@@ -1,0 +1,1369 @@
+/* styles-historia.css - Andebol Clube Olhão */
+
+/* ================================
+   ROOT + BASE
+================================ */
+
+:root {
+    --green: #2f7a34;
+    --green-dark: #235d28;
+    --muted: #6b6b6b;
+    --max-width: 1120px;
+    --gutter: 24px;
+    --radius: 6px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #222;
+    background: #fff;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:focus {
+    outline: 3px solid rgba(47, 122, 52, 0.18);
+    outline-offset: 3px;
+}
+
+.img-responsive,
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ================================
+   CABEÇALHO
+================================ */
+
+#header,
+.header1 {
+    background: #ffffff;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-bottom: 0 !important;
+}
+
+#header-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 14px var(--gutter);
+    align-items: center;
+}
+
+#branding {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+#branding .club-badge img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    display: block;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+#header .club-name {
+    color: var(--green-dark);
+    font-weight: 700;
+    line-height: 1;
+    margin: 0;
+}
+
+#header .site-slogan {
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.2px;
+}
+
+/* ================================
+   REDES SOCIAIS
+================================ */
+
+.socialmedia_icons a,
+.template-block.socialmedia_icons .icons a {
+    color: var(--green-dark);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 4px;
+    transition: 0.25s ease;
+}
+
+.socialmedia_icons a:hover,
+.template-block.socialmedia_icons .icons a:hover {
+    color: #ffffff;
+    background: var(--green-dark);
+}
+
+/* ================================
+   NAVBAR
+================================ */
+
+.navbar {
+    margin: 0 !important;
+    padding-top: 0.45rem !important;
+    padding-bottom: 0.45rem !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    border-top: 0 !important;
+}
+
+.navbar.bg-success {
+    background-color: #3f7a4a !important;
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand {
+    color: #ffffff !important;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active,
+.navbar .nav-link:focus {
+    color: #e6f3ea !important;
+}
+
+#menuPrincipal {
+    width: 100%;
+    align-items: center;
+}
+
+#li-auth-container {
+    margin-left: auto !important;
+}
+
+/* ================================
+   CONTEÚDO ANTIGO / COMPATIBILIDADE
+================================ */
+
+main {
+    padding: 2rem 0;
+}
+
+#page_title.page-header {
+    max-width: var(--max-width);
+    margin: 28px auto 0;
+    padding: 0 var(--gutter);
+}
+
+#page_title h1 {
+    font-size: 42px;
+    margin: 0;
+    color: var(--green-dark);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.wrapper {
+    max-width: var(--max-width);
+    margin: 12px auto 60px;
+    padding: 0 var(--gutter);
+}
+
+#content-main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.item-image {
+    width: 100%;
+}
+
+.item-image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    object-fit: cover;
+}
+
+.description--generic {
+    font-size: 0.96rem;
+    color: #222;
+    max-width: 900px;
+    text-align: justify;
+}
+
+.description--generic p {
+    margin: 0 0 1rem 0;
+}
+
+.description--generic.text-indent p {
+    text-indent: 1.2rem;
+}
+
+.description--generic h2,
+.description--generic h3 {
+    color: var(--green-dark);
+    margin-top: 0.25rem;
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+}
+
+.description--generic h2 {
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.description--generic h3 {
+    font-size: 1rem;
+}
+
+/* ================================
+   PÁGINA HISTÓRIA DO CLUBE
+================================ */
+
+.historia-page {
+    background: #f4f7f5;
+    color: #1f2933;
+}
+
+.historia-hero {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255, 204, 0, 0.20), transparent 28%),
+        linear-gradient(135deg, #198754 0%, #0f5132 100%);
+    color: #ffffff;
+    padding: 86px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.historia-hero::before {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    top: -110px;
+    right: -90px;
+}
+
+.historia-kicker {
+    display: inline-block;
+    background: rgba(255, 204, 0, 0.18);
+    color: #ffdf5d;
+    border: 1px solid rgba(255, 204, 0, 0.34);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.78rem;
+    margin-bottom: 18px;
+}
+
+.historia-hero h1 {
+    font-size: clamp(2.2rem, 5vw, 4.4rem);
+    font-weight: 950;
+    letter-spacing: -1.7px;
+    line-height: 1.05;
+    margin-bottom: 18px;
+}
+
+.historia-hero p {
+    max-width: 760px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 1.12rem;
+    line-height: 1.7;
+}
+
+.historia-content {
+    padding: 54px 0 80px;
+}
+
+.historia-banner {
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: 0 22px 50px rgba(15, 81, 50, 0.14);
+    margin-bottom: 34px;
+    background: #ffffff;
+}
+
+.historia-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.historia-intro-card {
+    background: #ffffff;
+    border: 1px solid rgba(25, 135, 84, 0.12);
+    box-shadow: 0 16px 36px rgba(15, 81, 50, 0.10);
+    border-radius: 24px;
+    padding: 28px;
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+    margin-bottom: 34px;
+}
+
+.intro-icon,
+.card-icon {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #198754, #0f5132);
+    color: #ffcc00;
+    display: grid;
+    place-items: center;
+    font-size: 1.45rem;
+    box-shadow: 0 12px 24px rgba(25, 135, 84, 0.22);
+}
+
+.historia-intro-card h2 {
+    color: #0f5132;
+    font-weight: 950;
+    letter-spacing: -0.8px;
+    margin-bottom: 8px;
+}
+
+.historia-intro-card p {
+    color: #5f6f65;
+    line-height: 1.75;
+    margin: 0;
+}
+
+.historia-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px;
+}
+
+.historia-card {
+    background: #ffffff;
+    border-radius: 24px;
+    border: 1px solid rgba(25, 135, 84, 0.12);
+    box-shadow: 0 16px 36px rgba(15, 81, 50, 0.09);
+    padding: 30px;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.historia-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 50px rgba(15, 81, 50, 0.16);
+    border-color: rgba(25, 135, 84, 0.28);
+}
+
+.historia-card h2 {
+    color: #0f5132;
+    font-size: 1.45rem;
+    font-weight: 950;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin: 20px 0 14px;
+}
+
+.historia-card p {
+    color: #5c6a61;
+    line-height: 1.75;
+    margin-bottom: 14px;
+}
+
+.historia-card p:last-child {
+    margin-bottom: 0;
+}
+
+.historia-list {
+    margin: 18px 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+}
+
+.historia-list li {
+    background: #f5faf6;
+    border: 1px solid #e1eee5;
+    border-radius: 14px;
+    padding: 11px 14px 11px 38px;
+    color: #294437;
+    font-weight: 650;
+    position: relative;
+}
+
+.historia-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 14px;
+    top: 10px;
+    color: #198754;
+    font-weight: 950;
+}
+
+.destaque-card {
+    background:
+        radial-gradient(circle at top right, rgba(255, 204, 0, 0.14), transparent 34%),
+        linear-gradient(135deg, #ffffff 0%, #f4fbf6 100%);
+    border-color: rgba(255, 204, 0, 0.26);
+}
+
+/* ================================
+   FOOTER
+================================ */
+
+.main-footer {
+    border-top: 5px solid #198754;
+}
+
+/* ================================
+   RESPONSIVO
+================================ */
+
+@media (max-width: 991.98px) {
+    #header-content {
+        padding: 10px 14px;
+    }
+
+    #branding .club-badge img {
+        width: 70px;
+        height: 70px;
+    }
+
+    #header .club-name {
+        font-size: 1.15rem;
+    }
+
+    #header .site-slogan {
+        font-size: 0.75rem;
+    }
+
+    .template-block.socialmedia_icons {
+        display: none;
+    }
+
+    #menuPrincipal {
+        width: 100%;
+    }
+
+    #li-auth-container {
+        width: 100%;
+        margin-left: 0 !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        padding-right: 0.75rem;
+        margin-top: 0.75rem;
+    }
+
+    #li-auth-container .btn {
+        max-width: max-content;
+    }
+
+    #page_title h1 {
+        font-size: 34px;
+    }
+
+    .wrapper {
+        margin-top: 18px;
+        padding: 0 14px;
+    }
+
+    #content-main {
+        gap: 18px;
+    }
+
+    .item-image img {
+        max-height: 360px;
+        object-fit: cover;
+    }
+}
+
+@media (max-width: 768px) {
+    .historia-hero {
+        padding-top: 58px !important;
+        padding-bottom: 58px !important;
+    }
+
+    .historia-content {
+        padding: 34px 0 56px;
+    }
+
+    .historia-banner {
+        border-radius: 18px;
+        margin-bottom: 24px;
+    }
+
+    .historia-intro-card {
+        flex-direction: column;
+        padding: 24px;
+        border-radius: 20px;
+    }
+
+    .historia-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .historia-card {
+        padding: 24px;
+        border-radius: 20px;
+    }
+
+    .historia-card h2 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 420px) {
+    #page_title h1 {
+        font-size: 28px;
+    }
+
+    .description--generic {
+        font-size: 0.95rem;
+    }
+}
+
+/* ================================
+   FIX - ESPAÇO ENTRE NAVBAR E HERO
+================================ */
+
+#header,
+.header1 {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+#header .navbar,
+.navbar {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Não empurrar o hero para cima */
+#page-content,
+.historia-page,
+main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* O hero precisa de padding interno */
+.historia-hero {
+    margin-top: 0 !important;
+    padding-top: 86px !important;
+    padding-bottom: 86px !important;
+}
+
+/* ================================
+   CIDADE DE OLHÃO
+================================ */
+
+.cidade-page {
+    background: #f4f7f5;
+    color: #1f2933;
+}
+
+.cidade-hero {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255, 204, 0, 0.20), transparent 28%),
+        linear-gradient(135deg, #198754 0%, #0f5132 100%);
+    color: #ffffff;
+    padding: 86px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cidade-hero::before {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    top: -110px;
+    right: -90px;
+}
+
+.cidade-kicker {
+    display: inline-block;
+    background: rgba(255, 204, 0, 0.18);
+    color: #ffdf5d;
+    border: 1px solid rgba(255, 204, 0, 0.34);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.78rem;
+    margin-bottom: 18px;
+}
+
+.cidade-hero h1 {
+    font-size: clamp(2.3rem, 5vw, 4.4rem);
+    font-weight: 950;
+    letter-spacing: -1.7px;
+    line-height: 1.05;
+    margin-bottom: 18px;
+}
+
+.cidade-hero p {
+    max-width: 760px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 1.12rem;
+    line-height: 1.7;
+}
+
+.cidade-content {
+    padding: 54px 0 80px;
+}
+
+.cidade-image-card {
+    border-radius: 28px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 22px 50px rgba(15, 81, 50, 0.14);
+    margin-bottom: 34px;
+    border: 1px solid rgba(25, 135, 84, 0.10);
+}
+
+.cidade-image-card img {
+    width: 100%;
+    height: min(520px, 55vw);
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.cidade-text-card {
+    background: #ffffff;
+    border-radius: 28px;
+    border: 1px solid rgba(25, 135, 84, 0.12);
+    box-shadow: 0 18px 42px rgba(15, 81, 50, 0.10);
+    padding: 38px;
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.cidade-card-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-bottom: 24px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid rgba(15, 81, 50, 0.12);
+}
+
+.cidade-icon {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #198754, #0f5132);
+    color: #ffcc00;
+    display: grid;
+    place-items: center;
+    font-size: 1.55rem;
+    box-shadow: 0 12px 24px rgba(25, 135, 84, 0.22);
+}
+
+.cidade-label {
+    display: inline-block;
+    color: #198754;
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 4px;
+}
+
+.cidade-card-header h2 {
+    color: #0f5132;
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    font-weight: 950;
+    letter-spacing: -0.9px;
+    margin: 0;
+}
+
+.cidade-text {
+    columns: 2;
+    column-gap: 42px;
+}
+
+.cidade-text p {
+    color: #53645a;
+    line-height: 1.85;
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    break-inside: avoid;
+}
+
+.cidade-text p:first-child::first-letter {
+    float: left;
+    font-size: 4rem;
+    line-height: 0.9;
+    font-weight: 950;
+    color: #198754;
+    padding-right: 10px;
+}
+
+/* Remove espaço branco entre menu e hero */
+#header,
+.header1 {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+#header .navbar,
+.navbar {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+#page-content,
+main {
+    margin-top: 0 !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .cidade-hero {
+        padding: 58px 18px;
+    }
+
+    .cidade-content {
+        padding: 34px 0 56px;
+    }
+
+    .cidade-image-card {
+        border-radius: 20px;
+        margin-bottom: 24px;
+    }
+
+    .cidade-image-card img {
+        height: 260px;
+    }
+
+    .cidade-text-card {
+        padding: 24px;
+        border-radius: 22px;
+    }
+
+    .cidade-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cidade-text {
+        columns: 1;
+    }
+
+    .cidade-text p {
+        font-size: 0.98rem;
+        line-height: 1.75;
+    }
+
+    .cidade-text p:first-child::first-letter {
+        font-size: 3.2rem;
+    }
+}
+
+/* =========================================================
+   ACO - MELHORIAS VISUAIS FINAIS
+   Apenas CSS: não altera HTML, JavaScript nem funcionalidades.
+   Pode ficar no fim do ficheiro para sobrepor estilos antigos.
+========================================================= */
+
+:root {
+    --aco-green: #198754;
+    --aco-green-main: #3f7a4a;
+    --aco-green-dark: #0f5132;
+    --aco-green-soft: #eaf5ee;
+    --aco-yellow: #ffcc00;
+    --aco-yellow-soft: rgba(255, 204, 0, 0.16);
+    --aco-bg: #f4f7f5;
+    --aco-card: #ffffff;
+    --aco-text: #1f2933;
+    --aco-muted: #607066;
+    --aco-border: rgba(25, 135, 84, 0.14);
+    --aco-shadow-sm: 0 8px 22px rgba(15, 81, 50, 0.08);
+    --aco-shadow-md: 0 18px 44px rgba(15, 81, 50, 0.12);
+    --aco-shadow-lg: 0 28px 70px rgba(15, 81, 50, 0.16);
+    --aco-radius-sm: 14px;
+    --aco-radius-md: 22px;
+    --aco-radius-lg: 30px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: var(--aco-text);
+    text-rendering: optimizeLegibility;
+}
+
+img {
+    max-width: 100%;
+}
+
+a,
+button,
+.nav-link,
+.dropdown-item,
+.btn,
+.hero-btn,
+.btn-read-more {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Cabeçalho mais limpo */
+#header,
+.header1 {
+    background: #ffffff !important;
+    box-shadow: 0 1px 0 rgba(15, 81, 50, 0.08);
+}
+
+#header-content {
+    max-width: 1180px !important;
+}
+
+#branding .club-badge img,
+.club-badge img {
+    filter: drop-shadow(0 8px 14px rgba(15, 81, 50, 0.10));
+    transition: transform 0.22s ease, filter 0.22s ease;
+}
+
+#branding .club-badge img:hover,
+.club-badge img:hover {
+    transform: translateY(-2px) scale(1.02);
+    filter: drop-shadow(0 12px 20px rgba(15, 81, 50, 0.16));
+}
+
+#header .club-name,
+.club-name {
+    color: var(--aco-green-dark) !important;
+    font-weight: 850 !important;
+    letter-spacing: -0.35px;
+}
+
+#header .site-slogan,
+.club-name .site-slogan {
+    color: var(--aco-muted) !important;
+    font-weight: 650 !important;
+}
+
+/* Redes sociais */
+.socialmedia_icons a,
+.template-block.socialmedia_icons .icons a {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    color: var(--aco-green-dark) !important;
+    background: rgba(25, 135, 84, 0.08);
+    transition: transform 0.22s ease, background 0.22s ease, color 0.22s ease;
+}
+
+.socialmedia_icons a:hover,
+.template-block.socialmedia_icons .icons a:hover {
+    transform: translateY(-2px);
+    color: #ffffff !important;
+    background: var(--aco-green-dark) !important;
+}
+
+/* Navbar principal */
+.navbar {
+    margin: 0 !important;
+    padding-top: 0.55rem !important;
+    padding-bottom: 0.55rem !important;
+    border: 0 !important;
+    box-shadow: 0 12px 28px rgba(15, 81, 50, 0.14) !important;
+}
+
+.navbar.bg-success {
+    background: linear-gradient(135deg, var(--aco-green-main) 0%, #2f7a34 52%, var(--aco-green-dark) 100%) !important;
+}
+
+.navbar .navbar-collapse {
+    gap: 14px;
+}
+
+#menuPrincipal {
+    width: auto !important;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 2px;
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand {
+    color: #ffffff !important;
+    font-weight: 750 !important;
+    border-radius: 999px;
+    padding: 0.55rem 0.82rem !important;
+    transition: background 0.22s ease, color 0.22s ease, transform 0.22s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active,
+.navbar .nav-link:focus {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.navbar .dropdown-menu {
+    border: 0 !important;
+    border-radius: 18px !important;
+    padding: 8px !important;
+    box-shadow: 0 18px 44px rgba(15, 81, 50, 0.22) !important;
+    overflow: hidden;
+}
+
+.navbar .dropdown-item {
+    border-radius: 12px;
+    padding: 10px 13px;
+    font-weight: 750;
+    color: #1f2933;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+    background: var(--aco-green-soft);
+    color: var(--aco-green-dark);
+    transform: translateX(2px);
+}
+
+/* Dropdown da conta criado no main.js */
+#navConta {
+    margin-left: auto !important;
+    align-items: center !important;
+}
+
+.conta-dropdown {
+    position: relative;
+}
+
+.conta-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 13px !important;
+    border-radius: 999px !important;
+    background: rgba(255, 255, 255, 0.13);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    color: #ffffff !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    transition: background 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.conta-toggle:hover,
+.conta-toggle:focus,
+.conta-toggle.show {
+    background: rgba(255, 255, 255, 0.20);
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.10);
+}
+
+.conta-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffdf5d, var(--aco-yellow));
+    color: var(--aco-green-dark);
+    display: grid;
+    place-items: center;
+    font-size: 0.92rem;
+    box-shadow: 0 6px 14px rgba(255, 204, 0, 0.24);
+}
+
+.conta-texto {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+    text-align: left;
+    max-width: 150px;
+}
+
+.conta-texto small {
+    font-size: 0.68rem;
+    opacity: 0.78;
+    font-weight: 650;
+}
+
+.conta-texto strong {
+    font-size: 0.85rem;
+    font-weight: 950;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.conta-menu {
+    margin-top: 10px !important;
+    min-width: 250px;
+}
+
+.conta-item {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+}
+
+.conta-item i {
+    width: 22px;
+    text-align: center;
+    color: var(--aco-green);
+}
+
+.conta-admin {
+    color: var(--aco-green-dark) !important;
+    font-weight: 900 !important;
+}
+
+.conta-admin i {
+    color: var(--aco-yellow) !important;
+    text-shadow: 0 1px 0 rgba(15, 81, 50, 0.22);
+}
+
+.conta-sair {
+    color: #dc3545 !important;
+}
+
+.conta-sair i {
+    color: #dc3545 !important;
+}
+
+.conta-sair:hover,
+.conta-sair:focus {
+    background: #fff1f2 !important;
+    color: #b02a37 !important;
+}
+
+.btn-login-navbar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: var(--aco-green-dark) !important;
+    font-size: 0.88rem;
+    font-weight: 950;
+    text-decoration: none;
+    box-shadow: 0 10px 24px rgba(15, 81, 50, 0.18);
+    transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+}
+
+.btn-login-navbar:hover {
+    transform: translateY(-2px);
+    background: #f3f8f5;
+    color: var(--aco-green-dark) !important;
+    box-shadow: 0 14px 30px rgba(15, 81, 50, 0.24);
+}
+
+/* Compatibilidade com botão antigo, caso ainda exista */
+#li-auth-container {
+    margin-left: auto !important;
+}
+
+#li-auth-container .btn,
+#btn-admin-nav {
+    border-radius: 999px !important;
+    font-weight: 900 !important;
+    box-shadow: 0 10px 24px rgba(15, 81, 50, 0.16) !important;
+}
+
+/* Heroes das várias páginas */
+.home-hero .swiper-slide,
+.contactos-hero,
+.historia-hero,
+.loja-hero,
+.noticias-hero,
+.noticia-hero,
+.socio-hero,
+.estrutura-hero,
+.presidente-hero,
+.produto-hero,
+.equipa-hero {
+    background:
+        radial-gradient(circle at 16% 18%, rgba(255, 204, 0, 0.24), transparent 28%),
+        radial-gradient(circle at 82% 12%, rgba(255, 255, 255, 0.10), transparent 24%),
+        linear-gradient(135deg, var(--aco-green) 0%, var(--aco-green-dark) 100%) !important;
+}
+
+.contactos-hero,
+.historia-hero,
+.loja-hero,
+.noticias-hero,
+.socio-hero,
+.estrutura-hero,
+.presidente-hero,
+.produto-hero,
+.equipa-hero {
+    isolation: isolate;
+    padding-top: clamp(62px, 8vw, 94px) !important;
+    padding-bottom: clamp(62px, 8vw, 94px) !important;
+}
+
+.contactos-hero h1,
+.historia-hero h1,
+.loja-hero h1,
+.noticias-hero h1,
+.noticia-hero h1,
+.socio-hero h1,
+.estrutura-hero h1,
+.presidente-hero h1,
+.produto-hero h1,
+.equipa-hero h1,
+.hero-content h1 {
+    text-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+}
+
+.contactos-kicker,
+.historia-kicker,
+.loja-kicker,
+.noticias-kicker,
+.noticia-kicker,
+.socio-kicker,
+.estrutura-kicker,
+.presidente-kicker,
+.produto-kicker,
+.equipa-kicker,
+.hero-kicker,
+.section-kicker,
+.form-kicker {
+    border-radius: 999px !important;
+    box-shadow: 0 10px 24px rgba(15, 81, 50, 0.10);
+}
+
+/* Cards e blocos principais */
+.news-card,
+.contact-card,
+.contact-map,
+.historia-banner,
+.historia-intro-card,
+.historia-card,
+.presidente-card,
+.estrutura-intro,
+.dept-card,
+.socio-intro-card,
+.socio-form-card,
+.produto-card,
+.products.products-grid article > a.thumbnail,
+.player-position h3,
+#item-image {
+    border-color: var(--aco-border) !important;
+    box-shadow: var(--aco-shadow-md) !important;
+}
+
+.news-card,
+.contact-card,
+.historia-card,
+.dept-card,
+.products.products-grid article > a.thumbnail {
+    transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.news-card:hover,
+.contact-card:hover,
+.historia-card:hover,
+.dept-card:hover,
+.products.products-grid article > a.thumbnail:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--aco-shadow-lg) !important;
+    border-color: rgba(25, 135, 84, 0.28) !important;
+}
+
+.card-image-wrapper,
+.products.products-grid article > a.thumbnail .item-image,
+.produto-imagem-area,
+.socio-image-wrap {
+    background:
+        radial-gradient(circle at top left, var(--aco-yellow-soft), transparent 34%),
+        linear-gradient(135deg, #f8fbf9 0%, #ffffff 100%) !important;
+}
+
+.card-image-wrapper img,
+.products.products-grid article > a.thumbnail img,
+.produto-img,
+.novo-socio-img,
+#item-image {
+    transition: transform 0.32s ease, filter 0.32s ease;
+}
+
+.news-card:hover .card-image-wrapper img,
+.products.products-grid article > a.thumbnail:hover img {
+    transform: scale(1.045);
+}
+
+/* Botões principais */
+.hero-btn,
+.btn-read-more,
+.socio-submit,
+.produto-comprar,
+.produto-voltar,
+.btn-login-navbar,
+main .btn-primary,
+main .btn-success {
+    border-radius: 999px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.1px;
+}
+
+.hero-btn,
+.socio-submit,
+.produto-comprar,
+main .btn-primary,
+main .btn-success {
+    border: 0 !important;
+    background: linear-gradient(135deg, var(--aco-yellow) 0%, #f0b900 100%) !important;
+    color: var(--aco-green-dark) !important;
+    box-shadow: 0 14px 28px rgba(255, 204, 0, 0.22) !important;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+}
+
+.hero-btn:hover,
+.socio-submit:hover,
+.produto-comprar:hover,
+main .btn-primary:hover,
+main .btn-success:hover {
+    transform: translateY(-3px);
+    color: var(--aco-green-dark) !important;
+    filter: brightness(1.03);
+    box-shadow: 0 18px 36px rgba(255, 204, 0, 0.30) !important;
+}
+
+.btn-read-more {
+    color: var(--aco-green) !important;
+}
+
+.btn-read-more:hover {
+    color: var(--aco-green-dark) !important;
+}
+
+/* Formulários */
+input,
+select,
+textarea,
+.form-control,
+.form-select {
+    border-radius: 14px !important;
+    border-color: rgba(25, 135, 84, 0.18) !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.form-control:focus,
+.form-select:focus {
+    border-color: rgba(25, 135, 84, 0.48) !important;
+    box-shadow: 0 0 0 0.22rem rgba(25, 135, 84, 0.12) !important;
+}
+
+/* Footer */
+.main-footer {
+    border-top: 5px solid var(--aco-green) !important;
+    box-shadow: 0 -12px 28px rgba(15, 81, 50, 0.06);
+}
+
+/* Responsivo */
+@media (max-width: 991.98px) {
+    .navbar .navbar-collapse {
+        padding-top: 12px;
+    }
+
+    #menuPrincipal {
+        width: 100% !important;
+    }
+
+    #navConta {
+        width: 100%;
+        align-items: flex-end !important;
+    }
+
+    .conta-dropdown {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .conta-menu {
+        width: min(100%, 320px);
+        margin-top: 8px !important;
+    }
+
+    .btn-login-navbar {
+        margin-left: auto;
+    }
+
+    .navbar .nav-link {
+        width: 100%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    #header-content {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    #branding {
+        gap: 12px;
+    }
+
+    #branding .club-badge img,
+    .club-badge img {
+        width: 72px !important;
+        height: 72px !important;
+    }
+
+    .contactos-hero,
+    .historia-hero,
+    .loja-hero,
+    .noticias-hero,
+    .socio-hero,
+    .estrutura-hero,
+    .presidente-hero,
+    .produto-hero,
+    .equipa-hero {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    .conta-texto {
+        max-width: 120px;
+    }
+}
+

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html lang="pt">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Minhas Convocatórias - ACO</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+<style>
+:root{--aco-green:#198754;--aco-dark:#0f5132;--aco-yellow:#ffcc00;--aco-text:#1f2933;--aco-muted:#66756c}
+body{background:radial-gradient(circle at top left,rgba(25,135,84,.08),transparent 28%),#f4f7f5;color:var(--aco-text)}
+#header,.header1{background:#fff;margin-bottom:0!important;padding-bottom:0!important}
+.navbar{margin-top:0!important;margin-bottom:0!important}.navbar.bg-success{background-color:#3f7a4a!important}
+#branding .club-badge img{width:90px;height:90px;object-fit:contain;display:block}
+#header .club-name{color:#3f7a4a;font-weight:700}#header .site-slogan{color:#666;font-size:.85rem}
+.convocatorias-hero{background:radial-gradient(circle at 15% 20%,rgba(255,204,0,.2),transparent 28%),linear-gradient(135deg,#198754 0%,#0f5132 100%);color:#fff;padding:76px 20px 92px;position:relative;overflow:hidden;text-align:center}
+.convocatorias-hero:before{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.08);top:-110px;right:-90px}
+.convocatorias-hero .container{position:relative;z-index:2}
+.convocatorias-kicker{display:inline-flex;align-items:center;gap:8px;background:rgba(255,204,0,.18);color:#ffdf5d;border:1px solid rgba(255,204,0,.34);border-radius:999px;padding:8px 16px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;font-size:.78rem;margin-bottom:18px}
+.convocatorias-hero h1{font-size:clamp(2.4rem,5vw,4.8rem);font-weight:950;letter-spacing:-1.8px;line-height:1.02;margin-bottom:16px}
+.convocatorias-hero p{max-width:760px;margin:0 auto;color:rgba(255,255,255,.88);font-size:1.1rem;line-height:1.7}
+.convocatorias-page{margin-top:-42px;padding-bottom:84px;position:relative;z-index:3}
+.convocatorias-panel{background:#fff;border-radius:30px;border:1px solid rgba(25,135,84,.12);box-shadow:0 24px 58px rgba(15,81,50,.13);padding:32px}
+.convocatorias-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid rgba(15,81,50,.1)}
+.convocatorias-title{display:flex;align-items:center;gap:15px}
+.convocatorias-title-icon{width:56px;height:56px;min-width:56px;border-radius:18px;background:linear-gradient(135deg,#198754,#0f5132);color:#ffcc00;display:grid;place-items:center;font-size:1.35rem;box-shadow:0 12px 26px rgba(25,135,84,.24)}
+.convocatorias-title span{display:block;color:#198754;font-size:.78rem;font-weight:950;text-transform:uppercase;letter-spacing:.55px;margin-bottom:4px}
+.convocatorias-title h2{color:#0f5132;font-size:clamp(1.6rem,3vw,2.3rem);font-weight:950;letter-spacing:-.9px;margin:0}
+.convocatorias-note{color:#66756c;background:#f4faf6;border:1px solid #dfeee4;border-radius:999px;padding:9px 15px;font-size:.88rem;font-weight:800;white-space:nowrap}
+.loading-box,.empty-box{background:#f7fbf8;border:1px solid #dfeee4;border-radius:24px;padding:46px 20px;text-align:center;color:#607066}
+.card-jogo{position:relative;cursor:pointer;height:100%;background:#fff;border:1px solid rgba(25,135,84,.13);border-radius:26px;overflow:hidden;box-shadow:0 18px 42px rgba(15,81,50,.1);transition:.22s ease}
+.card-jogo:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(255,204,0,.1),transparent 34%);pointer-events:none}
+.card-jogo:hover{transform:translateY(-7px);box-shadow:0 28px 60px rgba(15,81,50,.18);border-color:rgba(25,135,84,.35)}
+.card-jogo:focus{outline:3px solid rgba(25,135,84,.35);outline-offset:4px}
+.card-top{position:relative;z-index:2;background:linear-gradient(135deg,#198754 0%,#0f5132 100%);color:#fff;padding:15px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-weight:950;font-size:.78rem;letter-spacing:.45px;text-transform:uppercase}
+.card-top .badge{background:#fff!important;color:#0f5132!important;border-radius:999px;padding:7px 11px;font-weight:950}
+.card-body-jogo{position:relative;z-index:2;padding:26px}
+.jogo-versus{text-align:center;margin-bottom:22px;font-size:clamp(1.35rem,3vw,1.9rem);font-weight:950;text-transform:uppercase;letter-spacing:-.6px;color:#0f5132}
+.jogo-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;background:#f7fbf8;padding:16px;border-radius:18px;border:1px solid #dfeee4}
+.jogo-info-grid small{display:block;color:#198754!important;font-size:.72rem;text-transform:uppercase;font-weight:950;letter-spacing:.42px;margin-bottom:4px}
+.jogo-info-grid div div{color:#1f2933;font-weight:800;line-height:1.45}.ver-detalhes{color:#198754;font-weight:950;font-size:.88rem;margin-top:18px;text-align:center}
+.modal-aco-backdrop{display:none;position:fixed;inset:0;background:rgba(9,24,15,.68);z-index:9999;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(7px)}
+.modal-aco-backdrop.aberto{display:flex}.modal-aco-box{width:min(760px,100%);background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 26px 80px rgba(0,0,0,.38);animation:entrarModal .18s ease-out}
+@keyframes entrarModal{from{transform:translateY(14px) scale(.98);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+.modal-aco-header{background:radial-gradient(circle at top right,rgba(255,204,0,.16),transparent 35%),linear-gradient(135deg,#198754 0%,#0f5132 100%);color:#fff;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.modal-aco-header h5{margin:0;font-weight:950}.modal-aco-close{border:0;background:rgba(255,255,255,.16);color:#fff;width:40px;height:40px;border-radius:50%;font-size:1.35rem;line-height:1;cursor:pointer;transition:.18s ease}
+.modal-aco-close:hover{background:rgba(255,255,255,.28);transform:rotate(90deg)}.modal-aco-body{padding:30px}
+.modal-versus{text-align:center;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:950;text-transform:uppercase;margin-bottom:10px;color:#0f5132;letter-spacing:-.8px}
+.modal-escalao{display:inline-block;background:#0f5132;color:#fff;padding:7px 14px;border-radius:999px;font-weight:950;font-size:.82rem;text-transform:uppercase;letter-spacing:.4px}
+.modal-info-grid{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.modal-info-item{background:#f7fbf8;border:1px solid #dfeee4;border-radius:18px;padding:16px}.modal-info-item.full{grid-column:1/-1}
+.modal-info-label{display:block;color:#198754;font-size:.72rem;text-transform:uppercase;font-weight:950;letter-spacing:.42px;margin-bottom:6px}.modal-info-value{color:#1f2933;font-weight:850;font-size:1rem;line-height:1.45}
+.modal-alerta{margin-top:24px;background:#eaf7ef;border:1px solid #bfe8cf;color:#145c39;border-radius:18px;padding:16px 18px;font-weight:800;line-height:1.55}
+.main-footer{border-top:5px solid #198754}
+@media(max-width:768px){.convocatorias-hero{padding:58px 18px 76px}.convocatorias-page{margin-top:-30px;padding-bottom:56px}.convocatorias-panel{padding:22px;border-radius:24px}.convocatorias-heading{flex-direction:column;align-items:flex-start}.convocatorias-note{white-space:normal;border-radius:18px}.jogo-info-grid,.modal-info-grid{grid-template-columns:1fr}.card-body-jogo{padding:22px}.modal-aco-body{padding:22px}.template-block.socialmedia_icons{display:none}#branding .club-badge img{width:70px;height:70px}#header .club-name{font-size:1.15rem}#header .site-slogan{font-size:.75rem}}
+</style>
+</head>
+<body>
+<header class="header1" id="header">
+<div class="container d-flex justify-content-between align-items-center" id="header-content">
+<div class="d-flex align-items-center" id="branding">
+<div class="club-badge me-3">
+<a href="#"><img alt="logo" height="90" src="../img/logo_9JToiDZ.png" width="90"/></a>
+</div>
+<h2 class="club-name mb-0">
+                    Andebol Clube Olhão
+                    <span class="site-slogan d-block small">#maisqueumclube</span>
+</h2>
+</div>
+<aside class="template-block socialmedia_icons">
+<div class="icons d-flex gap-3 fs-4">
+<a href="https://www.facebook.com/AndebolClubeOlhao/" target="_blank"><i class="fab fa-facebook"></i></a>
+<a href="https://www.instagram.com/andebol_clube_olhao/" target="_blank"><i class="fab fa-instagram"></i></a>
+<a href="https://www.tiktok.com/@andebolclubeolhao" target="_blank"><i class="fab fa-tiktok"></i></a>
+</div>
+</aside>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success mt-0">
+<div class="container">
+<a class="navbar-brand d-lg-none" href="#">Menu</a>
+<button class="navbar-toggler" data-bs-target="#mainNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="mainNav">
+<ul class="navbar-nav" id="menuPrincipal">
+<li class="nav-item"><a class="nav-link" href="../index.html">Início</a></li>
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Clube</a>
+<ul class="dropdown-menu">
+<li><a class="dropdown-item" href="historiaaco.html">História</a></li>
+<li><a class="dropdown-item" href="mensagempr.html">Mensagem do Presidente</a></li>
+<li><a class="dropdown-item" href="Estrutura-desportiva.html">Estrutura desportiva</a></li>
+<li><a class="dropdown-item" href="historia.html">Cidade de Olhão</a></li>
+<li><a class="dropdown-item" href="contactos.html">Contatos</a></li>
+</ul>
+</li>
+<li class="nav-item dropdown">
+<a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="sociosDropdown" role="button">Sócios</a>
+<ul aria-labelledby="sociosDropdown" class="dropdown-menu">
+<li><a class="dropdown-item" href="../novo-socio.html">Novo Sócio</a></li>
+</ul>
+</li>
+<li class="nav-item dropdown">
+<a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="equipasDropdown" role="button">Equipas</a>
+<ul aria-labelledby="equipasDropdown" class="dropdown-menu">
+<li><a class="dropdown-item" href="equipas/sub18.html">Sub-18 Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/sub16.html">Sub-16 Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/sub14.html">Sub-14 Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/sub12.html">Minis Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/minisf.html">Minis Feminino</a></li>
+<li><a class="dropdown-item" href="equipas/bambis.html">Bambis Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/bambis.html">Bambis Feminino</a></li>
+<li><a class="dropdown-item" href="equipas/manitas.html">Manitas Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/manitas.html">Manitas Feminino</a></li>
+<li><a class="dropdown-item" href="equipas/baby.html">Baby</a></li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link" href="noticias.html">Notícias</a></li>
+<li class="nav-item"><a class="nav-link" href="../loja.html">Loja</a></li>
+</ul>
+</div>
+</div>
+</nav>
+</header>
+
+<section class="convocatorias-hero">
+<div class="container">
+<span class="convocatorias-kicker"><i class="fa-solid fa-calendar-check"></i> Área Reservada</span>
+<h1>Minhas Convocatórias</h1>
+<p>Consulta os próximos jogos, horários, locais e responsáveis das tuas convocatórias do Andebol Clube Olhão.</p>
+</div>
+</section>
+<main class="convocatorias-page">
+<div class="container">
+<div class="convocatorias-panel">
+<div class="convocatorias-heading">
+<div class="convocatorias-title">
+<div class="convocatorias-title-icon"><i class="fa-solid fa-trophy"></i></div>
+<div>
+<span>Próximos Jogos</span>
+<h2>Convocatórias disponíveis</h2>
+</div>
+</div>
+<div class="convocatorias-note"><i class="fa-solid fa-circle-info"></i> Clica num jogo para ver os detalhes</div>
+</div>
+<div class="row g-4" id="listaJogos">
+<div class="col-12">
+<div class="loading-box">
+<div class="spinner-border text-success" role="status"></div>
+<p class="mt-3 mb-0">A carregar convocatórias...</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<!-- Modal próprio: detalhes da convocatória -->
+<div aria-hidden="true" class="modal-aco-backdrop" id="modalDetalhesConvocatoria">
+<div aria-labelledby="tituloModalConvocatoria" aria-modal="true" class="modal-aco-box" role="dialog">
+<div class="modal-aco-header">
+<h5 id="tituloModalConvocatoria">
+<i class="fa-solid fa-calendar-check"></i> Detalhes da Convocatória
+                </h5>
+<button aria-label="Fechar" class="modal-aco-close" onclick="fecharDetalhesConvocatoria()" type="button">×</button>
+</div>
+<div class="modal-aco-body">
+<div class="modal-versus">
+<span class="text-success">ACO</span>
+<span class="text-muted mx-2">VS</span>
+<span id="detalheAdversario"></span>
+</div>
+<div class="text-center">
+<span class="modal-escalao" id="detalheEscalao"></span>
+</div>
+<div class="modal-info-grid">
+<div class="modal-info-item">
+<span class="modal-info-label"><i class="fa-solid fa-calendar-day text-success"></i> Data</span>
+<div class="modal-info-value" id="detalheData"></div>
+</div>
+<div class="modal-info-item">
+<span class="modal-info-label"><i class="fa-solid fa-clock text-success"></i> Hora</span>
+<div class="modal-info-value" id="detalheHora"></div>
+</div>
+<div class="modal-info-item full">
+<span class="modal-info-label"><i class="fa-solid fa-location-dot text-success"></i> Local</span>
+<div class="modal-info-value" id="detalheLocal"></div>
+</div>
+<div class="modal-info-item full">
+<span class="modal-info-label"><i class="fa-solid fa-user-shield text-success"></i> Responsável</span>
+<div class="modal-info-value" id="detalheResponsavel"></div>
+</div>
+<div class="modal-info-item full" id="detalheAtletaBox" style="display:none;">
+<span class="modal-info-label"><i class="fa-solid fa-user text-success"></i> Atleta</span>
+<div class="modal-info-value" id="detalheAtleta"></div>
+</div>
+</div>
+<div class="modal-alerta">
+<i class="fa-solid fa-circle-info"></i>
+                    Confirma a data, hora e local da convocatória. Em caso de dúvida, contacta o clube ou o responsável da equipa.
+                </div>
+</div>
+</div>
+</div>
+
+<footer class="main-footer bg-dark text-white py-4 mt-auto">
+<div class="container text-center">
+<div class="mb-3">
+<img alt="AC Olhão" src="../img/logo_9JToiDZ.png" style="height: 50px; opacity: 0.8;"/>
+</div>
+<span>2026 © Andebol Clube Olhão</span>
+<div class="text-center small mt-2">Criado por Leonardo Brito</div>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="main.js"></script>
+<script>
+    // 1. SEGURANÇA E DADOS DO USER
+const userStr = localStorage.getItem('utilizador');
+if (!userStr) {
+    window.location.href = 'login.html?destino=convocatoria.html';
+}
+
+const utilizador = JSON.parse(userStr);
+const container = document.getElementById('listaJogos');
+
+let jogosAtuais = [];
+let nomeAtletaAtual = '';
+
+function calcularTextoResponsavel(jogo) {
+    if (jogo.nome_treinador) {
+        return `Treinador: ${jogo.nome_treinador}`;
+    }
+
+    if (jogo.tipo_criador === 'admin') {
+        return 'Convocatória criada pela administração';
+    }
+
+    return 'Convocatória oficial do clube';
+}
+
+function abrirDetalhesConvocatoria(indice) {
+    const jogo = jogosAtuais[indice];
+
+    if (!jogo) {
+        console.error('Convocatória não encontrada no índice:', indice);
+        return;
+    }
+
+    const d = new Date(jogo.data_jogo);
+    const textoResponsavel = calcularTextoResponsavel(jogo);
+
+    document.getElementById('detalheAdversario').textContent = jogo.jogo_contra || 'Adversário não definido';
+    document.getElementById('detalheEscalao').textContent = jogo.escalao || 'Geral';
+    document.getElementById('detalheData').textContent = d.toLocaleDateString('pt-PT');
+    document.getElementById('detalheHora').textContent = d.toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' });
+    document.getElementById('detalheLocal').textContent = jogo.local || 'Local não definido';
+    document.getElementById('detalheResponsavel').textContent = textoResponsavel;
+
+    const atletaBox = document.getElementById('detalheAtletaBox');
+    const atletaValor = document.getElementById('detalheAtleta');
+
+    if (nomeAtletaAtual) {
+        atletaBox.style.display = 'block';
+        atletaValor.textContent = nomeAtletaAtual;
+    } else {
+        atletaBox.style.display = 'none';
+        atletaValor.textContent = '';
+    }
+
+    const modal = document.getElementById('modalDetalhesConvocatoria');
+    modal.classList.add('aberto');
+    modal.setAttribute('aria-hidden', 'false');
+}
+
+function fecharDetalhesConvocatoria() {
+    const modal = document.getElementById('modalDetalhesConvocatoria');
+    modal.classList.remove('aberto');
+    modal.setAttribute('aria-hidden', 'true');
+}
+
+document.getElementById('modalDetalhesConvocatoria').addEventListener('click', (event) => {
+    if (event.target.id === 'modalDetalhesConvocatoria') {
+        fecharDetalhesConvocatoria();
+    }
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        fecharDetalhesConvocatoria();
+    }
+});
+
+// 2. LÓGICA DE INICIALIZAÇÃO
+if (utilizador.tipo === 'encarregado') {
+    carregarSeletorFilhos();
+} else {
+    carregarConvocatorias(utilizador.id);
+}
+
+// 3. FUNÇÃO PARA ENCARREGADOS ESCOLHEREM O FILHO
+async function carregarSeletorFilhos() {
+    try {
+        const res = await fetch(`/api/meus-educandos?id=${utilizador.id}`);
+        const filhos = await res.json();
+
+        jogosAtuais = [];
+        nomeAtletaAtual = '';
+
+        container.innerHTML = `
+            <div class="col-12 text-center mb-4">
+                <h5><i class="fa-solid fa-users"></i> Selecione o seu educando para ver as convocatórias:</h5>
+                <div id="botoesFilhos" class="mt-3"></div>
+            </div>`;
+
+        const divBotoes = document.getElementById('botoesFilhos');
+
+        if (!filhos.length) {
+            divBotoes.innerHTML = '<div class="alert alert-warning">Não existem educandos associados.</div>';
+            return;
+        }
+
+        filhos.forEach(filho => {
+            divBotoes.innerHTML += `
+                <button class="btn btn-outline-success btn-lg m-2" onclick="carregarConvocatorias(${filho.id}, '${filho.nome.replace(/'/g, "\'")}')">
+                    <i class="fa-solid fa-user"></i> ${filho.nome}
+                </button>`;
+        });
+    } catch (err) {
+        console.error(err);
+        container.innerHTML = '<p class="text-danger">Erro ao carregar lista de filhos.</p>';
+    }
+}
+
+// 4. FUNÇÃO QUE CARREGA OS JOGOS
+async function carregarConvocatorias(idAtleta, nomeFilho = "") {
+    container.innerHTML = '<div class="col-12"><div class="loading-box"><div class="spinner-border text-success"></div><p class="mt-3 mb-0">A carregar convocatórias...</p></div></div>';
+
+    try {
+        const res = await fetch(`/api/meus-jogos?id=${idAtleta}`);
+        const jogos = await res.json();
+
+        jogosAtuais = jogos;
+        nomeAtletaAtual = nomeFilho || (utilizador.tipo === 'jogador' ? utilizador.nome : '');
+
+        container.innerHTML = nomeFilho
+            ? `<div class="col-12 mb-3"><h4>Convocatórias de: <span class="text-success">${nomeFilho}</span></h4><button class="btn btn-sm btn-secondary" onclick="carregarSeletorFilhos()">Voltar</button></div>`
+            : '';
+
+        if (jogos.length === 0) {
+            container.innerHTML += '<div class="col-12"><div class="empty-box"><h4>Sem jogos agendados</h4><p class="mb-0">Quando existirem novas convocatórias, vão aparecer aqui.</p></div></div>';
+            return;
+        }
+
+        jogos.forEach((jogo, indice) => {
+            const d = new Date(jogo.data_jogo);
+            const textoResponsavel = calcularTextoResponsavel(jogo);
+
+            container.innerHTML += `
+                <div class="col-lg-6">
+                    <div class="card-jogo" role="button" tabindex="0" data-indice="${indice}">
+                        <div class="card-top">
+                            <span><i class="fa-solid fa-trophy"></i> JOGO OFICIAL</span>
+                            <span class="badge bg-dark text-warning">${jogo.escalao || "Geral"}</span>
+                        </div>
+
+                        <div class="card-body-jogo">
+                            <div class="jogo-versus text-center">
+                                <span class="text-success">ACO</span> VS <span class="text-dark">${jogo.jogo_contra}</span>
+                            </div>
+
+                            <div class="jogo-info-grid mt-3">
+                                <div>
+                                    <small class="text-muted">Data</small>
+                                    <div>${d.toLocaleDateString('pt-PT')}</div>
+                                </div>
+
+                                <div>
+                                    <small class="text-muted">Hora</small>
+                                    <div>${d.toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' })}</div>
+                                </div>
+
+                                <div style="grid-column: 1 / -1;">
+                                    <small class="text-muted">Local</small>
+                                    <div>${jogo.local}</div>
+                                </div>
+
+                                <div style="grid-column: 1 / -1;">
+                                    <small class="text-muted">Responsável</small>
+                                    <div>
+                                        <i class="fa-solid fa-user-shield text-success"></i>
+                                        ${textoResponsavel}
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>`;
+        });
+
+        document.querySelectorAll('.card-jogo[data-indice]').forEach(card => {
+            card.addEventListener('click', () => {
+                abrirDetalhesConvocatoria(Number(card.dataset.indice));
+            });
+
+            card.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    abrirDetalhesConvocatoria(Number(card.dataset.indice));
+                }
+            });
+        });
+
+    } catch (error) {
+        console.error(error);
+        container.innerHTML = '<div class="alert alert-danger">Erro ao carregar dados.</div>';
+    }
+}
+    </script>
+</body>
+</html>

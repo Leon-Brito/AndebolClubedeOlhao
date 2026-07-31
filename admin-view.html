@@ -1,0 +1,4993 @@
+<!DOCTYPE html>
+
+<html lang="pt">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Painel Admin - Andebol Clube Olhão</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/><style>
+:root {
+    --aco-green: #157347;
+    --aco-green-dark: #0f5132;
+    --aco-green-soft: #eef8f2;
+    --aco-yellow: #f5c400;
+    --aco-bg: #f3f7f5;
+    --aco-text: #1f2933;
+    --aco-muted: #6b7a72;
+    --aco-line: #dbe9e1;
+    --aco-white: #ffffff;
+    --aco-radius: 18px;
+}
+
+/* BASE */
+* { box-sizing: border-box; }
+
+body.admin-clean-v2 {
+    margin: 0;
+    font-family: Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+    color: var(--aco-text);
+    background:
+        radial-gradient(circle at 10% 0%, rgba(21,115,71,.12), transparent 28%),
+        radial-gradient(circle at 95% 8%, rgba(245,196,0,.14), transparent 24%),
+        #f3f7f5;
+}
+
+/* HEADER */
+#header, .header1 {
+    background: #ffffff !important;
+    border: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#header-content {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.club-name {
+    color: #0f5132 !important;
+    font-weight: 850 !important;
+    letter-spacing: -0.35px;
+}
+
+.site-slogan {
+    color: #6b7a72 !important;
+    font-weight: 650;
+    font-size: .75rem !important;
+}
+
+.socialmedia_icons a {
+    color: #157347;
+    transition: .2s ease;
+}
+
+.socialmedia_icons a:hover {
+    color: #0f5132;
+    transform: translateY(-2px);
+}
+
+.navbar {
+    margin: 0 !important;
+    background: #3f7a4a !important;
+    box-shadow: 0 6px 22px rgba(15,81,50,.10);
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand {
+    color: #ffffff !important;
+    font-weight: 700;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+    color: #e9f6ee !important;
+}
+
+/* HERO */
+.admin-hero-v2 {
+    background:
+        linear-gradient(135deg, rgba(15,81,50,.98), rgba(21,115,71,.94)),
+        radial-gradient(circle at 18% 22%, rgba(245,196,0,.38), transparent 30%);
+    color: #fff;
+    text-align: center;
+    padding: 78px 20px 112px;
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-hero-v2::before,
+.admin-hero-v2::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,.08);
+}
+
+.admin-hero-v2::before {
+    width: 300px;
+    height: 300px;
+    right: -90px;
+    top: -120px;
+}
+
+.admin-hero-v2::after {
+    width: 210px;
+    height: 210px;
+    left: -70px;
+    bottom: -90px;
+    background: rgba(245,196,0,.10);
+}
+
+.admin-hero-v2 .container {
+    position: relative;
+    z-index: 2;
+}
+
+.admin-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #ffe16b;
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 999px;
+    padding: 9px 16px;
+    text-transform: uppercase;
+    font-size: .76rem;
+    font-weight: 850;
+    letter-spacing: .5px;
+    margin-bottom: 18px;
+}
+
+.admin-hero-v2 h1 {
+    font-size: clamp(2.4rem, 5vw, 4.7rem);
+    font-weight: 950;
+    letter-spacing: -1.8px;
+    line-height: 1.02;
+    margin: 0 0 16px;
+}
+
+.admin-hero-v2 p {
+    max-width: 790px;
+    margin: 0 auto;
+    color: rgba(255,255,255,.88);
+    font-size: 1.08rem;
+    line-height: 1.7;
+}
+
+/* MAIN SHELL */
+.admin-main-v2 {
+    margin-top: -62px;
+    position: relative;
+    z-index: 5;
+    padding-bottom: 82px;
+}
+
+.admin-shell-v2 {
+    background: rgba(255,255,255,.94);
+    border: 1px solid rgba(255,255,255,.78);
+    border-radius: 32px;
+    box-shadow: 0 30px 90px rgba(15,81,50,.16);
+    padding: 30px;
+    backdrop-filter: blur(12px);
+}
+
+.admin-page-title {
+    padding: 22px 24px !important;
+    margin-bottom: 22px !important;
+    border: 1px solid #e1eee6;
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(15,81,50,.06);
+}
+
+.admin-page-title h1 {
+    color: #0f5132 !important;
+    font-weight: 950;
+    letter-spacing: -0.8px;
+    margin: 0;
+}
+
+#badgePerfil {
+    border-radius: 999px;
+    padding: 8px 14px;
+    background: #0f5132 !important;
+    color: #ffffff !important;
+    font-weight: 850;
+}
+
+/* OVERVIEW */
+.admin-overview-v2 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.admin-overview-v2 > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #ffffff;
+    border: 1px solid #e1eee6;
+    border-radius: 18px;
+    padding: 15px;
+    color: #0f5132;
+    font-weight: 850;
+    box-shadow: 0 10px 26px rgba(15,81,50,.055);
+}
+
+.admin-overview-v2 i {
+    width: 38px;
+    height: 38px;
+    border-radius: 13px;
+    display: grid;
+    place-items: center;
+    background: #eef8f2;
+    color: #157347;
+}
+
+/* ALERT */
+#avisoTreinador {
+    border: 1px solid #bee5eb !important;
+    border-radius: 18px !important;
+    background: #eaf9ff !important;
+    color: #0f5260 !important;
+    font-weight: 750;
+    padding: 15px 18px;
+}
+
+/* CARDS */
+.admin-function-card {
+    border: 1px solid #e1eee6 !important;
+    border-radius: 24px !important;
+    overflow: hidden;
+    background: #ffffff !important;
+    box-shadow: 0 18px 44px rgba(15,81,50,.08) !important;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.admin-function-card:hover {
+    transform: translateY(-4px);
+    border-color: #bdd9c7 !important;
+    box-shadow: 0 26px 58px rgba(15,81,50,.12) !important;
+}
+
+.admin-function-card .card-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between;
+    gap: 16px;
+    border: 0 !important;
+    border-bottom: 1px solid #e1eee6 !important;
+    padding: 22px !important;
+    background: linear-gradient(135deg, #ffffff, #f8fbf9) !important;
+}
+
+.function-head-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+}
+
+.function-icon {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    background: #eef8f2;
+    color: #157347;
+    font-size: 1.12rem;
+}
+
+.function-call .function-icon {
+    background: #fff6cc;
+    color: #826300;
+}
+
+.function-delete .function-icon {
+    background: #fff0f2;
+    color: #bd2c3b;
+}
+
+.function-title {
+    color: #ffffff !important;
+    font-size: 1.08rem;
+    line-height: 1.1;
+    font-weight: 950;
+    letter-spacing: -0.35px;
+}
+
+.function-desc {
+    color: #ffffff !important;
+    font-size: .82rem;
+    font-weight: 650;
+    margin-top: 4px;
+}
+
+.function-tag {
+    background: #eef8f2;
+    color: #157347;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: .72rem;
+    font-weight: 850;
+}
+
+.card-body {
+    padding: 24px !important;
+}
+
+/* FIELD WRAP: muda mesmo o aspeto dos campos */
+.field-wrap {
+    background: #ffffff;
+    border: 1px solid #e1eee6;
+    border-radius: 18px;
+    padding: 11px 13px 12px;
+    box-shadow: 0 8px 20px rgba(15,81,50,.035);
+    transition: .18s ease;
+}
+
+.field-wrap:focus-within {
+    border-color: #9bc8aa;
+    box-shadow: 0 0 0 4px rgba(21,115,71,.08), 0 12px 26px rgba(15,81,50,.07);
+    transform: translateY(-1px);
+}
+
+.field-wrap .form-label {
+    display: block;
+    margin: 0 0 6px !important;
+    color: #607168 !important;
+    font-size: .70rem !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.field-wrap .form-control,
+.field-wrap .form-select {
+    border: 0 !important;
+    padding: 0 !important;
+    min-height: 28px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #1f2933 !important;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 0 !important;
+}
+
+.field-wrap .form-control:focus,
+.field-wrap .form-select:focus {
+    box-shadow: none !important;
+    outline: 0 !important;
+}
+
+.field-wrap .form-control::placeholder {
+    color: #9aa9a1;
+    font-weight: 650;
+}
+
+/* Selects */
+.form-select {
+    cursor: pointer;
+}
+
+select option {
+    background: #ffffff;
+    color: #1f2933;
+    font-weight: 650;
+}
+
+/* Multiple select */
+#selectJogadoresConvocados,
+select[multiple] {
+    min-height: 160px !important;
+    padding: 10px !important;
+    border: 1px solid #e1eee6 !important;
+    border-radius: 18px !important;
+    background: #fbfdfc !important;
+    font-weight: 700;
+}
+
+/* CHECKBOXES CHIPS */
+.aco-chip-group {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 10px !important;
+    padding: 14px !important;
+    border-radius: 18px !important;
+    border: 1px solid #e1eee6 !important;
+    background: #f8fbf9 !important;
+}
+
+.aco-chip-group .form-check {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.aco-chip-group .form-check-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.aco-chip-group .form-check-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 9px 14px;
+    border-radius: 999px;
+    border: 1px solid #d8e7de;
+    background: #ffffff;
+    color: #34443b;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .18s ease;
+}
+
+.aco-chip-group .form-check-label::before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    border-radius: 5px;
+    border: 1.7px solid #c9d9cf;
+    background: #fff;
+}
+
+.aco-chip-group .form-check-input:checked + .form-check-label {
+    background: #157347;
+    border-color: #157347;
+    color: #ffffff;
+}
+
+.aco-chip-group .form-check-input:checked + .form-check-label::before {
+    background: #ffffff;
+    border-color: #ffffff;
+    box-shadow: inset 0 0 0 4px #157347;
+}
+
+/* BUTTONS CLEAN */
+.btn {
+    border-radius: 14px !important;
+    min-height: 46px;
+    padding: .72rem 1.12rem !important;
+    border: 1px solid transparent !important;
+    font-weight: 850 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: none !important;
+    transition: .16s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-success,
+.btn-custom-primary {
+    background: #157347 !important;
+    border-color: #157347 !important;
+    color: #ffffff !important;
+}
+
+.btn-success:hover,
+.btn-custom-primary:hover {
+    background: #0f5f3a !important;
+    border-color: #0f5f3a !important;
+}
+
+.btn-warning {
+    background: #f5c400 !important;
+    border-color: #e5b700 !important;
+    color: #183428 !important;
+}
+
+.btn-warning:hover {
+    background: #dfb300 !important;
+    border-color: #d5aa00 !important;
+}
+
+.btn-secondary {
+    background: #66727a !important;
+    border-color: #66727a !important;
+    color: #ffffff !important;
+}
+
+.btn-danger,
+.btn-danger-custom {
+    background: #bd2c3b !important;
+    border-color: #bd2c3b !important;
+    color: #ffffff !important;
+}
+
+.btn-outline-light {
+    border: 1px solid rgba(255,255,255,.45) !important;
+    color: #fff !important;
+    background: rgba(255,255,255,.08) !important;
+}
+
+.btn-sm {
+    min-height: 36px;
+    padding: .45rem .75rem !important;
+    border-radius: 11px !important;
+    font-size: .82rem;
+}
+
+.w-100.btn {
+    min-height: 50px;
+}
+
+/* LISTAS E PLANTEL */
+.plantel-lista {
+    max-height: 460px;
+    overflow-y: auto;
+    background: #f8fbf9;
+    border: 1px solid #e1eee6;
+    border-radius: 18px;
+    padding: 12px;
+}
+
+.plantel-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px;
+    border: 1px solid #e1eee6;
+    border-radius: 16px;
+    margin-bottom: 10px;
+    background: #ffffff;
+}
+
+.plantel-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.plantel-foto {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+    object-fit: cover;
+    background: #eef8f2;
+    border: 1px solid #dbe9e1;
+}
+
+.plantel-nome {
+    color: #0f5132;
+    font-weight: 900;
+}
+
+.plantel-meta {
+    color: #6b7a72;
+    font-size: .82rem;
+    font-weight: 650;
+}
+
+/* ALERTS */
+.alert {
+    border-radius: 16px !important;
+    border-width: 1px !important;
+}
+
+.alert-success {
+    background: #eef8f2 !important;
+    color: #0f5132 !important;
+    border-color: #cce5d5 !important;
+}
+
+/* DANGER CARD */
+.function-delete {
+    border-color: #f0ccd0 !important;
+}
+
+.function-delete .card-header {
+    background: #fff8f8 !important;
+}
+
+.function-delete .function-title {
+    color: #9f2331;
+}
+
+.function-delete .function-tag {
+    background: #fff0f2;
+    color: #bd2c3b;
+}
+
+/* FOOTER */
+.main-footer {
+    border-top: 5px solid #157347;
+}
+
+/* RESPONSIVO */
+@media (max-width: 991px) {
+    .admin-overview-v2 {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+
+    .border-end {
+        border-right: 0 !important;
+        border-bottom: 1px solid #e1eee6;
+        padding-bottom: 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-hero-v2 {
+        padding: 58px 18px 86px;
+    }
+
+    .admin-main-v2 {
+        margin-top: -42px;
+        padding-bottom: 56px;
+    }
+
+    .admin-shell-v2 {
+        padding: 18px;
+        border-radius: 24px;
+    }
+
+    .admin-overview-v2 {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-page-title {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+
+    .function-tag {
+        display: none;
+    }
+
+    .template-block.socialmedia_icons {
+        display: none;
+    }
+
+    #branding .club-badge img {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    #header .club-name {
+        font-size: 1.15rem;
+    }
+
+    .plantel-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .plantel-item .btn {
+        width: 100%;
+    }
+}
+</style><style>
+
+/* =========================================================
+   ADMIN V3 - diferente, mais elegante e menos Bootstrap
+========================================================= */
+
+body.admin-lux-v3 {
+    --lux-dark: #082e1f;
+    --lux-green: #126b42;
+    --lux-green-2: #198754;
+    --lux-mint: #eff8f3;
+    --lux-yellow: #f2c200;
+    --lux-line: #dcebe3;
+    --lux-text: #17251d;
+    --lux-muted: #6c7b72;
+    background:
+        radial-gradient(circle at 0% 0%, rgba(18,107,66,.16), transparent 30%),
+        radial-gradient(circle at 100% 4%, rgba(242,194,0,.16), transparent 24%),
+        linear-gradient(135deg, #f3f8f5 0%, #ffffff 48%, #eef7f2 100%) !important;
+}
+
+/* HERO mais sóbrio */
+body.admin-lux-v3 .admin-hero-v2 {
+    background:
+        linear-gradient(135deg, rgba(8,46,31,.98), rgba(18,107,66,.96)),
+        radial-gradient(circle at 24% 30%, rgba(242,194,0,.34), transparent 30%) !important;
+    padding-bottom: 128px !important;
+}
+
+body.admin-lux-v3 .admin-eyebrow {
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.18);
+    color: #f7d550;
+}
+
+body.admin-lux-v3 .admin-hero-v2 h1 {
+    letter-spacing: -2.2px;
+}
+
+/* SHELL */
+body.admin-lux-v3 .admin-main-v2 {
+    margin-top: -76px !important;
+}
+
+body.admin-lux-v3 .admin-shell-v2 {
+    background: #ffffff !important;
+    border-radius: 34px !important;
+    border: 1px solid rgba(18,107,66,.11) !important;
+    box-shadow:
+        0 34px 88px rgba(8,46,31,.16),
+        0 1px 0 rgba(255,255,255,.85) inset !important;
+    padding: 34px !important;
+}
+
+/* TOP OVERVIEW */
+body.admin-lux-v3 .admin-overview-v2 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+body.admin-lux-v3 .admin-overview-v2 > div {
+    border: 0;
+    background:
+        linear-gradient(135deg, #0f5132, #198754);
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 18px;
+    box-shadow: 0 18px 38px rgba(15,81,50,.16);
+}
+
+body.admin-lux-v3 .admin-overview-v2 > div:nth-child(2) {
+    background: linear-gradient(135deg, #f2c200, #d9a900);
+    color: #10291c;
+}
+
+body.admin-lux-v3 .admin-overview-v2 > div:nth-child(3) {
+    background: linear-gradient(135deg, #176c47, #0b3f2a);
+}
+
+body.admin-lux-v3 .admin-overview-v2 > div:nth-child(4) {
+    background: linear-gradient(135deg, #24332b, #101b16);
+}
+
+body.admin-lux-v3 .admin-overview-v2 i {
+    background: rgba(255,255,255,.16);
+    color: inherit;
+    border-radius: 16px;
+}
+
+body.admin-lux-v3 .admin-overview-v2 span {
+    color: inherit;
+}
+
+/* Título dentro do painel */
+body.admin-lux-v3 .admin-page-title {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 6px 0 20px !important;
+    border-bottom: 1px solid var(--lux-line) !important;
+}
+
+body.admin-lux-v3 .admin-page-title h1 {
+    font-size: clamp(1.8rem, 3vw, 2.45rem);
+}
+
+body.admin-lux-v3 #badgePerfil {
+    background: #17251d !important;
+    border: 1px solid rgba(255,255,255,.08);
+    padding: 9px 15px;
+}
+
+/* Divider */
+.admin-section-divider-v3 {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 18px 0 22px;
+}
+
+.admin-section-divider-v3 span {
+    color: var(--lux-green);
+    font-size: .76rem;
+    font-weight: 950;
+    text-transform: uppercase;
+    letter-spacing: .65px;
+}
+
+.admin-section-divider-v3 strong {
+    color: var(--lux-dark);
+    font-size: 1.15rem;
+    font-weight: 950;
+    letter-spacing: -.35px;
+}
+
+/* CARDS - agora com cabeçalho escuro e número */
+body.admin-lux-v3 .admin-function-card {
+    position: relative;
+    border: 1px solid var(--lux-line) !important;
+    border-radius: 28px !important;
+    overflow: hidden;
+    box-shadow: 0 18px 46px rgba(8,46,31,.085) !important;
+    background: #ffffff !important;
+}
+
+body.admin-lux-v3 .admin-function-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 28px 70px rgba(8,46,31,.14) !important;
+    border-color: rgba(18,107,66,.22) !important;
+}
+
+body.admin-lux-v3 .admin-function-card .card-header {
+    min-height: 110px;
+    background:
+        radial-gradient(circle at 92% 12%, rgba(242,194,0,.18), transparent 32%),
+        linear-gradient(135deg, #0f5132, #082e1f) !important;
+    border: 0 !important;
+    color: #ffffff;
+    padding: 24px 26px !important;
+}
+
+body.admin-lux-v3 .function-call .card-header {
+    background:
+        radial-gradient(circle at 92% 12%, rgba(255,255,255,.22), transparent 32%),
+        linear-gradient(135deg, #f2c200, #d8a800) !important;
+}
+
+body.admin-lux-v3 .function-delete .card-header {
+    background:
+        radial-gradient(circle at 92% 12%, rgba(255,255,255,.15), transparent 32%),
+        linear-gradient(135deg, #bb2d3b, #68111b) !important;
+}
+
+body.admin-lux-v3 .function-head-left {
+    align-items: center;
+}
+
+body.admin-lux-v3 .function-icon {
+    background: rgba(255,255,255,.14) !important;
+    color: #f7d550 !important;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 18px;
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+}
+
+body.admin-lux-v3 .function-call .function-icon {
+    background: rgba(15,81,50,.14) !important;
+    color: #0f5132 !important;
+    border-color: rgba(15,81,50,.18);
+}
+
+body.admin-lux-v3 .function-title {
+    color: #ffffff !important;
+    font-size: 1.22rem;
+    letter-spacing: -.55px;
+}
+
+body.admin-lux-v3 .function-call .function-title {
+    color: #10291c !important;
+}
+
+body.admin-lux-v3 .function-desc {
+    color: rgba(255,255,255,.72) !important;
+    font-size: .86rem;
+}
+
+body.admin-lux-v3 .function-call .function-desc {
+    color: rgba(16,41,28,.72) !important;
+}
+
+body.admin-lux-v3 .function-tag {
+    display: none;
+}
+
+.card-number-v3 {
+    position: absolute;
+    right: 22px;
+    bottom: 14px;
+    font-size: 3rem;
+    line-height: 1;
+    font-weight: 950;
+    letter-spacing: -2px;
+    color: rgba(255,255,255,.10);
+    pointer-events: none;
+}
+
+body.admin-lux-v3 .function-call .card-number-v3 {
+    color: rgba(15,81,50,.13);
+}
+
+/* CARD BODY com blocos */
+body.admin-lux-v3 .card-body {
+    padding: 26px !important;
+    background:
+        linear-gradient(180deg, #fbfdfc 0%, #ffffff 38%) !important;
+}
+
+/* FIELD WRAP - visual novo, tipo formulário premium */
+body.admin-lux-v3 .field-wrap {
+    position: relative;
+    background: #ffffff !important;
+    border: 1px solid #dcebe3 !important;
+    border-radius: 20px !important;
+    padding: 14px 16px 13px !important;
+    box-shadow: 0 10px 26px rgba(8,46,31,.045) !important;
+}
+
+body.admin-lux-v3 .field-wrap::before {
+    content: "";
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    bottom: 14px;
+    width: 3px;
+    border-radius: 999px;
+    background: #dcebe3;
+    transition: .18s ease;
+}
+
+body.admin-lux-v3 .field-wrap:focus-within {
+    transform: none !important;
+    border-color: #9bc8aa !important;
+    box-shadow:
+        0 0 0 4px rgba(18,107,66,.07),
+        0 16px 34px rgba(8,46,31,.075) !important;
+}
+
+body.admin-lux-v3 .field-wrap:focus-within::before {
+    background: #157347;
+}
+
+body.admin-lux-v3 .field-wrap .form-label {
+    padding-left: 12px;
+    color: #566960 !important;
+    font-size: .68rem !important;
+    letter-spacing: .65px;
+}
+
+body.admin-lux-v3 .field-wrap .form-control,
+body.admin-lux-v3 .field-wrap .form-select {
+    padding-left: 12px !important;
+    font-size: 1.02rem;
+    color: #16251d !important;
+}
+
+body.admin-lux-v3 .field-wrap .form-control::placeholder {
+    color: #a1afa7;
+}
+
+/* SELECT MULTIPLE */
+body.admin-lux-v3 #selectJogadoresConvocados,
+body.admin-lux-v3 select[multiple] {
+    border: 1px solid #dcebe3 !important;
+    border-radius: 22px !important;
+    background: #ffffff !important;
+    min-height: 190px !important;
+    padding: 12px !important;
+}
+
+body.admin-lux-v3 #selectJogadoresConvocados:focus,
+body.admin-lux-v3 select[multiple]:focus {
+    box-shadow: 0 0 0 4px rgba(18,107,66,.07) !important;
+    border-color: #9bc8aa !important;
+}
+
+/* CHECKBOXES - estilo toggle card */
+body.admin-lux-v3 .aco-chip-group {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 10px !important;
+    padding: 12px !important;
+    background: #f6faf8 !important;
+    border: 1px solid #dcebe3 !important;
+    border-radius: 22px !important;
+}
+
+body.admin-lux-v3 .aco-chip-group .form-check-label {
+    width: 100%;
+    justify-content: center;
+    min-height: 46px;
+    border-radius: 16px;
+    background: #ffffff;
+    border: 1px solid #dcebe3;
+    color: #22372b;
+    font-weight: 850;
+}
+
+body.admin-lux-v3 .aco-chip-group .form-check-label::before {
+    display: none;
+}
+
+body.admin-lux-v3 .aco-chip-group .form-check-input:checked + .form-check-label {
+    background: #0f5132;
+    color: #ffffff;
+    border-color: #0f5132;
+    box-shadow: 0 12px 24px rgba(15,81,50,.15);
+}
+
+/* BUTTONS - aparência diferente */
+body.admin-lux-v3 .btn {
+    position: relative;
+    min-height: 50px;
+    border-radius: 16px !important;
+    padding: .78rem 1.15rem !important;
+    font-size: .95rem;
+    font-weight: 900 !important;
+    box-shadow: none !important;
+}
+
+body.admin-lux-v3 .btn i {
+    opacity: .9;
+}
+
+body.admin-lux-v3 .btn-success,
+body.admin-lux-v3 .btn-custom-primary {
+    background: #082e1f !important;
+    border-color: #082e1f !important;
+    color: #ffffff !important;
+}
+
+body.admin-lux-v3 .btn-success:hover,
+body.admin-lux-v3 .btn-custom-primary:hover {
+    background: #126b42 !important;
+    border-color: #126b42 !important;
+    box-shadow: 0 14px 30px rgba(8,46,31,.18) !important;
+}
+
+body.admin-lux-v3 .btn-warning {
+    background: #f2c200 !important;
+    border-color: #f2c200 !important;
+    color: #10291c !important;
+}
+
+body.admin-lux-v3 .btn-warning:hover {
+    background: #d9a900 !important;
+    border-color: #d9a900 !important;
+    box-shadow: 0 14px 30px rgba(242,194,0,.20) !important;
+}
+
+/* Botões longos têm detalhe lateral */
+body.admin-lux-v3 .func-card .btn.w-100::after,
+body.admin-lux-v3 .func-card button[type="submit"].w-100::after {
+    content: "";
+    position: absolute;
+    right: 16px;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: currentColor;
+    opacity: .45;
+}
+
+/* PLANTEL LIST */
+body.admin-lux-v3 .plantel-lista {
+    border-radius: 22px !important;
+    background: #f6faf8 !important;
+}
+
+body.admin-lux-v3 .plantel-item {
+    border-radius: 18px !important;
+    padding: 15px !important;
+}
+
+/* DANGER */
+body.admin-lux-v3 .function-delete .card-body {
+    background: linear-gradient(180deg, #fffafa, #ffffff 40%) !important;
+}
+
+body.admin-lux-v3 .btn-danger-custom,
+body.admin-lux-v3 .btn-danger {
+    background: #9f2331 !important;
+    border-color: #9f2331 !important;
+}
+
+/* MOBILE */
+@media (max-width: 1100px) {
+    body.admin-lux-v3 .aco-chip-group {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    body.admin-lux-v3 .admin-shell-v2 {
+        padding: 18px !important;
+    }
+
+    body.admin-lux-v3 .admin-overview-v2 {
+        grid-template-columns: 1fr;
+    }
+
+    body.admin-lux-v3 .aco-chip-group {
+        grid-template-columns: 1fr;
+    }
+
+    .card-number-v3 {
+        display: none;
+    }
+}
+</style><style>
+
+/* =========================================================
+   ADMIN V4 - sem branco, inputs com outro formato
+========================================================= */
+
+body.admin-no-white-v4 {
+    --v4-bg: #071f18;
+    --v4-bg-2: #0b3024;
+    --v4-panel: #0e3a2b;
+    --v4-panel-2: #123f30;
+    --v4-card: #11402f;
+    --v4-card-2: #0c2f23;
+    --v4-input: #08251c;
+    --v4-input-2: #0b2d22;
+    --v4-border: rgba(164, 214, 184, 0.22);
+    --v4-border-strong: rgba(242, 194, 0, 0.55);
+    --v4-text: #f4fff8;
+    --v4-muted: #b5cdbf;
+    --v4-yellow: #f2c200;
+    --v4-green: #35b56f;
+    --v4-danger: #ff6b7a;
+    background:
+        radial-gradient(circle at 12% 8%, rgba(53, 181, 111, 0.22), transparent 30%),
+        radial-gradient(circle at 90% 5%, rgba(242, 194, 0, 0.18), transparent 28%),
+        linear-gradient(145deg, #061b15 0%, #0b3024 45%, #071f18 100%) !important;
+    color: var(--v4-text) !important;
+}
+
+/* tira branco do header/painel */
+body.admin-no-white-v4 #header,
+body.admin-no-white-v4 .header1 {
+    background: #08251c !important;
+    border-bottom: 1px solid rgba(164, 214, 184, 0.15) !important;
+}
+
+body.admin-no-white-v4 .club-name {
+    color: #f4fff8 !important;
+}
+
+body.admin-no-white-v4 .site-slogan {
+    color: #b5cdbf !important;
+}
+
+body.admin-no-white-v4 .socialmedia_icons a {
+    color: #f2c200 !important;
+}
+
+body.admin-no-white-v4 .navbar {
+    background: #0f5132 !important;
+    border-top: 1px solid rgba(255,255,255,.08);
+}
+
+/* HERO mais escuro */
+body.admin-no-white-v4 .admin-hero-v2 {
+    background:
+        radial-gradient(circle at 18% 26%, rgba(242, 194, 0, 0.22), transparent 34%),
+        linear-gradient(135deg, #071f18 0%, #0f5132 62%, #08251c 100%) !important;
+    padding-bottom: 122px !important;
+}
+
+body.admin-no-white-v4 .admin-eyebrow {
+    background: rgba(242, 194, 0, 0.12) !important;
+    border-color: rgba(242, 194, 0, 0.26) !important;
+    color: #ffe177 !important;
+}
+
+/* SHELL sem branco */
+body.admin-no-white-v4 .admin-main-v2 {
+    margin-top: -74px !important;
+}
+
+body.admin-no-white-v4 .admin-shell-v2 {
+    background:
+        linear-gradient(145deg, rgba(14,58,43,0.96), rgba(8,37,28,0.98)) !important;
+    border: 1px solid rgba(164, 214, 184, 0.18) !important;
+    box-shadow:
+        0 34px 90px rgba(0,0,0,.32),
+        inset 0 1px 0 rgba(255,255,255,.06) !important;
+    border-radius: 34px !important;
+}
+
+/* overview */
+body.admin-no-white-v4 .admin-overview-v2 > div {
+    background: rgba(255,255,255,.06) !important;
+    border: 1px solid rgba(164,214,184,.16) !important;
+    color: #f4fff8 !important;
+    box-shadow: none !important;
+}
+
+body.admin-no-white-v4 .admin-overview-v2 i {
+    background: rgba(242,194,0,.13) !important;
+    color: #f2c200 !important;
+}
+
+body.admin-no-white-v4 .admin-page-title {
+    background: rgba(255,255,255,.05) !important;
+    border: 1px solid rgba(164,214,184,.16) !important;
+    box-shadow: none !important;
+}
+
+body.admin-no-white-v4 .admin-page-title h1 {
+    color: #f4fff8 !important;
+}
+
+body.admin-no-white-v4 #badgePerfil {
+    background: #f2c200 !important;
+    color: #08251c !important;
+}
+
+body.admin-no-white-v4 .admin-section-divider-v3 span,
+body.admin-no-white-v4 .admin-section-divider-v3 strong {
+    color: #f4fff8 !important;
+}
+
+/* alerta treinador */
+body.admin-no-white-v4 #avisoTreinador {
+    background: rgba(53, 181, 111, 0.10) !important;
+    border: 1px solid rgba(53, 181, 111, 0.28) !important;
+    color: #d8f8e7 !important;
+}
+
+/* CARDS sem branco */
+body.admin-no-white-v4 .admin-function-card,
+body.admin-no-white-v4 .card {
+    background:
+        linear-gradient(145deg, rgba(17,64,47,0.98), rgba(12,47,35,0.98)) !important;
+    border: 1px solid rgba(164,214,184,.18) !important;
+    box-shadow: 0 22px 54px rgba(0,0,0,.22) !important;
+    border-radius: 28px !important;
+}
+
+body.admin-no-white-v4 .admin-function-card:hover,
+body.admin-no-white-v4 .card:hover {
+    border-color: rgba(242,194,0,.36) !important;
+    box-shadow: 0 30px 70px rgba(0,0,0,.30) !important;
+}
+
+/* cabeçalho dos cards */
+body.admin-no-white-v4 .admin-function-card .card-header,
+body.admin-no-white-v4 .card-header {
+    background:
+        linear-gradient(135deg, rgba(242,194,0,.10), rgba(53,181,111,.07)),
+        #09291f !important;
+    border-bottom: 1px solid rgba(164,214,184,.14) !important;
+    color: #f4fff8 !important;
+}
+
+body.admin-no-white-v4 .function-title,
+body.admin-no-white-v4 .card-header,
+body.admin-no-white-v4 .card-header h4 {
+    color: #f4fff8 !important;
+}
+
+body.admin-no-white-v4 .function-desc,
+body.admin-no-white-v4 .text-muted,
+body.admin-no-white-v4 small {
+    color: #b5cdbf !important;
+}
+
+body.admin-no-white-v4 .function-icon {
+    background: rgba(242,194,0,.13) !important;
+    color: #f2c200 !important;
+    border: 1px solid rgba(242,194,0,.18) !important;
+}
+
+body.admin-no-white-v4 .function-call .function-icon {
+    background: #f2c200 !important;
+    color: #08251c !important;
+}
+
+body.admin-no-white-v4 .card-number-v3 {
+    color: rgba(255,255,255,.08) !important;
+}
+
+/* corpo dos cards sem branco */
+body.admin-no-white-v4 .card-body,
+body.admin-no-white-v4 .admin-function-card .card-body {
+    background: transparent !important;
+    color: #f4fff8 !important;
+}
+
+/* headings internos */
+body.admin-no-white-v4 h1,
+body.admin-no-white-v4 h2,
+body.admin-no-white-v4 h3,
+body.admin-no-white-v4 h4,
+body.admin-no-white-v4 h5,
+body.admin-no-white-v4 h6 {
+    color: #f4fff8;
+}
+
+body.admin-no-white-v4 .func-card h6.text-muted,
+body.admin-no-white-v4 .func-card h6,
+body.admin-no-white-v4 .admin-function-card h6 {
+    color: #f2c200 !important;
+}
+
+/* NOVO FORMATO DOS INPUTS: linhas escuras com label superior */
+body.admin-no-white-v4 .field-wrap {
+    position: relative;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025)) !important;
+    border: 1px solid rgba(164,214,184,.16) !important;
+    border-radius: 14px !important;
+    padding: 13px 15px 12px !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.04) !important;
+    transition: border-color .18s ease, background .18s ease, transform .18s ease;
+}
+
+body.admin-no-white-v4 .field-wrap::before {
+    display: none !important;
+}
+
+body.admin-no-white-v4 .field-wrap::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 9px;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(164,214,184,.18);
+    transition: background .18s ease;
+}
+
+body.admin-no-white-v4 .field-wrap:focus-within {
+    background:
+        linear-gradient(180deg, rgba(242,194,0,.08), rgba(255,255,255,.035)) !important;
+    border-color: rgba(242,194,0,.48) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 0 0 4px rgba(242,194,0,.08) !important;
+}
+
+body.admin-no-white-v4 .field-wrap:focus-within::after {
+    background: #f2c200;
+}
+
+body.admin-no-white-v4 .field-wrap .form-label {
+    color: #f2c200 !important;
+    padding-left: 0 !important;
+    font-size: .68rem !important;
+    font-weight: 900 !important;
+    letter-spacing: .62px;
+    margin-bottom: 8px !important;
+    text-transform: uppercase;
+}
+
+body.admin-no-white-v4 .field-wrap .form-control,
+body.admin-no-white-v4 .field-wrap .form-select {
+    background: transparent !important;
+    color: #f4fff8 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 0 9px 0 !important;
+    min-height: 32px !important;
+    font-weight: 750;
+    font-size: 1rem;
+}
+
+body.admin-no-white-v4 .field-wrap .form-control::placeholder {
+    color: rgba(244,255,248,.45) !important;
+    font-weight: 650;
+}
+
+body.admin-no-white-v4 .form-control:focus,
+body.admin-no-white-v4 .form-select:focus {
+    outline: none !important;
+}
+
+/* read only */
+body.admin-no-white-v4 input[readonly],
+body.admin-no-white-v4 .form-control.bg-light {
+    color: rgba(244,255,248,.70) !important;
+    background: transparent !important;
+}
+
+/* SELECT / OPTIONS */
+body.admin-no-white-v4 select,
+body.admin-no-white-v4 .form-select {
+    color-scheme: dark;
+}
+
+body.admin-no-white-v4 select option {
+    background: #0b2d22 !important;
+    color: #f4fff8 !important;
+}
+
+/* SELECT MULTIPLE fora do field-wrap */
+body.admin-no-white-v4 #selectJogadoresConvocados,
+body.admin-no-white-v4 select[multiple] {
+    background: #08251c !important;
+    color: #f4fff8 !important;
+    border: 1px solid rgba(164,214,184,.20) !important;
+    border-radius: 18px !important;
+    min-height: 185px !important;
+    padding: 12px !important;
+}
+
+body.admin-no-white-v4 #selectJogadoresConvocados:focus,
+body.admin-no-white-v4 select[multiple]:focus {
+    border-color: rgba(242,194,0,.48) !important;
+    box-shadow: 0 0 0 4px rgba(242,194,0,.08) !important;
+}
+
+/* CHECKBOXES - outro formato: cartões escuros */
+body.admin-no-white-v4 .aco-chip-group {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 10px !important;
+    background: #08251c !important;
+    border: 1px solid rgba(164,214,184,.16) !important;
+    border-radius: 18px !important;
+    padding: 12px !important;
+}
+
+body.admin-no-white-v4 .aco-chip-group .form-check {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+body.admin-no-white-v4 .aco-chip-group .form-check-input {
+    position: absolute;
+    opacity: 0;
+}
+
+body.admin-no-white-v4 .aco-chip-group .form-check-label {
+    width: 100%;
+    min-height: 48px;
+    border-radius: 14px;
+    border: 1px solid rgba(164,214,184,.18);
+    background: rgba(255,255,255,.045);
+    color: #d8f8e7;
+    font-weight: 850;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .18s ease;
+}
+
+body.admin-no-white-v4 .aco-chip-group .form-check-label::before {
+    display: none !important;
+}
+
+body.admin-no-white-v4 .aco-chip-group .form-check-label:hover {
+    border-color: rgba(242,194,0,.38);
+    background: rgba(242,194,0,.08);
+}
+
+body.admin-no-white-v4 .aco-chip-group .form-check-input:checked + .form-check-label {
+    background: #f2c200 !important;
+    color: #08251c !important;
+    border-color: #f2c200 !important;
+}
+
+/* BOTÕES combinados com o novo tema */
+body.admin-no-white-v4 .btn {
+    border-radius: 13px !important;
+    min-height: 48px;
+    padding: .72rem 1.1rem !important;
+    font-weight: 900 !important;
+    border: 1px solid transparent !important;
+    box-shadow: none !important;
+}
+
+body.admin-no-white-v4 .btn-success,
+body.admin-no-white-v4 .btn-custom-primary {
+    background: #f2c200 !important;
+    color: #08251c !important;
+    border-color: #f2c200 !important;
+}
+
+body.admin-no-white-v4 .btn-success:hover,
+body.admin-no-white-v4 .btn-custom-primary:hover {
+    background: #ffd740 !important;
+    border-color: #ffd740 !important;
+}
+
+body.admin-no-white-v4 .btn-warning {
+    background: #35b56f !important;
+    color: #061b15 !important;
+    border-color: #35b56f !important;
+}
+
+body.admin-no-white-v4 .btn-warning:hover {
+    background: #57d98e !important;
+    border-color: #57d98e !important;
+}
+
+body.admin-no-white-v4 .btn-secondary {
+    background: rgba(255,255,255,.09) !important;
+    color: #f4fff8 !important;
+    border-color: rgba(164,214,184,.20) !important;
+}
+
+body.admin-no-white-v4 .btn-danger,
+body.admin-no-white-v4 .btn-danger-custom {
+    background: #ff6b7a !important;
+    color: #18070a !important;
+    border-color: #ff6b7a !important;
+}
+
+body.admin-no-white-v4 .btn-sm {
+    min-height: 36px;
+    border-radius: 11px !important;
+}
+
+/* INPUT GROUP / FATURA */
+body.admin-no-white-v4 .input-group-text {
+    background: #08251c !important;
+    color: #f2c200 !important;
+    border-color: rgba(164,214,184,.18) !important;
+}
+
+body.admin-no-white-v4 .alert-success {
+    background: rgba(53,181,111,.10) !important;
+    border-color: rgba(53,181,111,.25) !important;
+    color: #d8f8e7 !important;
+}
+
+/* PLANTEL */
+body.admin-no-white-v4 .plantel-lista {
+    background: #08251c !important;
+    border-color: rgba(164,214,184,.16) !important;
+}
+
+body.admin-no-white-v4 .plantel-item {
+    background: rgba(255,255,255,.045) !important;
+    border-color: rgba(164,214,184,.16) !important;
+}
+
+body.admin-no-white-v4 .plantel-nome {
+    color: #f4fff8 !important;
+}
+
+body.admin-no-white-v4 .plantel-meta {
+    color: #b5cdbf !important;
+}
+
+body.admin-no-white-v4 .plantel-foto {
+    background: #08251c !important;
+    border-color: rgba(164,214,184,.18) !important;
+}
+
+/* danger */
+body.admin-no-white-v4 .function-delete,
+body.admin-no-white-v4 .card.border-danger {
+    border-color: rgba(255,107,122,.32) !important;
+}
+
+body.admin-no-white-v4 .function-delete .card-header {
+    background:
+        linear-gradient(135deg, rgba(255,107,122,.14), rgba(255,255,255,.03)),
+        #271016 !important;
+}
+
+/* FOOTER */
+body.admin-no-white-v4 .main-footer {
+    background: #061b15 !important;
+    border-top: 5px solid #f2c200 !important;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+    body.admin-no-white-v4 .aco-chip-group {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    body.admin-no-white-v4 .admin-shell-v2 {
+        border-radius: 24px !important;
+        padding: 18px !important;
+    }
+
+    body.admin-no-white-v4 .aco-chip-group {
+        grid-template-columns: 1fr;
+    }
+
+    body.admin-no-white-v4 .field-wrap {
+        padding: 12px 14px !important;
+    }
+}
+</style><style>
+
+/* =========================================================
+   AJUSTES FINAIS PEDIDOS
+   Header branco + fundo main branco + inputs transparentes
+   + botões principais mais bonitos
+========================================================= */
+
+/* Header volta a branco */
+body.admin-no-white-v4 #header,
+body.admin-no-white-v4 .header1 {
+    background: #ffffff !important;
+    border-bottom: 0 !important;
+}
+
+body.admin-no-white-v4 #header-content {
+    background: #ffffff !important;
+}
+
+body.admin-no-white-v4 .club-name {
+    color: #3f7a4a !important;
+}
+
+body.admin-no-white-v4 .site-slogan {
+    color: #666666 !important;
+}
+
+body.admin-no-white-v4 .socialmedia_icons a {
+    color: #3f7a4a !important;
+}
+
+body.admin-no-white-v4 .socialmedia_icons a:hover {
+    color: #0f5132 !important;
+}
+
+body.admin-no-white-v4 .navbar {
+    background: #3f7a4a !important;
+}
+
+
+
+
+
+body.admin-no-white-v4 .admin-shell-v2 {
+    background:
+        linear-gradient(145deg, rgba(14,58,43,0.98), rgba(8,37,28,0.98)) !important;
+}
+
+/* Inputs transparentes quando se escreve */
+body.admin-no-white-v4 .field-wrap {
+    background: rgba(255, 255, 255, 0.045) !important;
+}
+
+body.admin-no-white-v4 .field-wrap:focus-within {
+    background: rgba(255, 255, 255, 0.065) !important;
+}
+
+body.admin-no-white-v4 .field-wrap .form-control,
+body.admin-no-white-v4 .field-wrap .form-select,
+body.admin-no-white-v4 .field-wrap input,
+body.admin-no-white-v4 .field-wrap select,
+body.admin-no-white-v4 .field-wrap textarea {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #f4fff8 !important;
+    box-shadow: none !important;
+}
+
+body.admin-no-white-v4 .field-wrap .form-control:-webkit-autofill,
+body.admin-no-white-v4 .field-wrap input:-webkit-autofill {
+    -webkit-text-fill-color: #f4fff8 !important;
+    transition: background-color 9999s ease-in-out 0s !important;
+}
+
+/* Select multiple mantém fundo escuro mas não branco */
+body.admin-no-white-v4 #selectJogadoresConvocados,
+body.admin-no-white-v4 select[multiple] {
+    background: rgba(255, 255, 255, 0.045) !important;
+    color: #f4fff8 !important;
+}
+
+/* Botões principais mais bonitos */
+body.admin-no-white-v4 .btn {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px !important;
+    min-height: 50px;
+    padding: 0.78rem 1.18rem !important;
+    font-weight: 950 !important;
+    letter-spacing: -0.15px;
+    border: 1px solid transparent !important;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+body.admin-no-white-v4 .btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,.24), transparent);
+    transform: translateX(-120%);
+    transition: transform .55s ease;
+    pointer-events: none;
+}
+
+body.admin-no-white-v4 .btn:hover::before {
+    transform: translateX(120%);
+}
+
+body.admin-no-white-v4 .btn:hover {
+    transform: translateY(-2px);
+}
+
+body.admin-no-white-v4 .btn:active {
+    transform: translateY(0);
+}
+
+/* Criar Utilizador / Adicionar / Emitir Fatura */
+body.admin-no-white-v4 .btn-custom-primary,
+body.admin-no-white-v4 .btn-success {
+    background:
+        linear-gradient(135deg, #f7d446 0%, #f2c200 44%, #dca800 100%) !important;
+    color: #061b15 !important;
+    border-color: rgba(255, 230, 115, .45) !important;
+    box-shadow:
+        0 18px 38px rgba(242, 194, 0, 0.24),
+        inset 0 1px 0 rgba(255,255,255,.45) !important;
+}
+
+body.admin-no-white-v4 .btn-custom-primary:hover,
+body.admin-no-white-v4 .btn-success:hover {
+    background:
+        linear-gradient(135deg, #ffe16b 0%, #f2c200 46%, #c99800 100%) !important;
+    box-shadow:
+        0 24px 48px rgba(242, 194, 0, 0.32),
+        inset 0 1px 0 rgba(255,255,255,.5) !important;
+}
+
+/* Lançar Convocatória */
+body.admin-no-white-v4 .btn-warning {
+    background:
+        linear-gradient(135deg, #42d985 0%, #35b56f 45%, #18824d 100%) !important;
+    color: #061b15 !important;
+    border-color: rgba(87, 217, 142, .45) !important;
+    box-shadow:
+        0 18px 38px rgba(53, 181, 111, 0.26),
+        inset 0 1px 0 rgba(255,255,255,.32) !important;
+}
+
+body.admin-no-white-v4 .btn-warning:hover {
+    background:
+        linear-gradient(135deg, #65eba0 0%, #35b56f 45%, #126b42 100%) !important;
+    box-shadow:
+        0 24px 48px rgba(53, 181, 111, 0.34),
+        inset 0 1px 0 rgba(255,255,255,.36) !important;
+}
+
+/* Apagar Utilizador */
+body.admin-no-white-v4 .btn-danger,
+body.admin-no-white-v4 .btn-danger-custom {
+    background:
+        linear-gradient(135deg, #ff8a96 0%, #ff6b7a 42%, #c92f45 100%) !important;
+    color: #20070b !important;
+    border-color: rgba(255, 138, 150, .48) !important;
+    box-shadow:
+        0 18px 38px rgba(255, 107, 122, 0.24),
+        inset 0 1px 0 rgba(255,255,255,.34) !important;
+}
+
+body.admin-no-white-v4 .btn-danger:hover,
+body.admin-no-white-v4 .btn-danger-custom:hover {
+    background:
+        linear-gradient(135deg, #ffa0aa 0%, #ff6b7a 42%, #a91f33 100%) !important;
+    box-shadow:
+        0 24px 48px rgba(255, 107, 122, 0.33),
+        inset 0 1px 0 rgba(255,255,255,.38) !important;
+}
+
+/* Secundários */
+body.admin-no-white-v4 .btn-secondary {
+    background: rgba(255,255,255,.10) !important;
+    color: #f4fff8 !important;
+    border-color: rgba(164,214,184,.24) !important;
+}
+
+body.admin-no-white-v4 .btn-secondary:hover {
+    background: rgba(255,255,255,.16) !important;
+}
+
+/* Botões largos das funções com detalhe de seta */
+body.admin-no-white-v4 .func-card .btn.w-100,
+body.admin-no-white-v4 .admin-function-card .btn.w-100,
+body.admin-no-white-v4 .func-card button[type="submit"].w-100,
+body.admin-no-white-v4 .admin-function-card button[type="submit"].w-100 {
+    min-height: 58px;
+    border-radius: 18px !important;
+}
+
+body.admin-no-white-v4 .func-card .btn.w-100::after,
+body.admin-no-white-v4 .admin-function-card .btn.w-100::after,
+body.admin-no-white-v4 .func-card button[type="submit"].w-100::after,
+body.admin-no-white-v4 .admin-function-card button[type="submit"].w-100::after {
+    content: "→";
+    position: absolute;
+    right: 18px;
+    font-size: 1.05rem;
+    opacity: .75;
+}
+
+/* Botão sair no header */
+body.admin-no-white-v4 .navbar .btn-outline-light {
+    background: rgba(255,255,255,.10) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255,255,255,.38) !important;
+    box-shadow: none !important;
+}
+
+body.admin-no-white-v4 .navbar .btn-outline-light:hover {
+    background: #ffffff !important;
+    color: #0f5132 !important;
+}
+</style><style>
+/* =========================================================
+   CORREÇÃO FINAL: só o nome "Nova Convocatória" em branco
+   Tem de ficar no fim do CSS para ganhar aos estilos anteriores
+========================================================= */
+
+body.admin-clean-v2.admin-lux-v3.admin-no-white-v4 .admin-function-card.function-call .card-header .function-title,
+body.admin-no-white-v4 .admin-function-card.function-call .card-header .function-title,
+body.admin-lux-v3 .admin-function-card.function-call .card-header .function-title,
+.admin-function-card.function-call .card-header .function-title {
+    color: #ffffff !important;
+}
+</style><style>
+/* =========================================================
+   ORGANIZAÇÃO DAS FUNÇÕES POR ÁREA - ADMIN VIEW
+   Apenas organiza visualmente os blocos; não altera IDs nem JavaScript.
+========================================================= */
+
+.admin-area-group-v5 {
+    margin-top: 28px;
+    padding: 22px;
+    border-radius: 30px;
+    border: 1px solid rgba(164, 214, 184, 0.18);
+    background: rgba(255, 255, 255, 0.055);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.admin-area-head-v5 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.admin-area-head-left-v5 {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.admin-area-icon-v5 {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    font-size: 1.35rem;
+    background: rgba(242, 194, 0, 0.14);
+    color: #f2c200;
+    border: 1px solid rgba(242, 194, 0, 0.24);
+}
+
+.admin-area-kicker-v5 {
+    display: inline-block;
+    margin-bottom: 4px;
+    color: #f2c200;
+    font-size: .72rem;
+    font-weight: 950;
+    text-transform: uppercase;
+    letter-spacing: .65px;
+}
+
+.admin-area-head-v5 h2 {
+    margin: 0;
+    color: #f4fff8;
+    font-size: clamp(1.35rem, 2.6vw, 2rem);
+    font-weight: 950;
+    letter-spacing: -.7px;
+    line-height: 1.1;
+}
+
+.admin-area-head-v5 p {
+    margin: 5px 0 0;
+    max-width: 760px;
+    color: #b5cdbf;
+    font-size: .94rem;
+    line-height: 1.55;
+    font-weight: 650;
+}
+
+/* Cada área com uma pequena identidade visual */
+.admin-area-convocatorias {
+    border-color: rgba(53, 181, 111, 0.26);
+}
+
+.admin-area-convocatorias .admin-area-icon-v5 {
+    background: rgba(53, 181, 111, 0.13);
+    color: #57d98e;
+    border-color: rgba(53, 181, 111, 0.28);
+}
+
+.admin-area-utilizadores .admin-area-icon-v5 {
+    background: rgba(242, 194, 0, 0.14);
+    color: #f2c200;
+}
+
+.admin-area-equipas .admin-area-icon-v5 {
+    background: rgba(255, 255, 255, 0.09);
+    color: #d8f8e7;
+    border-color: rgba(216, 248, 231, 0.20);
+}
+
+.admin-area-financeiro .admin-area-icon-v5 {
+    background: rgba(53, 181, 111, 0.12);
+    color: #35b56f;
+    border-color: rgba(53, 181, 111, 0.25);
+}
+
+.admin-area-seguranca {
+    border-color: rgba(255, 107, 122, 0.28);
+    background: linear-gradient(145deg, rgba(255,107,122,.055), rgba(255,255,255,.035));
+}
+
+.admin-area-seguranca .admin-area-icon-v5 {
+    background: rgba(255, 107, 122, 0.13);
+    color: #ff8a96;
+    border-color: rgba(255, 107, 122, 0.28);
+}
+
+/* Remover margens antigas que vinham de containers internos */
+.admin-area-group-v5 .container.mt-5 {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Cartões ocupam melhor o espaço dentro das áreas */
+.admin-area-group-v5 .admin-function-card {
+    height: 100%;
+}
+
+.admin-area-group-v5 .card-header {
+    min-height: 106px;
+}
+
+/* Em tema claro, caso removas a classe admin-no-white-v4 */
+body.admin-clean-v2:not(.admin-no-white-v4) .admin-area-group-v5 {
+    background: #ffffff;
+    border-color: #e1eee6;
+}
+
+body.admin-clean-v2:not(.admin-no-white-v4) .admin-area-head-v5 h2 {
+    color: #0f5132;
+}
+
+body.admin-clean-v2:not(.admin-no-white-v4) .admin-area-head-v5 p {
+    color: #607168;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .admin-area-group-v5 {
+        padding: 16px;
+        border-radius: 24px;
+        margin-top: 22px;
+    }
+
+    .admin-area-head-left-v5 {
+        align-items: flex-start;
+    }
+
+    .admin-area-icon-v5 {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        border-radius: 16px;
+        font-size: 1.1rem;
+    }
+
+    .admin-area-head-v5 p {
+        font-size: .88rem;
+    }
+}
+</style><style>
+/* =========================================================
+   ADMIN V6 - Categorias clicáveis
+   Clicar em Utilizadores mostra Criar, Associar e Remover.
+   Clicar nas outras áreas mostra as respetivas funções.
+========================================================= */
+
+.admin-category-selector-v6 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin: 26px 0 8px;
+}
+
+.admin-category-btn-v6 {
+    width: 100%;
+    min-height: 104px;
+    border: 1px solid rgba(164, 214, 184, 0.18);
+    border-radius: 24px;
+    background:
+        linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
+    color: #f4fff8;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 17px;
+    text-align: left;
+    cursor: pointer;
+    transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+}
+
+.admin-category-btn-v6:hover,
+.admin-category-btn-v6[aria-expanded="true"] {
+    transform: translateY(-3px);
+    border-color: rgba(242, 194, 0, 0.42);
+    background:
+        linear-gradient(145deg, rgba(242,194,0,.13), rgba(255,255,255,.045));
+    box-shadow: 0 20px 44px rgba(0,0,0,.20);
+}
+
+.admin-category-icon-v6 {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    background: rgba(242, 194, 0, 0.14);
+    color: #f2c200;
+    border: 1px solid rgba(242, 194, 0, 0.24);
+    font-size: 1.18rem;
+}
+
+.admin-category-text-v6 {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+}
+
+.admin-category-text-v6 strong {
+    color: #f4fff8;
+    font-size: 1rem;
+    font-weight: 950;
+    letter-spacing: -.35px;
+    line-height: 1.1;
+}
+
+.admin-category-text-v6 small {
+    color: #b5cdbf !important;
+    font-size: .78rem;
+    font-weight: 650;
+    line-height: 1.35;
+    margin-top: 4px;
+}
+
+.admin-category-count-v6 {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: #f2c200;
+    color: #08251c;
+    font-size: .8rem;
+    font-weight: 950;
+}
+
+.admin-areas-accordion-v6 {
+    margin-top: 18px;
+}
+
+.admin-collapse-area-v6 > .admin-area-group-v5:first-child,
+.admin-collapse-area-v6 > .admin-subarea-danger-v6:first-child {
+    margin-top: 0;
+}
+
+/* A remoção fica como sub-área dentro de Utilizadores */
+.admin-subarea-danger-v6 {
+    margin-top: 22px;
+    padding: 22px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 107, 122, 0.28);
+    background: linear-gradient(145deg, rgba(255,107,122,.055), rgba(255,255,255,.035));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* Estado claro, caso tires a classe admin-no-white-v4 */
+body.admin-clean-v2:not(.admin-no-white-v4) .admin-category-btn-v6 {
+    background: #ffffff;
+    color: #0f5132;
+    border-color: #e1eee6;
+}
+
+body.admin-clean-v2:not(.admin-no-white-v4) .admin-category-text-v6 strong {
+    color: #0f5132;
+}
+
+body.admin-clean-v2:not(.admin-no-white-v4) .admin-category-text-v6 small {
+    color: #607168 !important;
+}
+
+/* Mobile */
+@media (max-width: 1100px) {
+    .admin-category-selector-v6 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-category-selector-v6 {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-category-btn-v6 {
+        min-height: 86px;
+        border-radius: 20px;
+        padding: 14px;
+    }
+
+    .admin-category-icon-v6 {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+        border-radius: 14px;
+    }
+
+    .admin-subarea-danger-v6 {
+        padding: 16px;
+        border-radius: 24px;
+    }
+}
+</style><style>
+/* =========================================================
+   ASSOCIAR ENCARREGADO - V8
+   Layout mais limpo, sem textos cortados e sem números soltos.
+   Mantém: #formAssoc, #selectEncarregado, #selectJogador, #msgAssoc
+========================================================= */
+
+.associar-card-wrapper-v8,
+.admin-function-card.function-link {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.admin-function-card.function-link {
+    overflow: hidden !important;
+}
+
+.admin-function-card.function-link .card-header {
+    min-height: auto !important;
+    padding: 24px 26px !important;
+}
+
+.admin-function-card.function-link .function-head-left {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+}
+
+.admin-function-card.function-link .function-title,
+.admin-function-card.function-link .function-desc {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    max-width: 100% !important;
+}
+
+.admin-function-card.function-link .card-body {
+    padding: 26px !important;
+}
+
+/* Esconde estilos anteriores da versão com números/seta, caso ainda existam em cache */
+.admin-function-card.function-link .assoc-step-number-v7,
+.admin-function-card.function-link .assoc-link-icon-v7 {
+    display: none !important;
+}
+
+.assoc-panel-v8 {
+    border-radius: 24px;
+    border: 1px solid rgba(164, 214, 184, 0.16);
+    background:
+        linear-gradient(145deg, rgba(255,255,255,.060), rgba(255,255,255,.030));
+    padding: 22px;
+}
+
+.assoc-top-v8 {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.assoc-top-icon-v8 {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    background: rgba(242, 194, 0, 0.14);
+    color: #f2c200;
+    border: 1px solid rgba(242, 194, 0, 0.24);
+    font-size: 1.15rem;
+}
+
+.assoc-top-text-v8 h3 {
+    margin: 0;
+    color: #f4fff8;
+    font-size: 1.1rem;
+    font-weight: 950;
+    letter-spacing: -.35px;
+}
+
+.assoc-top-text-v8 p {
+    margin: 4px 0 0;
+    color: #b5cdbf;
+    font-size: .9rem;
+    font-weight: 650;
+    line-height: 1.45;
+}
+
+.assoc-grid-v8 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: start;
+}
+
+.assoc-field-v8 {
+    min-width: 0 !important;
+    width: 100% !important;
+    min-height: 92px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.assoc-field-v8 .form-label {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    line-height: 1.25 !important;
+    margin-bottom: 9px !important;
+    max-width: 100% !important;
+}
+
+.assoc-field-v8 .form-select {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
+
+.assoc-connector-v8 {
+    margin: 18px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #f2c200;
+    font-size: .74rem;
+    font-weight: 950;
+    text-transform: uppercase;
+    letter-spacing: .55px;
+}
+
+.assoc-connector-v8::before,
+.assoc-connector-v8::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: rgba(164, 214, 184, 0.18);
+}
+
+.assoc-connector-v8 i {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: rgba(242, 194, 0, 0.14);
+    border: 1px solid rgba(242, 194, 0, 0.24);
+}
+
+.assoc-action-v8 {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.assoc-action-v8 .btn {
+    max-width: 280px;
+    min-height: 56px !important;
+    border-radius: 18px !important;
+}
+
+/* Corrige número 04 a bater visualmente no botão */
+.admin-function-card.function-link .card-number-v3 {
+    opacity: .45;
+    right: 22px;
+    bottom: 12px;
+}
+
+/* Tema claro, se algum dia removeres o modo escuro */
+body.admin-clean-v2:not(.admin-no-white-v4) .assoc-panel-v8 {
+    background: #ffffff;
+    border-color: #e1eee6;
+}
+
+body.admin-clean-v2:not(.admin-no-white-v4) .assoc-top-text-v8 h3 {
+    color: #0f5132;
+}
+
+body.admin-clean-v2:not(.admin-no-white-v4) .assoc-top-text-v8 p {
+    color: #607168;
+}
+
+/* Responsivo */
+@media (max-width: 991px) {
+    .assoc-grid-v8 {
+        grid-template-columns: 1fr;
+    }
+
+    .assoc-action-v8 .btn {
+        max-width: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .admin-function-card.function-link .card-body {
+        padding: 18px !important;
+    }
+
+    .assoc-panel-v8 {
+        padding: 16px;
+        border-radius: 20px;
+    }
+
+    .assoc-top-v8 {
+        align-items: flex-start;
+    }
+
+    .assoc-connector-v8 span {
+        display: none;
+    }
+}
+</style><style>
+/* =========================================================
+   ADMIN V9
+   Contadores dinâmicos, notificações, modal de remoção e PDF
+========================================================= */
+
+/* Contadores */
+.admin-category-count-v6 {
+    min-width: 34px !important;
+    width: auto !important;
+    padding: 0 9px;
+    font-variant-numeric: tabular-nums;
+}
+
+.admin-category-count-v6.is-loading-v9 {
+    opacity: .58;
+    animation: counterPulseV9 1s ease-in-out infinite alternate;
+}
+
+.admin-category-count-v6.is-unavailable-v9 {
+    background: rgba(255,255,255,.10) !important;
+    color: #b5cdbf !important;
+}
+
+@keyframes counterPulseV9 {
+    from { transform: scale(.94); }
+    to { transform: scale(1); }
+}
+
+/* Ações da fatura */
+.finance-actions-v9 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.finance-actions-v9 .btn {
+    min-width: 235px;
+}
+
+#btnExportarReciboPDF:disabled {
+    opacity: .48;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Notificações */
+.aco-toast-container-v9 {
+    position: fixed;
+    top: 22px;
+    right: 22px;
+    z-index: 1095;
+    width: min(390px, calc(100vw - 28px));
+    display: grid;
+    gap: 12px;
+    pointer-events: none;
+}
+
+.aco-toast-v9 {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr) 32px;
+    gap: 12px;
+    align-items: start;
+    padding: 16px;
+    border-radius: 20px;
+    color: #f4fff8;
+    background: linear-gradient(145deg, #103d2e, #08251c);
+    border: 1px solid rgba(164,214,184,.24);
+    box-shadow: 0 24px 60px rgba(0,0,0,.34);
+    pointer-events: auto;
+    animation: toastEnterV9 .25s ease both;
+}
+
+.aco-toast-v9::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: var(--toast-accent-v9, #35b56f);
+    animation: toastTimerV9 5s linear both;
+}
+
+.aco-toast-icon-v9 {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: color-mix(in srgb, var(--toast-accent-v9, #35b56f) 18%, transparent);
+    color: var(--toast-accent-v9, #35b56f);
+    font-size: 1.05rem;
+}
+
+.aco-toast-content-v9 strong {
+    display: block;
+    color: #ffffff;
+    font-size: .95rem;
+    font-weight: 950;
+    margin-bottom: 3px;
+}
+
+.aco-toast-content-v9 p {
+    margin: 0;
+    color: #c8ddd1;
+    font-size: .86rem;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.aco-toast-close-v9 {
+    width: 30px;
+    height: 30px;
+    border: 0;
+    border-radius: 10px;
+    background: rgba(255,255,255,.08);
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.aco-toast-v9.toast-success-v9 { --toast-accent-v9: #57d98e; }
+.aco-toast-v9.toast-error-v9   { --toast-accent-v9: #ff6b7a; }
+.aco-toast-v9.toast-warning-v9 { --toast-accent-v9: #f2c200; }
+.aco-toast-v9.toast-info-v9    { --toast-accent-v9: #62c7ff; }
+
+.aco-toast-v9.is-leaving-v9 {
+    animation: toastLeaveV9 .22s ease both;
+}
+
+@keyframes toastEnterV9 {
+    from { opacity: 0; transform: translateX(28px) scale(.98); }
+    to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes toastLeaveV9 {
+    to { opacity: 0; transform: translateX(25px) scale(.98); }
+}
+
+@keyframes toastTimerV9 {
+    from { transform: scaleX(1); transform-origin: left; }
+    to { transform: scaleX(0); transform-origin: left; }
+}
+
+/* Modal de remoção */
+.admin-delete-modal-v9 .modal-content {
+    overflow: hidden;
+    border: 1px solid rgba(255,107,122,.30);
+    border-radius: 28px;
+    color: #f4fff8;
+    background:
+        radial-gradient(circle at 92% 5%, rgba(255,107,122,.17), transparent 30%),
+        linear-gradient(145deg, #12382d, #071f18);
+    box-shadow: 0 32px 90px rgba(0,0,0,.46);
+}
+
+.admin-delete-modal-v9 .modal-header,
+.admin-delete-modal-v9 .modal-footer {
+    border-color: rgba(164,214,184,.14);
+    padding: 20px 22px;
+}
+
+.admin-delete-modal-v9 .modal-body {
+    padding: 24px 22px;
+}
+
+.delete-modal-heading-v9 {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.delete-modal-icon-v9 {
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    background: rgba(255,107,122,.14);
+    color: #ff8a96;
+    border: 1px solid rgba(255,107,122,.28);
+}
+
+.delete-modal-kicker-v9 {
+    display: block;
+    color: #ff8a96;
+    font-size: .69rem;
+    font-weight: 950;
+    text-transform: uppercase;
+    letter-spacing: .65px;
+    margin-bottom: 2px;
+}
+
+.delete-modal-warning-v9 {
+    margin: 0 0 12px;
+    color: #c8ddd1;
+}
+
+.delete-user-preview-v9 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    border-radius: 17px;
+    background: rgba(255,107,122,.10);
+    border: 1px solid rgba(255,107,122,.23);
+    color: #ffffff;
+    margin-bottom: 18px;
+}
+
+.delete-user-preview-v9 i {
+    color: #ff8a96;
+}
+
+.delete-modal-help-v9 {
+    color: #c8ddd1;
+    font-size: .9rem;
+    line-height: 1.55;
+}
+
+.delete-confirm-field-v9 {
+    margin-top: 16px;
+}
+
+.delete-modal-error-v9 {
+    margin-top: 12px;
+    color: #ffadb5;
+    font-size: .85rem;
+    font-weight: 750;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .aco-toast-container-v9 {
+        top: 12px;
+        right: 14px;
+        left: 14px;
+        width: auto;
+    }
+
+    .finance-actions-v9 {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .finance-actions-v9 .btn {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .admin-delete-modal-v9 .modal-footer {
+        flex-direction: column-reverse;
+    }
+
+    .admin-delete-modal-v9 .modal-footer .btn {
+        width: 100%;
+    }
+}
+</style><style>
+/* =========================================================
+   PLANTEL V10 — FOTO DIRETA + VÁRIOS ESCALÕES
+========================================================= */
+
+.plantel-label-v10 {
+    color: #f2c200 !important;
+    font-size: .72rem !important;
+    font-weight: 950 !important;
+    text-transform: uppercase;
+    letter-spacing: .55px;
+}
+
+.plantel-escaloes-area-v10 {
+    margin-bottom: 14px;
+}
+
+.plantel-escaloes-grid-v10 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.plantel-escalao-chip-v10 {
+    position: relative;
+    margin: 0;
+    cursor: pointer;
+}
+
+.plantel-escalao-chip-v10 input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.plantel-escalao-chip-v10 span {
+    min-height: 48px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 12px;
+    border-radius: 15px;
+    border: 1px solid rgba(164, 214, 184, .18);
+    background: rgba(255, 255, 255, .045);
+    color: #d8f8e7;
+    font-size: .83rem;
+    font-weight: 850;
+    line-height: 1.25;
+    text-align: center;
+    transition: .18s ease;
+}
+
+.plantel-escalao-chip-v10 span:hover {
+    border-color: rgba(242, 194, 0, .42);
+    background: rgba(242, 194, 0, .08);
+}
+
+.plantel-escalao-chip-v10 input:checked + span {
+    border-color: #f2c200;
+    background: #f2c200;
+    color: #08251c;
+    box-shadow: 0 12px 28px rgba(242, 194, 0, .20);
+}
+
+.plantel-upload-card-v10 {
+    display: grid;
+    grid-template-columns: 118px minmax(0, 1fr);
+    gap: 16px;
+    align-items: center;
+    padding: 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(164, 214, 184, .17);
+    background: rgba(255, 255, 255, .04);
+}
+
+.plantel-preview-wrap-v10 {
+    width: 118px;
+    height: 132px;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid rgba(242, 194, 0, .24);
+    background: #08251c;
+}
+
+#plantelFotoPreview {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.plantel-upload-content-v10 {
+    min-width: 0;
+}
+
+#plantelFotoFicheiro {
+    cursor: pointer;
+}
+
+#plantelFotoFicheiro::file-selector-button {
+    margin-right: 12px;
+    border: 0;
+    border-radius: 10px;
+    padding: 8px 12px;
+    background: #f2c200;
+    color: #08251c;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.plantel-escaloes-badges-v10 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.plantel-escalao-badge-v10 {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgba(242, 194, 0, .13);
+    border: 1px solid rgba(242, 194, 0, .22);
+    color: #f2c200;
+    font-size: .7rem;
+    font-weight: 850;
+}
+
+@media (max-width: 576px) {
+    .plantel-escaloes-grid-v10 {
+        grid-template-columns: 1fr;
+    }
+
+    .plantel-upload-card-v10 {
+        grid-template-columns: 1fr;
+    }
+
+    .plantel-preview-wrap-v10 {
+        width: 100%;
+        height: 220px;
+    }
+}
+</style></head>
+<body class="admin-clean-v2 admin-lux-v3 admin-no-white-v4">
+<header class="header1" id="header">
+<div class="container d-flex justify-content-between align-items-center py-2" id="header-content">
+<div class="d-flex align-items-center" id="branding">
+<div class="club-badge me-3">
+<a href="#"><img alt="logo" height="70" src="../img/logo_9JToiDZ.png" width="70"/></a>
+</div>
+<h2 class="club-name mb-0 h4">
+                    Andebol Clube Olhão
+                    <span class="site-slogan d-block small">#maisqueumclube</span>
+</h2>
+</div>
+<aside class="template-block socialmedia_icons">
+<div class="icons d-flex gap-3 fs-5">
+<a href="https://www.facebook.com/AndebolClubeOlhao/" target="_blank"><i class="fab fa-facebook"></i></a>
+<a href="https://www.instagram.com/andebol_clube_olhao/" target="_blank"><i class="fab fa-instagram"></i></a>
+<a href="https://www.tiktok.com/@andebolclubeolhao" target="_blank"><i class="fab fa-tiktok"></i></a>
+</div>
+</aside>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success mt-0">
+<div class="container">
+<a class="navbar-brand d-lg-none" href="#">Menu</a>
+<button class="navbar-toggler" data-bs-target="#mainNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="mainNav">
+<ul class="navbar-nav me-auto" id="menuPrincipal">
+<li class="nav-item"><a class="nav-link" href="../index.html">Início</a></li>
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Clube</a>
+<ul class="dropdown-menu">
+<li><a class="dropdown-item" href="../historiaaco.html">História</a></li>
+<li><a class="dropdown-item" href="../mensagempr.html">Mensagem do Presidente</a></li>
+<li><a class="dropdown-item" href="../Estrutura-desportiva.html">Estrutura desportiva</a></li>
+<li><a class="dropdown-item" href="../historia.html">Cidade de Olhão</a></li>
+<li><a class="dropdown-item" href="../contactos.html">Contatos</a></li>
+</ul>
+</li>
+<li class="nav-item dropdown">
+<a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="sociosDropdown" role="button">Sócios</a>
+<ul aria-labelledby="sociosDropdown" class="dropdown-menu">
+<li><a class="dropdown-item" href="../novo-socio.html">Novo Sócio</a></li>
+<li><a class="dropdown-item" href="../financeiro.html">Financeiro</a></li>
+<li><a class="dropdown-item" href="../convocatoria.html">Convocatória</a></li>
+</ul>
+</li>
+<li class="nav-item dropdown">
+<a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="equipasDropdown" role="button">Equipas</a>
+<ul aria-labelledby="equipasDropdown" class="dropdown-menu">
+<li><a class="dropdown-item" href="equipas/sub18.html">Sub-18 Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/sub16.html">Sub-16 Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/sub14.html">Sub-14 Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/sub12.html">Minis Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/minisf.html">Minis Feminino</a></li>
+<li><a class="dropdown-item" href="equipas/bambis.html">Bambis Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/bambis.html">Bambis Feminino</a></li>
+<li><a class="dropdown-item" href="equipas/manitas.html">Manitas Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/manitas.html">Manitas Feminino</a></li>
+<li><a class="dropdown-item" href="equipas/baby.html">Baby</a></li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link" href="../noticias.html">Notícias</a></li>
+<li class="nav-item"><a class="nav-link" href="../loja.html">Loja</a></li>
+</ul>
+<div class="d-flex">
+<button class="btn btn-outline-light btn-sm" onclick="sair()">
+<i class="fas fa-sign-out-alt"></i> Sair
+                        </button>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<section class="admin-hero-v2">
+<div class="container">
+<span class="admin-eyebrow"><i class="fas fa-lock"></i> Área Administrativa</span>
+<h1>Painel de Administração</h1>
+<p>Gestão do clube, atletas, equipas, convocatórias e recibos num painel mais limpo e profissional.</p>
+</div>
+</section>
+<main class="admin-main-v2"><div class="container"><div class="admin-shell-v2">
+<div class="d-flex justify-content-between align-items-center mb-4 admin-page-title">
+<h1 class="h3 text-gray-800"><i class="fas fa-cogs"></i> Painel de Administração</h1>
+<span class="badge bg-secondary" id="badgePerfil">Acesso Reservado</span>
+</div>
+<div class="alert alert-info treinador-only-info" id="avisoTreinador">
+<i class="fas fa-info-circle"></i> Perfil de treinador: só tens permissão para lançar convocatórias. As restantes áreas administrativas foram bloqueadas.
+        </div><div class="admin-category-selector-v6" id="adminCategorySelector"><button aria-controls="areaUtilizadoresCollapse" aria-expanded="false" class="admin-category-btn-v6 admin-only" data-bs-target="#areaUtilizadoresCollapse" data-bs-toggle="collapse" type="button"><span class="admin-category-icon-v6"><i class="fas fa-users-gear"></i></span><span class="admin-category-text-v6"><strong>Utilizadores</strong><small>Criar, associar e remover contas</small></span><span aria-label="Total de utilizadores" class="admin-category-count-v6" id="countUtilizadores" title="Total de utilizadores">…</span></button><button aria-controls="areaConvocatoriasCollapse" aria-expanded="false" class="admin-category-btn-v6 convocatoria-section" data-bs-target="#areaConvocatoriasCollapse" data-bs-toggle="collapse" type="button"><span class="admin-category-icon-v6"><i class="fas fa-calendar-check"></i></span><span class="admin-category-text-v6"><strong>Convocatórias</strong><small>Lançar convocatórias por escalão</small></span><span aria-label="Total de convocatórias" class="admin-category-count-v6" id="countConvocatorias" title="Total de convocatórias">…</span></button><button aria-controls="areaEquipasCollapse" aria-expanded="false" class="admin-category-btn-v6 admin-only" data-bs-target="#areaEquipasCollapse" data-bs-toggle="collapse" type="button"><span class="admin-category-icon-v6"><i class="fas fa-shirt"></i></span><span class="admin-category-text-v6"><strong>Equipas</strong><small>Gerir jogadores do plantel</small></span><span aria-label="Total de atletas no plantel" class="admin-category-count-v6" id="countEquipas" title="Total de atletas no plantel">…</span></button><button aria-controls="areaFinanceiroCollapse" aria-expanded="false" class="admin-category-btn-v6 admin-only" data-bs-target="#areaFinanceiroCollapse" data-bs-toggle="collapse" type="button"><span class="admin-category-icon-v6"><i class="fas fa-file-invoice-dollar"></i></span><span class="admin-category-text-v6"><strong>Financeiro</strong><small>Emitir faturas e recibos</small></span><span aria-label="Total de faturas/recibos" class="admin-category-count-v6" id="countFinanceiro" title="Total de faturas/recibos">…</span></button></div><div class="admin-areas-accordion-v6" id="adminAreasAccordion"><div class="collapse admin-collapse-area-v6 admin-only" data-bs-parent="#adminAreasAccordion" id="areaUtilizadoresCollapse"><section class="admin-area-group-v5 admin-area-utilizadores admin-only"><div class="admin-area-head-v5"><div class="admin-area-head-left-v5"><div class="admin-area-icon-v5"><i class="fas fa-users-gear"></i></div><div><span class="admin-area-kicker-v5">Contas e permissões</span><h2>Utilizadores</h2><p>Criar utilizadores, associar encarregados aos jogadores e remover contas do sistema.</p></div></div></div><div class="row g-4"><div class="col-xl-7 col-lg-12 mb-4 admin-only">
+<div class="card h-100 admin-function-card function-user">
+<div class="card-header d-flex align-items-center">
+<div class="function-head-left">
+<div class="function-icon"><i class="fas fa-user-plus me-2"></i></div>
+<div>
+<div class="function-title">Novo Utilizador</div>
+<div class="function-desc">Criar contas e definir permissões</div>
+</div>
+</div>
+<div class="function-tag">Admin</div>
+<div class="card-number-v3">01</div></div>
+<div class="card-body">
+<div class="row g-2">
+<div class="col-md-6">
+<div class="field-wrap"><label class="form-label">Nome</label><input class="form-control" id="novoNome" placeholder="Nome completo" type="text"/></div>
+</div>
+<div class="col-md-6">
+<div class="field-wrap"><label class="form-label">Email</label><input class="form-control" id="novoEmail" placeholder="Email" type="email"/></div>
+</div>
+<div class="col-md-6">
+<div class="field-wrap"><label class="form-label">Senha</label><input class="form-control" id="novoSenha" placeholder="Senha segura" type="password"/></div>
+</div>
+<div class="col-md-6">
+<div class="field-wrap"><label class="form-label">NIF</label><input class="form-control" id="novoNif" placeholder="NIF" type="text"/></div>
+</div>
+<div class="col-12">
+<div class="field-wrap"><label class="form-label">Morada</label><input class="form-control" id="novaMorada" placeholder="Morada completa" type="text"/></div>
+</div>
+<div class="col-md-12">
+<div class="field-wrap"><label class="form-label">Tipo de Utilizador</label><select class="form-select" id="novoTipo" onchange="toggleEscaloes()">
+<option value="jogador">Jogador (Atleta)</option>
+<option value="treinador">Treinador</option>
+<option value="admin">Administrador</option>
+<option value="encarregado">Encarregado de Educação</option>
+</select></div>
+</div>
+<div class="col-12 mt-3" id="areaEscaloes">
+<label class="form-label mb-2">Escalões Associados:</label>
+<div class="checkbox-group d-flex flex-wrap gap-3 aco-chip-group">
+<div class="form-check">
+<input class="form-check-input chk" id="chk12" type="checkbox" value="Sub-12"/>
+<label class="form-check-label" for="chk12">Sub-12</label>
+</div>
+<div class="form-check">
+<input class="form-check-input chk" id="chk14" type="checkbox" value="Sub-14"/>
+<label class="form-check-label" for="chk14">Sub-14</label>
+</div>
+<div class="form-check">
+<input class="form-check-input chk" id="chk16" type="checkbox" value="Sub-16"/>
+<label class="form-check-label" for="chk16">Sub-16</label>
+</div>
+<div class="form-check">
+<input class="form-check-input chk" id="chk18" type="checkbox" value="Sub-18"/>
+<label class="form-check-label" for="chk18">Sub-18</label>
+</div>
+</div>
+</div>
+<div class="col-12 mt-3">
+<button class="btn btn-custom-primary w-100" onclick="criarUtilizador()">
+<i class="fas fa-save"></i> Criar Utilizador
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div><div class="col-12 mb-4 admin-only associar-card-wrapper-v8">
+<div class="card shadow admin-function-card function-link">
+<div class="card-header bg-primary text-white">
+<div class="function-head-left">
+<div class="function-icon"><i class="fas fa-link"></i></div>
+<div>
+<div class="function-title">Associar Encarregado a Jogador</div>
+<div class="function-desc">Ligar educandos aos encarregados</div>
+</div>
+</div>
+<div class="function-tag">Admin</div>
+<div class="card-number-v3">04</div></div>
+<div class="card-body">
+<form id="formAssoc"><div class="assoc-panel-v8"><div class="assoc-top-v8"><div class="assoc-top-icon-v8"><i class="fas fa-people-arrows"></i></div><div class="assoc-top-text-v8"><h3>Criar ligação familiar</h3><p>Escolhe o encarregado de educação e o jogador que queres associar.</p></div></div><div class="assoc-grid-v8"><div class="field-wrap assoc-field-v8"><label class="form-label" for="selectEncarregado">Encarregado de Educação</label><select class="form-select" id="selectEncarregado" required=""><option value="">Carregando...</option></select></div><div class="field-wrap assoc-field-v8"><label class="form-label" for="selectJogador">Jogador / Atleta</label><select class="form-select" id="selectJogador" required=""><option value="">Carregando...</option></select></div></div><div class="assoc-connector-v8"><span>Encarregado</span><i class="fas fa-link"></i><span>Jogador</span></div><div class="assoc-action-v8"><button class="btn btn-success w-100" type="submit"><i class="fas fa-link"></i> Associar agora</button></div></div></form>
+<div class="mt-2" id="msgAssoc"></div>
+</div>
+</div>
+</div></div></section><section class="admin-area-seguranca admin-only admin-subarea-danger-v6"><div class="admin-area-head-v5"><div class="admin-area-head-left-v5"><div class="admin-area-icon-v5"><i class="fas fa-triangle-exclamation"></i></div><div><span class="admin-area-kicker-v5">Zona crítica</span><h2>Remoção de utilizadores</h2><p>Área reservada para apagar contas do sistema. Usa apenas quando tiveres a certeza.</p></div></div></div><div class="row g-4"><div class="col-12 mb-4 admin-only">
+<div class="card border-danger admin-function-card function-delete">
+<div class="card-header card-header-danger d-flex align-items-center">
+<div class="function-head-left">
+<div class="function-icon"><i class="fas fa-user-minus me-2"></i></div>
+<div>
+<div class="function-title">Remover Utilizador</div>
+<div class="function-desc">Apagar contas do sistema</div>
+</div>
+</div>
+<div class="function-tag">Admin</div>
+<div class="card-number-v3">06</div></div>
+<div class="card-body">
+<div class="row align-items-end">
+<div class="col-md-8">
+<div class="field-wrap"><label class="form-label text-danger">Selecione o utilizador para apagar permanentemente:</label><select class="form-select border-danger" id="selectApagarUser">
+<option value="">-- Carregando lista... --</option>
+</select></div>
+</div>
+<div class="col-md-4 mt-3 mt-md-0">
+<button class="btn btn-danger-custom w-100" onclick="apagarUtilizador()">
+<i class="fas fa-trash-alt"></i> Apagar Utilizador
+                                </button>
+</div>
+</div>
+<div class="mt-2 text-muted small">
+<i class="fas fa-exclamation-triangle"></i> Atenção: Esta ação não pode ser desfeita. Todos os dados associados a este utilizador serão perdidos.
+                        </div>
+</div>
+</div>
+</div></div></section></div><div class="collapse admin-collapse-area-v6 convocatoria-section" data-bs-parent="#adminAreasAccordion" id="areaConvocatoriasCollapse"><section class="admin-area-group-v5 admin-area-convocatorias convocatoria-section"><div class="admin-area-head-v5"><div class="admin-area-head-left-v5"><div class="admin-area-icon-v5"><i class="fas fa-calendar-check"></i></div><div><span class="admin-area-kicker-v5">Jogos e atletas</span><h2>Convocatórias</h2><p>Criar convocatórias por escalão, escolher data, local, adversário e atletas convocados.</p></div></div></div><div class="row g-4"><div class="col-xl-7 col-lg-12 mb-4 convocatoria-section" id="areaConvocatoriaPermitida">
+<div class="card h-100 convocatoria-card admin-function-card function-call">
+<div class="card-header d-flex align-items-center">
+<div class="function-head-left">
+<div class="function-icon"><i class="fas fa-calendar-alt me-2"></i></div>
+<div>
+<div class="function-title">Nova Convocatória</div>
+<div class="function-desc">Selecionar equipa, data e atletas</div>
+</div>
+</div>
+<div class="function-tag">Admin</div>
+<div class="card-number-v3">02</div></div>
+<div class="card-body">
+<div class="row g-2">
+<div class="col-md-8">
+<div class="field-wrap"><label class="form-label">Adversário</label><input class="form-control" id="adversario" placeholder="Nome da equipa" type="text"/></div>
+</div>
+<div class="col-md-4">
+<div class="field-wrap"><label class="form-label">Escalão</label><select class="form-select" id="selectEscalaoJogo" onchange="carregarJogadoresPorEscalao()">
+<option value="">-- Escolher --</option>
+<option value="Sub-12">Sub-12</option>
+<option value="Sub-14">Sub-14</option>
+<option value="Sub-16">Sub-16</option>
+<option value="Sub-18">Sub-18</option>
+</select></div>
+</div>
+<div class="col-md-6">
+<div class="field-wrap"><label class="form-label">Data e Hora</label><input class="form-control" id="dataJogo" type="datetime-local"/></div>
+</div>
+<div class="col-md-6">
+<div class="field-wrap"><label class="form-label">Local</label><input class="form-control" id="localJogo" placeholder="Pavilhão..." type="text"/></div>
+</div>
+<div class="col-12">
+<div class="field-wrap"><label class="form-label">Selecione os Jogadores (Ctrl + Clique)</label><select class="form-select" id="selectJogadoresConvocados" multiple="">
+</select></div>
+<small class="text-muted">Selecione o escalão acima para carregar a lista.</small>
+</div>
+<div class="col-12 mt-3">
+<button class="btn btn-warning w-100 text-dark fw-bold" onclick="fazerConvocatoria()">
+<i class="fas fa-paper-plane"></i> Lançar Convocatória
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div></div></section></div><div class="collapse admin-collapse-area-v6 admin-only" data-bs-parent="#adminAreasAccordion" id="areaEquipasCollapse"><section class="admin-area-group-v5 admin-area-equipas admin-only"><div class="admin-area-head-v5"><div class="admin-area-head-left-v5"><div class="admin-area-icon-v5"><i class="fas fa-shirt"></i></div><div><span class="admin-area-kicker-v5">Plantel público</span><h2>Equipas e jogadores</h2><p>Gerir os jogadores que aparecem nas páginas públicas das equipas e atualizar dados do plantel.</p></div></div></div><div class="row g-4"><div class="col-12 mb-4 admin-only">
+<div class="card border-success admin-function-card function-roster">
+<div class="card-header d-flex align-items-center">
+<div class="function-head-left">
+<div class="function-icon"><i class="fas fa-users-gear me-2"></i></div>
+<div>
+<div class="function-title">Gerir Jogadores das Equipas</div>
+<div class="function-desc">Atualizar o plantel das páginas públicas</div>
+</div>
+</div>
+<div class="function-tag">Admin</div>
+<div class="card-number-v3">03</div></div>
+<div class="card-body">
+<div class="alert alert-warning mb-4"><i class="fas fa-circle-info"></i> Escolhe a fotografia diretamente do computador e seleciona todos os escalões a que o atleta pertence. A mesma ficha será apresentada automaticamente nas páginas dessas equipas.</div>
+<div class="row g-3">
+<div class="col-lg-5 border-end">
+<h6 class="text-muted mb-3">Adicionar Jogador</h6>
+<div class="mb-2">
+<div class="field-wrap"><label class="form-label">Nome do Jogador</label><input class="form-control" id="plantelNome" placeholder="Ex: Diego Brito" type="text"/></div>
+</div>
+<div class="row g-2">
+<div class="col-md-6">
+<div class="field-wrap"><label class="form-label">Número</label><input class="form-control" id="plantelNumero" placeholder="Ex: 6" type="text"/></div>
+</div>
+<div class="col-md-6">
+<div class="field-wrap"><label class="form-label">Idade</label><input class="form-control" id="plantelIdade" placeholder="Ex: 13 anos" type="text"/></div>
+</div>
+
+</div><div class="col-12 mt-2 plantel-escaloes-area-v10">
+<label class="form-label mb-2 plantel-label-v10">
+        Escalões a que o atleta pertence
+    </label>
+<input id="plantelEscalao" type="hidden" value=""/>
+<div class="plantel-escaloes-grid-v10">
+<label class="plantel-escalao-chip-v10">
+<input class="plantel-escalao-check" type="checkbox" value="Sub-18"/>
+<span>Sub-18</span>
+</label>
+<label class="plantel-escalao-chip-v10">
+<input class="plantel-escalao-check" type="checkbox" value="Sub-16"/>
+<span>Sub-16</span>
+</label>
+<label class="plantel-escalao-chip-v10">
+<input class="plantel-escalao-check" type="checkbox" value="Sub-14"/>
+<span>Sub-14</span>
+</label>
+<label class="plantel-escalao-chip-v10">
+<input class="plantel-escalao-check" type="checkbox" value="Sub-12"/>
+<span>Sub-12 / Minis Masculino</span>
+</label>
+<label class="plantel-escalao-chip-v10">
+<input class="plantel-escalao-check" type="checkbox" value="Minis Feminino"/>
+<span>Minis Feminino</span>
+</label>
+<label class="plantel-escalao-chip-v10">
+<input class="plantel-escalao-check" type="checkbox" value="Bambis"/>
+<span>Bambis</span>
+</label>
+<label class="plantel-escalao-chip-v10">
+<input class="plantel-escalao-check" type="checkbox" value="Manitas"/>
+<span>Manitas</span>
+</label>
+<label class="plantel-escalao-chip-v10">
+<input class="plantel-escalao-check" type="checkbox" value="Baby"/>
+<span>Baby</span>
+</label>
+</div>
+<small class="text-muted d-block mt-2">
+        Podes escolher um ou vários escalões. O atleta aparecerá automaticamente
+        em todas as páginas selecionadas.
+    </small>
+</div>
+<div class="mb-2 mt-2">
+<div class="field-wrap"><label class="form-label">Posição</label><select class="form-select" id="plantelPosicao">
+<option value="Universal">Universal</option>
+<option value="Guarda-redes">Guarda-redes</option>
+<option value="Ponta">Ponta</option>
+<option value="Lateral">Lateral</option>
+<option value="Central">Central</option>
+<option value="Pivot">Pivot</option>
+</select></div>
+</div>
+<div class="mb-3 plantel-upload-area-v10">
+<label class="form-label mb-2 plantel-label-v10">
+        Fotografia do atleta
+    </label>
+<div class="plantel-upload-card-v10">
+<div class="plantel-preview-wrap-v10">
+<img alt="Pré-visualização da fotografia" id="plantelFotoPreview" src="/img/equipa/default.png"/>
+</div>
+<div class="plantel-upload-content-v10">
+<div class="field-wrap">
+<label class="form-label" for="plantelFotoFicheiro">
+                    Escolher fotografia do computador
+                </label>
+<input accept="image/jpeg,image/png,image/webp" class="form-control" id="plantelFotoFicheiro" type="file"/>
+</div>
+<input id="plantelFoto" type="hidden" value=""/>
+<small class="text-muted d-block mt-2">
+                Formatos aceites: JPG, PNG e WEBP. Tamanho máximo: 5 MB.
+            </small>
+</div>
+</div>
+</div>
+<button class="btn btn-success w-100" onclick="adicionarJogadorPlantel()">
+<i class="fas fa-user-plus"></i> Adicionar Jogador à Equipa
+</button>
+</div>
+<div class="col-lg-7">
+<div class="d-flex justify-content-between align-items-end gap-2 mb-3 flex-wrap">
+<div>
+<h6 class="text-muted mb-1">Jogadores Existentes</h6>
+<small class="text-muted">Seleciona um escalão para filtrar e remover jogadores.</small>
+</div>
+<div style="min-width: 220px;">
+<div class="field-wrap"><label class="form-label mb-1">Filtrar por Escalão</label><select class="form-select" id="plantelFiltroEscalao" onchange="carregarPlantelJogadores()">
+<option value="">Todos</option>
+<option value="Sub-18">Sub-18</option>
+<option value="Sub-16">Sub-16</option>
+<option value="Sub-14">Sub-14</option>
+<option value="Sub-12">Sub-12 / Minis Masculino</option>
+<option value="Minis Feminino">Minis Feminino</option>
+<option value="Bambis">Bambis</option>
+<option value="Manitas">Manitas</option>
+<option value="Baby">Baby</option>
+</select></div>
+</div>
+</div>
+<div id="plantelMensagem"></div>
+<div class="plantel-lista" id="plantelLista">
+<div class="text-center text-muted py-4">A carregar jogadores...</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div></section></div><div class="collapse admin-collapse-area-v6 admin-only" data-bs-parent="#adminAreasAccordion" id="areaFinanceiroCollapse"><section class="admin-area-group-v5 admin-area-financeiro admin-only"><div class="admin-area-head-v5"><div class="admin-area-head-left-v5"><div class="admin-area-icon-v5"><i class="fas fa-file-invoice-dollar"></i></div><div><span class="admin-area-kicker-v5">Pagamentos</span><h2>Financeiro</h2><p>Emitir faturas e recibos, registar mensalidades, métodos de pagamento e valores finais.</p></div></div></div><div class="row g-4"><div class="col-12 mb-4 admin-only">
+<div class="card admin-function-card function-bill">
+<div class="card-header d-flex align-items-center">
+<div class="function-head-left">
+<div class="function-icon"><i class="fas fa-file-invoice-dollar me-2"></i></div>
+<div>
+<div class="function-title">Emitir Fatura / Recibo</div>
+<div class="function-desc">Registar pagamentos e recibos</div>
+</div>
+</div>
+<div class="function-tag">Admin</div>
+<div class="card-number-v3">05</div></div>
+<div class="card-body">
+<div class="row g-4">
+<div class="col-lg-5 border-end">
+<h6 class="text-muted mb-3">Dados do Atleta</h6>
+<div class="mb-3">
+<div class="field-wrap"><label class="form-label">Selecionar Atleta</label><select class="form-select" id="fatSelectJogador" onchange="preencherDadosJogador()">
+</select></div>
+</div>
+<div class="row g-2">
+<div class="col-md-6">
+<div class="field-wrap"><label class="form-label">Nº Recibo</label><input class="form-control" id="fatRecibo" placeholder="Ex: 2024/001" type="text"/></div>
+</div>
+<div class="col-md-6">
+<div class="field-wrap"><label class="form-label">Data Emissão</label><input class="form-control" id="fatDataEmissao" type="date"/></div>
+</div>
+<div class="col-12">
+<div class="field-wrap"><label class="form-label">NIF</label><input class="form-control bg-light" id="fatNif" readonly="" type="text"/></div>
+</div>
+<div class="col-12">
+<div class="field-wrap"><label class="form-label">Morada</label><input class="form-control bg-light" id="fatMorada" readonly="" type="text"/></div>
+</div>
+</div>
+</div>
+<div class="col-lg-7">
+<h6 class="text-muted mb-3">Detalhes do Pagamento</h6>
+<div class="mb-3">
+<div class="field-wrap"><label class="form-label">Descrição</label><input class="form-control" id="fatDescricao" placeholder="Ex: Mensalidade Outubro" type="text"/></div>
+</div>
+<div class="row g-2 mb-3">
+<div class="col-md-4">
+<div class="field-wrap"><label class="form-label">Valor Base (€)</label><input class="form-control" id="fatBase" oninput="calcTotal()" placeholder="0.00" type="number"/></div>
+</div>
+<div class="col-md-4">
+<div class="field-wrap"><label class="form-label">IVA (€)</label><input class="form-control" id="fatIva" oninput="calcTotal()" placeholder="0.00" type="number"/></div>
+</div>
+<div class="col-md-4">
+<div class="field-wrap"><label class="form-label">Desconto (€)</label><input class="form-control text-danger" id="fatDesc" oninput="calcTotal()" placeholder="0.00" type="number"/></div>
+</div>
+</div>
+<div class="alert alert-success d-flex justify-content-between align-items-center">
+<strong>TOTAL A PAGAR:</strong>
+<div class="input-group w-50">
+<span class="input-group-text">€</span>
+<input class="form-control fw-bold fs-5 text-end text-success" id="fatTotal" readonly="" type="number" value="0.00"/>
+</div>
+</div>
+<div class="row g-2">
+<div class="col-md-4">
+<div class="field-wrap"><label class="form-label">Data Pagamento</label><input class="form-control" id="fatDataPag" type="date"/></div>
+</div>
+<div class="col-md-4">
+<div class="field-wrap"><label class="form-label">Método</label><select class="form-select" id="fatMetodo">
+<option value="Transferencia Bancaria">Transferência</option>
+<option value="Dinheiro">Dinheiro</option>
+<option value="MBWAY">MBWay</option>
+</select></div>
+</div>
+<div class="col-md-4">
+<div class="field-wrap"><label class="form-label">Nota (Opcional)</label><input class="form-control" id="fatNota" placeholder="Obs..." type="text"/></div>
+</div>
+</div>
+<div class="mt-4 text-end">
+<button class="btn btn-success btn-lg px-5" onclick="lancarFatura()" type="button">
+<i class="fas fa-check-circle"></i> Emitir Fatura
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div></section></div></div>
+</div></div></main>
+<footer class="main-footer bg-dark text-white py-4 mt-auto">
+<div class="container text-center">
+<div class="mb-3">
+<img alt="AC Olhão" src="../img/logo_9JToiDZ.png" style="height: 50px; opacity: 0.8;"/>
+</div>
+<span>2026 © Andebol Clube Olhão</span>
+<div class="text-center small mt-2">Criado por Leonardo Brito</div>
+</div>
+</footer>
+<div aria-hidden="true" aria-labelledby="modalRemoverUtilizadorLabel" class="modal fade admin-delete-modal-v9" id="modalRemoverUtilizador" tabindex="-1">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+<div class="delete-modal-heading-v9">
+<span class="delete-modal-icon-v9">
+<i class="fas fa-user-xmark"></i>
+</span>
+<div>
+<span class="delete-modal-kicker-v9">Ação permanente</span>
+<h2 class="modal-title fs-5" id="modalRemoverUtilizadorLabel">
+                            Remover utilizador
+                        </h2>
+</div>
+</div>
+<button aria-label="Fechar" class="btn-close btn-close-white" data-bs-dismiss="modal" type="button"></button>
+</div>
+<div class="modal-body">
+<p class="delete-modal-warning-v9">
+                    Estás prestes a remover permanentemente:
+                </p>
+<div class="delete-user-preview-v9">
+<i class="fas fa-user"></i>
+<strong id="nomeUtilizadorRemover">Utilizador selecionado</strong>
+</div>
+<p class="delete-modal-help-v9">
+                    Esta operação pode apagar dados associados à conta.
+                    Para confirmar, escreve <strong>REMOVER</strong> no campo abaixo.
+                </p>
+<div class="field-wrap delete-confirm-field-v9">
+<label class="form-label" for="confirmarTextoRemocao">
+                        Confirmação
+                    </label>
+<input autocomplete="off" class="form-control" id="confirmarTextoRemocao" placeholder="Escreve REMOVER" type="text"/>
+</div>
+<div class="delete-modal-error-v9" hidden="" id="erroModalRemocao"></div>
+</div>
+<div class="modal-footer">
+<button class="btn btn-secondary" data-bs-dismiss="modal" type="button">
+<i class="fas fa-arrow-left"></i> Cancelar
+                </button>
+<button class="btn btn-danger" disabled="" id="btnConfirmarRemocao" onclick="confirmarRemocaoUtilizador()" type="button">
+<i class="fas fa-trash"></i> Remover permanentemente
+                </button>
+</div>
+</div>
+</div>
+</div>
+<div aria-atomic="true" aria-live="polite" class="aco-toast-container-v9" id="acoToastContainer"></div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+        function sair() { 
+            localStorage.removeItem('utilizador'); 
+            window.location.href = '/logout'; 
+        }
+
+        function obterUtilizadorAtual() {
+            try {
+                return JSON.parse(localStorage.getItem('utilizador') || '{}');
+            } catch (e) {
+                return {};
+            }
+        }
+
+        function tipoUtilizadorAtual() {
+            const utilizador = obterUtilizadorAtual();
+            return (utilizador.tipo || utilizador.role || '').toString().toLowerCase();
+        }
+
+        function utilizadorTemTipo(tipo) {
+            return tipoUtilizadorAtual() === tipo;
+        }
+
+        function bloquearSeTreinador(acao) {
+            if (utilizadorTemTipo('treinador')) {
+                alert('Sem permissão: treinadores só podem lançar convocatórias.');
+                console.warn('Ação bloqueada para treinador:', acao);
+                return true;
+            }
+            return false;
+        }
+
+        function aplicarPermissoes() {
+            const tipo = tipoUtilizadorAtual();
+            const badge = document.getElementById('badgePerfil');
+            const isTreinador = tipo === 'treinador';
+
+            document.body.classList.toggle('modo-treinador', isTreinador);
+
+            if (isTreinador) {
+                // Regra visual forte: treinador vê apenas a área de Nova Convocatória.
+                document.querySelectorAll('.admin-only, .treinador-hide').forEach(el => {
+                    el.style.display = 'none';
+                });
+
+                document.querySelectorAll('.convocatoria-section').forEach(el => {
+                    el.style.display = '';
+                });
+
+                if (badge) {
+                    badge.className = 'badge bg-warning text-dark';
+                    badge.textContent = 'Treinador';
+                }
+            } else {
+                document.querySelectorAll('.admin-only, .treinador-hide').forEach(el => {
+                    el.style.display = '';
+                });
+
+                if (badge) {
+                    badge.className = 'badge bg-secondary';
+                    badge.textContent = tipo ? tipo.charAt(0).toUpperCase() + tipo.slice(1) : 'Acesso Reservado';
+                }
+            }
+        }
+
+        aplicarPermissoes();
+
+        let listaJogadores = [];
+let listaUtilizadores = [];
+
+async function init() {
+    try {
+        const [resJogadores, resUtilizadores] = await Promise.all([
+            fetch('/api/jogadores-completo', { credentials: 'same-origin' }),
+            fetch('/api/todos-utilizadores', { credentials: 'same-origin' })
+        ]);
+
+        listaJogadores = await resJogadores.json();
+        listaUtilizadores = await resUtilizadores.json();
+
+        if (!resJogadores.ok) {
+            throw new Error(listaJogadores.erro || 'Erro ao carregar jogadores.');
+        }
+
+        if (!resUtilizadores.ok) {
+            throw new Error(listaUtilizadores.erro || 'Erro ao carregar utilizadores.');
+        }
+
+        atualizarDropdowns();
+
+    } catch (error) {
+        console.error("Erro ao carregar dados:", error);
+        alert("Erro ao carregar dados do painel: " + error.message);
+    }
+}
+        // 1. Carregar os Encarregados e Jogadores nos Selects
+async function carregarListasAssoc() {
+    try {
+        // Buscar Encarregados
+        const resEnc = await fetch('/api/encarregados');
+        const encarregados = await resEnc.json();
+        const selectEnc = document.getElementById('selectEncarregado');
+        selectEnc.innerHTML = '<option value="">Escolha um Encarregado</option>';
+        encarregados.forEach(e => selectEnc.innerHTML += `<option value="${e.id}">${e.nome}</option>`);
+
+        // Buscar Jogadores (podes aproveitar a rota que já tens)
+        const resJog = await fetch('/api/jogadores-completo');
+        const jogadores = await resJog.json();
+        const selectJog = document.getElementById('selectJogador');
+        selectJog.innerHTML = '<option value="">Escolha um Jogador</option>';
+        jogadores.forEach(j => selectJog.innerHTML += `<option value="${j.id}">${j.nome}</option>`);
+    } catch (err) {
+        console.error("Erro ao carregar listas:", err);
+    }
+}
+
+// 2. Evento de Submissão do Formulário
+document.getElementById('formAssoc').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (bloquearSeTreinador('associar encarregado a jogador')) return;
+    const msg = document.getElementById('msgAssoc');
+    
+    const dados = {
+        id_encarregado: document.getElementById('selectEncarregado').value,
+        id_jogador: document.getElementById('selectJogador').value
+    };
+
+    try {
+        const res = await fetch('/api/associar-familia', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dados)
+        });
+
+        const resultado = await res.json();
+        if (res.ok) {
+            msg.innerHTML = `<div class="alert alert-success">${resultado.mensagem}</div>`;
+            e.target.reset();
+        } else {
+            msg.innerHTML = `<div class="alert alert-danger">${resultado.erro}</div>`;
+        }
+    } catch (err) {
+        msg.innerHTML = `<div class="alert alert-danger">Erro de ligação ao servidor.</div>`;
+    }
+});
+
+// Chamar a função ao carregar a página apenas para administradores
+if (!utilizadorTemTipo('treinador')) carregarListasAssoc();
+        
+        function atualizarDropdowns() {
+    const selFat = document.getElementById('fatSelectJogador');
+    if (selFat) {
+        selFat.innerHTML = '<option value="">-- Selecione Jogador --</option>';
+        listaJogadores.forEach(u => {
+            selFat.innerHTML += `<option value="${u.id}">${u.nome}</option>`;
+        });
+    }
+
+    const selDel = document.getElementById('selectApagarUser');
+    if (selDel) {
+        selDel.innerHTML = '<option value="">-- Selecione para APAGAR --</option>';
+        listaUtilizadores.forEach(u => {
+            selDel.innerHTML += `<option value="${u.id}">${u.nome} (${u.tipo || 'sem tipo'})</option>`;
+        });
+    }
+}
+
+        if (!utilizadorTemTipo('treinador')) init();
+
+        function toggleEscaloes() {
+            const tipo = document.getElementById('novoTipo').value;
+            document.getElementById('areaEscaloes').style.display = (tipo === 'jogador' || tipo === 'treinador') ? 'block' : 'none';
+        }
+
+        async function criarUtilizador() {
+            if (bloquearSeTreinador('criar utilizador')) return;
+            const escaloes = Array.from(document.querySelectorAll('.chk:checked')).map(c => c.value);
+            const dados = {
+                nome: document.getElementById('novoNome').value,
+                email: document.getElementById('novoEmail').value,
+                senha: document.getElementById('novoSenha').value,
+                nif: document.getElementById('novoNif').value,
+                morada: document.getElementById('novaMorada').value,
+                tipo: document.getElementById('novoTipo').value,
+                escaloes: escaloes
+            };
+
+            if ((dados.tipo === 'jogador' || dados.tipo === 'treinador') && escaloes.length === 0) {
+                alert('Escolhe pelo menos um escalão para este utilizador.');
+                return;
+            }
+            
+            try {
+                const res = await fetch('/api/criar-utilizador', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(dados)});
+                const json = await res.json();
+                alert(json.mensagem || "Operação realizada");
+                if (!utilizadorTemTipo('treinador')) init(); // Recarrega lista
+            } catch (error) {
+                alert("Erro ao criar utilizador (Simulação).");
+            }
+        }
+        
+        // --- FUNÇÃO DE APAGAR UTILIZADOR ---
+        
+async function apagarUtilizador() {
+    if (bloquearSeTreinador('apagar utilizador')) return;
+
+    const select = document.getElementById('selectApagarUser');
+    const id = select.value;
+    const nome = select.options[select.selectedIndex]?.text || '';
+
+    if (!id) {
+        alert("Por favor selecione um utilizador para apagar.");
+        return;
+    }
+
+    if (!confirm(
+        "ATENÇÃO!\n\nTens a certeza que queres apagar permanentemente:\n" +
+        nome +
+        "?\n\nEsta ação não pode ser desfeita."
+    )) {
+        return;
+    }
+
+    try {
+        const res = await fetch('/api/apagar-utilizador', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ id: Number(id) })
+        });
+
+        const texto = await res.text();
+        let json;
+
+        try {
+            json = JSON.parse(texto);
+        } catch (e) {
+            console.error('Resposta não JSON:', texto);
+            throw new Error('A API não devolveu JSON. Verifica o api.php e o error_log.');
+        }
+
+        if (!res.ok) {
+            throw new Error(json.erro || json.mensagem || 'Erro ao apagar utilizador.');
+        }
+
+        alert(json.mensagem || "Utilizador apagado com sucesso.");
+
+        await init();
+
+        if (document.getElementById('fatSelectJogador')?.value == id) {
+            document.getElementById('fatSelectJogador').value = "";
+            preencherDadosJogador();
+        }
+
+    } catch (error) {
+        console.error('Erro ao apagar:', error);
+        alert("Erro ao apagar utilizador: " + error.message);
+    }
+}
+
+
+       async function carregarEscaloesPermitidos() {
+    const select = document.getElementById('selectEscalaoJogo');
+
+    try {
+        const res = await fetch('/api/me/escaloes');
+
+        const contentType = res.headers.get('content-type') || '';
+
+        if (!contentType.includes('application/json')) {
+            const texto = await res.text();
+            console.error('Resposta não JSON:', texto);
+            alert('Erro: a API devolveu HTML em vez de JSON. Verifica o .htaccess e se a rota existe no api.php.');
+            return;
+        }
+
+        const escaloes = await res.json();
+
+        if (!res.ok) {
+            alert(escaloes.erro || 'Erro ao carregar escalões.');
+            return;
+        }
+
+        select.innerHTML = '<option value="">-- Escolher --</option>';
+
+        escaloes.forEach(escalao => {
+            select.innerHTML += `<option value="${escalao}">${escalao}</option>`;
+        });
+
+    } catch (err) {
+        console.error('Erro ao carregar escalões permitidos:', err);
+        alert('Erro ao carregar escalões do treinador.');
+    }
+}
+
+        carregarEscaloesPermitidos();
+
+        async function carregarJogadoresPorEscalao() {
+            const esc = document.getElementById('selectEscalaoJogo').value;
+            const sel = document.getElementById('selectJogadoresConvocados');
+
+            sel.innerHTML = '';
+            if(!esc) return;
+            
+            try {
+                const res = await fetch('/api/jogadores/' + encodeURIComponent(esc));
+                const users = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(users.erro || 'Erro ao carregar jogadores.');
+                }
+
+                sel.innerHTML = users.map(u => `<option value="${u.id}">${u.nome}</option>`).join('');
+            } catch (error) {
+                console.error(error);
+                alert(error.message || 'Erro ao carregar jogadores do escalão.');
+            }
+        }
+
+        async function lerRespostaApi(res, nomeOperacao) {
+    const contentType = res.headers.get('content-type') || '';
+
+    if (!contentType.includes('application/json')) {
+        const texto = await res.text();
+        console.error(`${nomeOperacao} devolveu HTML/texto em vez de JSON:`, texto);
+        throw new Error(`${nomeOperacao}: a API devolveu HTML em vez de JSON. Confirma se o .htaccess está ativo e se a rota existe no api.php.`);
+    }
+
+    const json = await res.json();
+
+    if (!res.ok) {
+        throw new Error(json.erro || json.mensagem || `${nomeOperacao}: erro ${res.status}`);
+    }
+
+    return json;
+}
+
+async function fazerConvocatoria() {
+    const ids = Array.from(document.getElementById('selectJogadoresConvocados').selectedOptions)
+        .map(o => o.value);
+
+    const dados = {
+        adversario: document.getElementById('adversario').value.trim(),
+        data: document.getElementById('dataJogo').value,
+        local: document.getElementById('localJogo').value.trim(),
+        escalao: document.getElementById('selectEscalaoJogo').value,
+        ids_jogadores: ids
+    };
+
+    if (!dados.adversario || !dados.data || !dados.local || !dados.escalao) {
+        alert('Preenche adversário, data/hora, local e escalão.');
+        return;
+    }
+
+    if (ids.length === 0) {
+        alert('Seleciona pelo menos um jogador para a convocatória.');
+        return;
+    }
+
+    try {
+        const res = await fetch('/api/convocatoria', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify(dados)
+        });
+
+        const json = await lerRespostaApi(res, 'Lançar convocatória');
+        alert(json.mensagem || 'Convocatória enviada!');
+    } catch (error) {
+        console.error('Erro ao lançar convocatória:', error);
+        alert(error.message || 'Erro ao lançar convocatória.');
+    }
+}
+
+        function preencherDadosJogador() {
+            const user = listaJogadores.find(u => u.id == document.getElementById('fatSelectJogador').value);
+            if(user) {
+                document.getElementById('fatNif').value = user.nif || '';
+                document.getElementById('fatMorada').value = user.morada || '';
+            } else {
+                document.getElementById('fatNif').value = '';
+                document.getElementById('fatMorada').value = '';
+            }
+        }
+
+        function calcTotal() {
+            const base = parseFloat(document.getElementById('fatBase').value) || 0;
+            const iva = parseFloat(document.getElementById('fatIva').value) || 0;
+            const desc = parseFloat(document.getElementById('fatDesc').value) || 0;
+            document.getElementById('fatTotal').value = (base + iva - desc).toFixed(2);
+        }
+
+        async function lancarFatura() {
+    if (bloquearSeTreinador('emitir fatura')) return;
+    const sel = document.getElementById('fatSelectJogador');
+    
+    // Validação básica
+    if (!sel.value) return alert("Por favor, selecione um atleta.");
+    if (!document.getElementById('fatRecibo').value) return alert("Insira o número do recibo.");
+
+    const dados = {
+        id_jogador: sel.value,
+        numero_recibo: document.getElementById('fatRecibo').value,
+        data_emissao: document.getElementById('fatDataEmissao').value,
+        descricao: document.getElementById('fatDescricao').value,
+        valor_base: document.getElementById('fatBase').value || 0,
+        valor_iva: document.getElementById('fatIva').value || 0,
+        valor_total: document.getElementById('fatTotal').value,
+        valor_desconto: document.getElementById('fatDesc').value || 0,
+        data_pagamento: document.getElementById('fatDataPag').value || null,
+        metodo_pagamento: document.getElementById('fatMetodo').value,
+        nota_pagamento: document.getElementById('fatNota').value,
+        nif_jogador: document.getElementById('fatNif').value // Guardamos o NIF na fatura para histórico
+    };
+    
+    try {
+        const res = await fetch('/api/faturas', { 
+            method: 'POST', 
+            headers: {'Content-Type': 'application/json'}, 
+            body: JSON.stringify(dados)
+        });
+        
+        const json = await res.json();
+        
+        if (res.ok) {
+            alert("✅ Fatura emitida com sucesso!");
+            // Limpar formulário (opcional)
+            document.getElementById('fatRecibo').value,
+         document.getElementById('fatDataEmissao').value,
+         document.getElementById('fatDescricao').value,
+         document.getElementById('fatBase').value || 0,
+         document.getElementById('fatIva').value || 0,
+         document.getElementById('fatTotal').value = '0.00';
+         document.getElementById('fatDesc').value = '0.00';
+         document.getElementById('fatDataPag').value = '';
+         document.getElementById('fatMetodo').value = '';
+         document.getElementById('fatNota').value = '';
+         document.getElementById('fatNif').value = '';
+         document.getElementById('fatMorada').value = '';
+         document.getElementById('fatSelectJogador').value = "";
+            
+         
+        } else {
+            alert("❌ Erro: " + json.erro);
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Erro crítico ao ligar ao servidor.");
+    }
+    function souAdminPlantel() {
+    try {
+        const user = JSON.parse(localStorage.getItem('utilizador') || '{}');
+        return user.tipo === 'admin';
+    } catch {
+        return false;
+    }
+}
+
+function caminhoFotoPlantel(foto) {
+    return foto && foto.trim() ? foto.trim() : '../img/equipa/default.png';
+}
+
+function mostrarMensagemPlantel(tipo, mensagem) {
+    const box = document.getElementById('plantelMensagem');
+
+    if (!box) return;
+
+    box.innerHTML = `
+        <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
+            ${mensagem}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+        </div>
+    `;
+}
+
+async function carregarPlantelJogadores() {
+    const lista = document.getElementById('plantelLista');
+    const filtro = document.getElementById('plantelFiltroEscalao');
+
+    if (!lista || !filtro) return;
+
+    if (!souAdminPlantel()) {
+        lista.innerHTML = '<div class="alert alert-danger">Apenas administradores podem gerir jogadores.</div>';
+        return;
+    }
+
+    lista.innerHTML = '<div class="text-center text-muted py-4">A carregar jogadores...</div>';
+
+    try {
+        const escalao = filtro.value;
+
+        const url = escalao
+            ? `/api/plantel-jogadores?escalao=${encodeURIComponent(escalao)}`
+            : '/api/plantel-jogadores';
+
+        const res = await fetch(url, {
+            credentials: 'same-origin'
+        });
+
+        const dados = await res.json();
+
+        if (!res.ok) {
+            throw new Error(dados.erro || 'Erro ao carregar jogadores.');
+        }
+
+        if (!dados.length) {
+            lista.innerHTML = '<div class="alert alert-light border text-muted">Ainda não existem jogadores neste filtro.</div>';
+            return;
+        }
+
+        lista.innerHTML = dados.map(jogador => `
+            <div class="plantel-item">
+                <div class="plantel-info">
+                    <img 
+                        class="plantel-foto" 
+                        src="${caminhoFotoPlantel(jogador.foto)}" 
+                        alt="${jogador.nome}" 
+                        onerror="this.src='../img/equipa/default.png'"
+                    >
+
+                    <div>
+                        <div class="plantel-nome">
+                            ${jogador.numero ? `<span class="badge bg-success me-1">#${jogador.numero}</span>` : ''}
+                            ${jogador.nome}
+                        </div>
+
+                        <div class="plantel-meta">
+                            ${jogador.escalao || 'Sem escalão'} · 
+                            ${jogador.posicao || 'Sem posição'}
+                            ${jogador.idade ? ` · ${jogador.idade}` : ''}
+                        </div>
+                    </div>
+                </div>
+
+                <button 
+                    class="btn btn-sm btn-outline-danger" 
+                    onclick="removerJogadorPlantel(${jogador.id}, '${String(jogador.nome).replace(/'/g, "\\'")}')"
+                >
+                    <i class="fas fa-trash"></i> Remover
+                </button>
+            </div>
+        `).join('');
+
+    } catch (err) {
+        console.error(err);
+        lista.innerHTML = `<div class="alert alert-danger">${err.message}</div>`;
+    }
+}
+
+async function adicionarJogadorPlantel() {
+    if (!souAdminPlantel()) {
+        alert('Apenas administradores podem adicionar jogadores.');
+        return;
+    }
+
+    const dados = {
+        nome: document.getElementById('plantelNome').value.trim(),
+        numero: document.getElementById('plantelNumero').value.trim(),
+        idade: document.getElementById('plantelIdade').value.trim(),
+        escalao: document.getElementById('plantelEscalao').value,
+        posicao: document.getElementById('plantelPosicao').value,
+        foto: document.getElementById('plantelFoto').value.trim()
+    };
+
+    if (!dados.nome) {
+        alert('Indica o nome do jogador.');
+        return;
+    }
+
+    if (!dados.escalao) {
+        alert('Escolhe o escalão do jogador.');
+        return;
+    }
+
+    try {
+        const res = await fetch('/api/plantel-jogadores', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(dados)
+        });
+
+        const json = await res.json();
+
+        if (!res.ok) {
+            throw new Error(json.erro || 'Erro ao adicionar jogador.');
+        }
+
+        document.getElementById('plantelNome').value = '';
+        document.getElementById('plantelNumero').value = '';
+        document.getElementById('plantelIdade').value = '';
+        document.getElementById('plantelFoto').value = '';
+
+        mostrarMensagemPlantel('success', json.mensagem || 'Jogador adicionado com sucesso.');
+        carregarPlantelJogadores();
+
+    } catch (err) {
+        console.error(err);
+        mostrarMensagemPlantel('danger', err.message);
+    }
+}
+
+async function removerJogadorPlantel(id, nome) {
+    if (!souAdminPlantel()) {
+        alert('Apenas administradores podem remover jogadores.');
+        return;
+    }
+
+    if (!confirm(`Remover o jogador "${nome}" da equipa?`)) {
+        return;
+    }
+
+    try {
+        const res = await fetch(`/api/plantel-jogadores/${id}`, {
+            method: 'DELETE',
+            credentials: 'same-origin'
+        });
+
+        const json = await res.json();
+
+        if (!res.ok) {
+            throw new Error(json.erro || 'Erro ao remover jogador.');
+        }
+
+        mostrarMensagemPlantel('success', json.mensagem || 'Jogador removido com sucesso.');
+        carregarPlantelJogadores();
+
+    } catch (err) {
+        console.error(err);
+        mostrarMensagemPlantel('danger', err.message);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('plantelLista')) {
+        carregarPlantelJogadores();
+    }
+});
+}
+    </script>
+<script>
+window.souAdminPlantel = function () {
+    try {
+        const user = JSON.parse(localStorage.getItem('utilizador') || '{}');
+        return user.tipo === 'admin';
+    } catch {
+        return false;
+    }
+};
+
+window.caminhoFotoPlantel = function (foto) {
+    return foto && foto.trim() ? foto.trim() : '../img/equipa/default.png';
+};
+
+window.mostrarMensagemPlantel = function (tipo, mensagem) {
+    const box = document.getElementById('plantelMensagem');
+
+    if (!box) return;
+
+    box.innerHTML = `
+        <div class="alert alert-${tipo} alert-dismissible fade show" role="alert">
+            ${mensagem}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+        </div>
+    `;
+};
+
+window.carregarPlantelJogadores = async function () {
+    const lista = document.getElementById('plantelLista');
+    const filtro = document.getElementById('plantelFiltroEscalao');
+
+    if (!lista || !filtro) return;
+
+    if (!window.souAdminPlantel()) {
+        lista.innerHTML = '<div class="alert alert-danger">Apenas administradores podem gerir jogadores.</div>';
+        return;
+    }
+
+    lista.innerHTML = '<div class="text-center text-muted py-4">A carregar jogadores...</div>';
+
+    try {
+        const escalao = filtro.value;
+
+        const url = escalao
+            ? `/api/plantel-jogadores?escalao=${encodeURIComponent(escalao)}`
+            : '/api/plantel-jogadores';
+
+        const res = await fetch(url, {
+            credentials: 'same-origin'
+        });
+
+        const dados = await res.json();
+
+        if (!res.ok) {
+            throw new Error(dados.erro || 'Erro ao carregar jogadores.');
+        }
+
+        if (!dados.length) {
+            lista.innerHTML = '<div class="alert alert-light border text-muted">Ainda não existem jogadores neste filtro.</div>';
+            return;
+        }
+
+        lista.innerHTML = dados.map(jogador => `
+            <div class="plantel-item">
+                <div class="plantel-info">
+                    <img 
+                        class="plantel-foto" 
+                        src="${window.caminhoFotoPlantel(jogador.foto)}" 
+                        alt="${jogador.nome}" 
+                        onerror="this.src='../img/equipa/default.png'"
+                    >
+
+                    <div>
+                        <div class="plantel-nome">
+                            ${jogador.numero ? `<span class="badge bg-success me-1">#${jogador.numero}</span>` : ''}
+                            ${jogador.nome}
+                        </div>
+
+                        <div class="plantel-meta">
+                            ${jogador.escalao || 'Sem escalão'} · 
+                            ${jogador.posicao || 'Sem posição'}
+                            ${jogador.idade ? ` · ${jogador.idade}` : ''}
+                        </div>
+                    </div>
+                </div>
+
+                <button 
+                    class="btn btn-sm btn-outline-danger" 
+                    onclick="removerJogadorPlantel(${jogador.id}, '${String(jogador.nome).replace(/'/g, "\\'")}')"
+                >
+                    <i class="fas fa-trash"></i> Remover
+                </button>
+            </div>
+        `).join('');
+
+    } catch (err) {
+        console.error(err);
+        lista.innerHTML = `<div class="alert alert-danger">${err.message}</div>`;
+    }
+};
+
+window.adicionarJogadorPlantel = async function () {
+    if (!window.souAdminPlantel()) {
+        alert('Apenas administradores podem adicionar jogadores.');
+        return;
+    }
+
+    const dados = {
+        nome: document.getElementById('plantelNome').value.trim(),
+        numero: document.getElementById('plantelNumero').value.trim(),
+        idade: document.getElementById('plantelIdade').value.trim(),
+        escalao: document.getElementById('plantelEscalao').value,
+        posicao: document.getElementById('plantelPosicao').value,
+        foto: document.getElementById('plantelFoto').value.trim()
+    };
+
+    if (!dados.nome) {
+        alert('Indica o nome do jogador.');
+        return;
+    }
+
+    if (!dados.escalao) {
+        alert('Escolhe o escalão do jogador.');
+        return;
+    }
+
+    try {
+        const res = await fetch('/api/plantel-jogadores', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(dados)
+        });
+
+        const json = await res.json();
+
+        if (!res.ok) {
+            throw new Error(json.erro || 'Erro ao adicionar jogador.');
+        }
+
+        document.getElementById('plantelNome').value = '';
+        document.getElementById('plantelNumero').value = '';
+        document.getElementById('plantelIdade').value = '';
+        document.getElementById('plantelFoto').value = '';
+
+        window.mostrarMensagemPlantel('success', json.mensagem || 'Jogador adicionado com sucesso.');
+        window.carregarPlantelJogadores();
+
+    } catch (err) {
+        console.error(err);
+        window.mostrarMensagemPlantel('danger', err.message);
+    }
+};
+
+window.removerJogadorPlantel = async function (id, nome) {
+    if (!window.souAdminPlantel()) {
+        alert('Apenas administradores podem remover jogadores.');
+        return;
+    }
+
+    if (!confirm(`Remover o jogador "${nome}" da equipa?`)) {
+        return;
+    }
+
+    try {
+        const res = await fetch(`/api/plantel-jogadores/${id}`, {
+            method: 'DELETE',
+            credentials: 'same-origin'
+        });
+
+        const json = await res.json();
+
+        if (!res.ok) {
+            throw new Error(json.erro || 'Erro ao remover jogador.');
+        }
+
+        window.mostrarMensagemPlantel('success', json.mensagem || 'Jogador removido com sucesso.');
+        window.carregarPlantelJogadores();
+
+    } catch (err) {
+        console.error(err);
+        window.mostrarMensagemPlantel('danger', err.message);
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('plantelLista')) {
+        window.carregarPlantelJogadores();
+    }
+});
+</script>
+<script>
+(function () {
+    'use strict';
+
+    let utilizadorPendenteRemocao = null;
+
+    function removerToast(elemento) {
+        if (!elemento || elemento.classList.contains('is-leaving-v9')) return;
+        elemento.classList.add('is-leaving-v9');
+        setTimeout(() => elemento.remove(), 230);
+    }
+
+    window.mostrarNotificacao = function (tipo, titulo, mensagem, duracao = 5000) {
+        let container = document.getElementById('acoToastContainer');
+
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'acoToastContainer';
+            container.className = 'aco-toast-container-v9';
+            document.body.appendChild(container);
+        }
+
+        const tipos = {
+            success: { classe: 'toast-success-v9', icone: 'fa-circle-check' },
+            error:   { classe: 'toast-error-v9',   icone: 'fa-circle-xmark' },
+            warning: { classe: 'toast-warning-v9', icone: 'fa-triangle-exclamation' },
+            info:    { classe: 'toast-info-v9',    icone: 'fa-circle-info' }
+        };
+
+        const config = tipos[tipo] || tipos.info;
+        const toast = document.createElement('article');
+        toast.className = `aco-toast-v9 ${config.classe}`;
+
+        const icon = document.createElement('span');
+        icon.className = 'aco-toast-icon-v9';
+        icon.innerHTML = `<i class="fas ${config.icone}"></i>`;
+
+        const content = document.createElement('div');
+        content.className = 'aco-toast-content-v9';
+
+        const strong = document.createElement('strong');
+        strong.textContent = titulo || 'Informação';
+
+        const p = document.createElement('p');
+        p.textContent = String(mensagem || '');
+
+        content.append(strong, p);
+
+        const close = document.createElement('button');
+        close.type = 'button';
+        close.className = 'aco-toast-close-v9';
+        close.setAttribute('aria-label', 'Fechar notificação');
+        close.innerHTML = '<i class="fas fa-xmark"></i>';
+        close.addEventListener('click', () => removerToast(toast));
+
+        toast.append(icon, content, close);
+        container.prepend(toast);
+
+        if (duracao > 0) {
+            setTimeout(() => removerToast(toast), duracao);
+        }
+
+        return toast;
+    };
+
+    /* Mantém compatibilidade com os alert() existentes, mas apresenta-os melhor. */
+    window.alert = function (mensagem) {
+        const texto = String(mensagem || '');
+        const lower = texto.toLowerCase();
+
+        let tipo = 'info';
+        let titulo = 'Informação';
+
+        if (lower.includes('erro') || lower.includes('❌') || lower.includes('falhou')) {
+            tipo = 'error';
+            titulo = 'Ocorreu um erro';
+        } else if (
+            lower.includes('atenção') ||
+            lower.includes('selecione') ||
+            lower.includes('seleciona') ||
+            lower.includes('preenche') ||
+            lower.includes('escolhe') ||
+            lower.includes('sem permissão')
+        ) {
+            tipo = 'warning';
+            titulo = 'Atenção';
+        } else if (
+            lower.includes('sucesso') ||
+            lower.includes('enviada') ||
+            lower.includes('realizada') ||
+            lower.includes('✅')
+        ) {
+            tipo = 'success';
+            titulo = 'Operação concluída';
+        }
+
+        window.mostrarNotificacao(tipo, titulo, texto.replace(/[✅❌]/g, '').trim());
+    };
+
+    function extrairTotal(dados) {
+        if (Array.isArray(dados)) return dados.length;
+        if (!dados || typeof dados !== 'object') return null;
+
+        const chavesNumericas = [
+            'total', 'quantidade', 'count', 'numero', 'total_registos',
+            'total_utilizadores', 'total_convocatorias', 'total_jogadores',
+            'total_faturas'
+        ];
+
+        for (const chave of chavesNumericas) {
+            if (Number.isFinite(Number(dados[chave]))) {
+                return Number(dados[chave]);
+            }
+        }
+
+        const chavesListas = [
+            'dados', 'items', 'resultados', 'utilizadores', 'convocatorias',
+            'jogadores', 'faturas', 'recibos'
+        ];
+
+        for (const chave of chavesListas) {
+            if (Array.isArray(dados[chave])) return dados[chave].length;
+        }
+
+        return null;
+    }
+
+    async function obterTotal(url) {
+        const resposta = await fetch(url, {
+            credentials: 'same-origin',
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (!resposta.ok) {
+            throw new Error(`HTTP ${resposta.status}`);
+        }
+
+        const tipo = resposta.headers.get('content-type') || '';
+        if (!tipo.includes('application/json')) {
+            throw new Error('Resposta não JSON');
+        }
+
+        return extrairTotal(await resposta.json());
+    }
+
+    function atualizarContador(id, valor) {
+        const elemento = document.getElementById(id);
+        if (!elemento) return;
+
+        elemento.classList.remove('is-loading-v9', 'is-unavailable-v9');
+
+        if (valor === null || valor === undefined || Number.isNaN(Number(valor))) {
+            elemento.textContent = '—';
+            elemento.classList.add('is-unavailable-v9');
+            return;
+        }
+
+        elemento.textContent = String(valor);
+    }
+
+    window.carregarContadoresPainel = async function () {
+        const configuracao = [
+            ['countUtilizadores', '/api/todos-utilizadores'],
+            ['countConvocatorias', '/api/convocatoria'],
+            ['countEquipas', '/api/plantel-jogadores'],
+            ['countFinanceiro', '/api/faturas']
+        ];
+
+        configuracao.forEach(([id]) => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.textContent = '…';
+                el.classList.add('is-loading-v9');
+            }
+        });
+
+        const resultados = await Promise.allSettled(
+            configuracao.map(([, url]) => obterTotal(url))
+        );
+
+        resultados.forEach((resultado, indice) => {
+            const [id] = configuracao[indice];
+            atualizarContador(
+                id,
+                resultado.status === 'fulfilled' ? resultado.value : null
+            );
+        });
+    };
+
+    /* Modal de remoção */
+    window.apagarUtilizador = function () {
+        const select = document.getElementById('selectApagarUser');
+
+        if (!select || !select.value) {
+            window.mostrarNotificacao(
+                'warning',
+                'Escolhe um utilizador',
+                'Seleciona primeiro a conta que pretendes remover.'
+            );
+            return;
+        }
+
+        utilizadorPendenteRemocao = {
+            id: Number(select.value),
+            nome: select.options[select.selectedIndex]?.text || 'Utilizador selecionado'
+        };
+
+        const nome = document.getElementById('nomeUtilizadorRemover');
+        const campo = document.getElementById('confirmarTextoRemocao');
+        const confirmar = document.getElementById('btnConfirmarRemocao');
+        const erro = document.getElementById('erroModalRemocao');
+
+        if (nome) nome.textContent = utilizadorPendenteRemocao.nome;
+        if (campo) campo.value = '';
+        if (confirmar) confirmar.disabled = true;
+        if (erro) {
+            erro.hidden = true;
+            erro.textContent = '';
+        }
+
+        const modalElement = document.getElementById('modalRemoverUtilizador');
+        bootstrap.Modal.getOrCreateInstance(modalElement).show();
+
+        setTimeout(() => campo?.focus(), 300);
+    };
+
+    window.confirmarRemocaoUtilizador = async function () {
+        if (!utilizadorPendenteRemocao) return;
+
+        const campo = document.getElementById('confirmarTextoRemocao');
+        const botao = document.getElementById('btnConfirmarRemocao');
+        const erro = document.getElementById('erroModalRemocao');
+
+        if ((campo?.value || '').trim().toUpperCase() !== 'REMOVER') {
+            if (erro) {
+                erro.hidden = false;
+                erro.textContent = 'Escreve REMOVER exatamente para confirmar.';
+            }
+            return;
+        }
+
+        botao.disabled = true;
+        botao.innerHTML = '<span class="spinner-border spinner-border-sm"></span> A remover...';
+
+        try {
+            const resposta = await fetch('/api/apagar-utilizador', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'same-origin',
+                body: JSON.stringify({ id: utilizadorPendenteRemocao.id })
+            });
+
+            const tipo = resposta.headers.get('content-type') || '';
+            const dados = tipo.includes('application/json')
+                ? await resposta.json()
+                : { erro: await resposta.text() };
+
+            if (!resposta.ok) {
+                throw new Error(dados.erro || dados.mensagem || 'Não foi possível remover o utilizador.');
+            }
+
+            bootstrap.Modal.getInstance(
+                document.getElementById('modalRemoverUtilizador')
+            )?.hide();
+
+            window.mostrarNotificacao(
+                'success',
+                'Utilizador removido',
+                dados.mensagem || `${utilizadorPendenteRemocao.nome} foi removido com sucesso.`
+            );
+
+            utilizadorPendenteRemocao = null;
+
+            if (typeof window.init === 'function') {
+                await window.init();
+            }
+
+            await window.carregarContadoresPainel();
+        } catch (error) {
+            if (erro) {
+                erro.hidden = false;
+                erro.textContent = error.message;
+            }
+
+            window.mostrarNotificacao(
+                'error',
+                'Erro ao remover',
+                error.message
+            );
+        } finally {
+            botao.disabled = (campo?.value || '').trim().toUpperCase() !== 'REMOVER';
+            botao.innerHTML = '<i class="fas fa-trash"></i> Remover permanentemente';
+        }
+    };
+
+    /* Emissão de fatura com dados guardados para exportação PDF */
+    window.lancarFatura = async function () {
+        if (typeof window.bloquearSeTreinador === 'function' &&
+            window.bloquearSeTreinador('emitir fatura')) {
+            return;
+        }
+
+        const select = document.getElementById('fatSelectJogador');
+        const recibo = document.getElementById('fatRecibo');
+
+        if (!select?.value) {
+            window.mostrarNotificacao('warning', 'Atleta em falta', 'Seleciona o atleta da fatura.');
+            return;
+        }
+
+        if (!recibo?.value.trim()) {
+            window.mostrarNotificacao('warning', 'Número em falta', 'Indica o número do recibo.');
+            return;
+        }
+
+        const dados = {
+            id_jogador: select.value,
+            numero_recibo: recibo.value.trim(),
+            data_emissao: document.getElementById('fatDataEmissao').value,
+            descricao: document.getElementById('fatDescricao').value.trim(),
+            valor_base: document.getElementById('fatBase').value || 0,
+            valor_iva: document.getElementById('fatIva').value || 0,
+            valor_total: document.getElementById('fatTotal').value || 0,
+            valor_desconto: document.getElementById('fatDesc').value || 0,
+            data_pagamento: document.getElementById('fatDataPag').value || null,
+            metodo_pagamento: document.getElementById('fatMetodo').value,
+            nota_pagamento: document.getElementById('fatNota').value.trim(),
+            nif_jogador: document.getElementById('fatNif').value,
+            morada_jogador: document.getElementById('fatMorada').value,
+            nome_jogador: select.options[select.selectedIndex]?.text || 'Atleta'
+        };
+
+        const botao = document.querySelector("button[onclick='lancarFatura()']");
+        const htmlOriginal = botao?.innerHTML;
+
+        if (botao) {
+            botao.disabled = true;
+            botao.innerHTML = '<span class="spinner-border spinner-border-sm"></span> A emitir...';
+        }
+
+        try {
+            const resposta = await fetch('/api/faturas', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'same-origin',
+                body: JSON.stringify(dados)
+            });
+
+            const tipo = resposta.headers.get('content-type') || '';
+            const resultado = tipo.includes('application/json')
+                ? await resposta.json()
+                : { erro: await resposta.text() };
+
+            if (!resposta.ok) {
+                throw new Error(resultado.erro || resultado.mensagem || 'Não foi possível emitir a fatura.');
+            }
+
+
+
+            window.mostrarNotificacao(
+                'success',
+                'Fatura emitida',
+                resultado.mensagem || 'A fatura foi registada com sucesso.'
+            );
+
+            [
+                'fatRecibo', 'fatDataEmissao', 'fatDescricao', 'fatBase',
+                'fatIva', 'fatDataPag', 'fatNota', 'fatNif', 'fatMorada'
+            ].forEach(id => {
+                const campo = document.getElementById(id);
+                if (campo) campo.value = '';
+            });
+
+            document.getElementById('fatDesc').value = '0.00';
+            document.getElementById('fatTotal').value = '0.00';
+            document.getElementById('fatSelectJogador').value = '';
+
+            await window.carregarContadoresPainel();
+        } catch (error) {
+            window.mostrarNotificacao('error', 'Erro ao emitir', error.message);
+        } finally {
+            if (botao) {
+                botao.disabled = false;
+                botao.innerHTML = htmlOriginal;
+            }
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const campoConfirmacao = document.getElementById('confirmarTextoRemocao');
+        const botaoConfirmacao = document.getElementById('btnConfirmarRemocao');
+        const erro = document.getElementById('erroModalRemocao');
+
+        campoConfirmacao?.addEventListener('input', function () {
+            const valido = this.value.trim().toUpperCase() === 'REMOVER';
+
+            if (botaoConfirmacao) botaoConfirmacao.disabled = !valido;
+
+            if (erro) {
+                erro.hidden = true;
+                erro.textContent = '';
+            }
+        });
+
+        window.carregarContadoresPainel();
+    });
+})();
+</script><script>
+/* =========================================================
+   PLANTEL V10 — FOTO DIRETA + VÁRIOS ESCALÕES
+========================================================= */
+
+(function () {
+    'use strict';
+
+    const FOTO_DEFAULT_PLANTEL = '/img/equipa/default.png';
+
+    function escaloesPlantelSelecionados() {
+        return Array.from(
+            document.querySelectorAll(
+                '.plantel-escalao-check:checked'
+            )
+        ).map(input => input.value);
+    }
+
+    function atualizarEscalaoPrincipalPlantel() {
+        const campo = document.getElementById('plantelEscalao');
+        const escaloes = escaloesPlantelSelecionados();
+
+        if (campo) {
+            campo.value = escaloes[0] || '';
+        }
+    }
+
+    function limparFormularioPlantelV10() {
+        [
+            'plantelNome',
+            'plantelNumero',
+            'plantelIdade'
+        ].forEach(id => {
+            const campo = document.getElementById(id);
+            if (campo) campo.value = '';
+        });
+
+        const foto = document.getElementById(
+            'plantelFotoFicheiro'
+        );
+
+        const caminho = document.getElementById(
+            'plantelFoto'
+        );
+
+        const preview = document.getElementById(
+            'plantelFotoPreview'
+        );
+
+        if (foto) foto.value = '';
+        if (caminho) caminho.value = '';
+        if (preview) preview.src = FOTO_DEFAULT_PLANTEL;
+
+        document.querySelectorAll(
+            '.plantel-escalao-check'
+        ).forEach(input => {
+            input.checked = false;
+        });
+
+        atualizarEscalaoPrincipalPlantel();
+    }
+
+    async function lerRespostaPlantel(resposta) {
+        const tipo = resposta.headers.get(
+            'content-type'
+        ) || '';
+
+        if (!tipo.includes('application/json')) {
+            const texto = await resposta.text();
+
+            throw new Error(
+                texto ||
+                'O servidor devolveu uma resposta inválida.'
+            );
+        }
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            throw new Error(
+                dados.erro ||
+                dados.mensagem ||
+                'Não foi possível concluir a operação.'
+            );
+        }
+
+        return dados;
+    }
+
+    async function enviarFotoPlantel() {
+        const input = document.getElementById(
+            'plantelFotoFicheiro'
+        );
+
+        const ficheiro = input?.files?.[0];
+
+        if (!ficheiro) {
+            return FOTO_DEFAULT_PLANTEL;
+        }
+
+        const dados = new FormData();
+        dados.append('foto', ficheiro);
+
+        const resposta = await fetch(
+            '/api/plantel-foto',
+            {
+                method: 'POST',
+                credentials: 'same-origin',
+                body: dados
+            }
+        );
+
+        const resultado = await lerRespostaPlantel(
+            resposta
+        );
+
+        return resultado.foto;
+    }
+
+    window.carregarPlantelJogadores =
+        async function () {
+            const lista = document.getElementById(
+                'plantelLista'
+            );
+
+            const filtro = document.getElementById(
+                'plantelFiltroEscalao'
+            );
+
+            if (!lista || !filtro) {
+                return;
+            }
+
+            if (
+                typeof window.souAdminPlantel === 'function' &&
+                !window.souAdminPlantel()
+            ) {
+                lista.innerHTML = `
+                    <div class="alert alert-danger">
+                        Apenas administradores podem gerir jogadores.
+                    </div>
+                `;
+                return;
+            }
+
+            lista.innerHTML = `
+                <div class="text-center text-muted py-4">
+                    A carregar jogadores...
+                </div>
+            `;
+
+            try {
+                const escalao = filtro.value;
+
+                const url = escalao
+                    ? '/api/plantel-jogadores?escalao=' +
+                      encodeURIComponent(escalao)
+                    : '/api/plantel-jogadores';
+
+                const resposta = await fetch(
+                    url,
+                    {
+                        credentials: 'same-origin',
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    }
+                );
+
+                const jogadores = await lerRespostaPlantel(
+                    resposta
+                );
+
+                if (!jogadores.length) {
+                    lista.innerHTML = `
+                        <div class="alert alert-light border text-muted">
+                            Ainda não existem jogadores neste filtro.
+                        </div>
+                    `;
+                    return;
+                }
+
+                lista.innerHTML = jogadores.map(jogador => {
+                    const escaloes = Array.isArray(
+                        jogador.escaloes
+                    ) && jogador.escaloes.length
+                        ? jogador.escaloes
+                        : [jogador.escalao].filter(Boolean);
+
+                    const badges = escaloes.map(escalao => `
+                        <span class="plantel-escalao-badge-v10">
+                            ${escalao}
+                        </span>
+                    `).join('');
+
+                    const nomeSeguro = String(
+                        jogador.nome || ''
+                    ).replace(/'/g, "\\'");
+
+                    return `
+                        <div class="plantel-item">
+                            <div class="plantel-info">
+                                <img
+                                    class="plantel-foto"
+                                    src="${jogador.foto || FOTO_DEFAULT_PLANTEL}"
+                                    alt="${jogador.nome || 'Jogador'}"
+                                    onerror="this.src='${FOTO_DEFAULT_PLANTEL}'"
+                                >
+
+                                <div>
+                                    <div class="plantel-nome">
+                                        ${
+                                            jogador.numero
+                                                ? '<span class="badge bg-success me-1">' +
+                                                  '#' + jogador.numero +
+                                                  '</span>'
+                                                : ''
+                                        }
+
+                                        ${jogador.nome}
+                                    </div>
+
+                                    <div class="plantel-meta">
+                                        ${jogador.posicao || 'Sem posição'}
+                                        ${
+                                            jogador.idade
+                                                ? ' · ' + jogador.idade
+                                                : ''
+                                        }
+                                    </div>
+
+                                    <div class="plantel-escaloes-badges-v10">
+                                        ${badges}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button
+                                class="btn btn-sm btn-outline-danger"
+                                onclick="removerJogadorPlantel(
+                                    ${jogador.id},
+                                    '${nomeSeguro}'
+                                )"
+                            >
+                                <i class="fas fa-trash"></i>
+                                Remover
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+
+            } catch (erro) {
+                console.error(erro);
+
+                lista.innerHTML = `
+                    <div class="alert alert-danger">
+                        ${erro.message}
+                    </div>
+                `;
+            }
+        };
+
+    window.adicionarJogadorPlantel =
+        async function () {
+            if (
+                typeof window.souAdminPlantel === 'function' &&
+                !window.souAdminPlantel()
+            ) {
+                alert(
+                    'Apenas administradores podem adicionar jogadores.'
+                );
+                return;
+            }
+
+            const escaloes =
+                escaloesPlantelSelecionados();
+
+            const nome = document.getElementById(
+                'plantelNome'
+            )?.value.trim();
+
+            if (!nome) {
+                alert('Indica o nome do jogador.');
+                return;
+            }
+
+            if (escaloes.length === 0) {
+                alert(
+                    'Escolhe pelo menos um escalão para o jogador.'
+                );
+                return;
+            }
+
+            atualizarEscalaoPrincipalPlantel();
+
+            const botao = document.querySelector(
+                "button[onclick='adicionarJogadorPlantel()']"
+            );
+
+            const htmlOriginal = botao?.innerHTML;
+
+            if (botao) {
+                botao.disabled = true;
+                botao.innerHTML = `
+                    <span class="spinner-border spinner-border-sm"></span>
+                    A guardar jogador...
+                `;
+            }
+
+            try {
+                const caminhoFoto =
+                    await enviarFotoPlantel();
+
+                const campoCaminho = document.getElementById(
+                    'plantelFoto'
+                );
+
+                if (campoCaminho) {
+                    campoCaminho.value = caminhoFoto;
+                }
+
+                const dados = {
+                    nome,
+                    numero:
+                        document.getElementById(
+                            'plantelNumero'
+                        )?.value.trim() || '',
+                    idade:
+                        document.getElementById(
+                            'plantelIdade'
+                        )?.value.trim() || '',
+                    posicao:
+                        document.getElementById(
+                            'plantelPosicao'
+                        )?.value || 'Universal',
+                    escaloes,
+                    foto: caminhoFoto
+                };
+
+                const resposta = await fetch(
+                    '/api/plantel-jogadores',
+                    {
+                        method: 'POST',
+                        credentials: 'same-origin',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(dados)
+                    }
+                );
+
+                const resultado =
+                    await lerRespostaPlantel(resposta);
+
+                if (
+                    typeof window.mostrarMensagemPlantel ===
+                    'function'
+                ) {
+                    window.mostrarMensagemPlantel(
+                        'success',
+                        resultado.mensagem ||
+                        'Jogador adicionado com sucesso.'
+                    );
+                } else {
+                    alert(
+                        resultado.mensagem ||
+                        'Jogador adicionado com sucesso.'
+                    );
+                }
+
+                limparFormularioPlantelV10();
+
+                await window.carregarPlantelJogadores();
+
+                if (
+                    typeof window.carregarContadoresPainel ===
+                    'function'
+                ) {
+                    window.carregarContadoresPainel();
+                }
+
+            } catch (erro) {
+                console.error(erro);
+
+                if (
+                    typeof window.mostrarMensagemPlantel ===
+                    'function'
+                ) {
+                    window.mostrarMensagemPlantel(
+                        'danger',
+                        erro.message
+                    );
+                } else {
+                    alert(erro.message);
+                }
+
+            } finally {
+                if (botao) {
+                    botao.disabled = false;
+                    botao.innerHTML = htmlOriginal;
+                }
+            }
+        };
+
+    document.addEventListener(
+        'DOMContentLoaded',
+        function () {
+            document.querySelectorAll(
+                '.plantel-escalao-check'
+            ).forEach(input => {
+                input.addEventListener(
+                    'change',
+                    atualizarEscalaoPrincipalPlantel
+                );
+            });
+
+            const inputFoto = document.getElementById(
+                'plantelFotoFicheiro'
+            );
+
+            const preview = document.getElementById(
+                'plantelFotoPreview'
+            );
+
+            inputFoto?.addEventListener(
+                'change',
+                function () {
+                    const ficheiro = this.files?.[0];
+
+                    if (!ficheiro) {
+                        preview.src = FOTO_DEFAULT_PLANTEL;
+                        return;
+                    }
+
+                    if (ficheiro.size > 5 * 1024 * 1024) {
+                        alert(
+                            'A fotografia não pode ultrapassar 5 MB.'
+                        );
+
+                        this.value = '';
+                        preview.src = FOTO_DEFAULT_PLANTEL;
+                        return;
+                    }
+
+                    preview.src = URL.createObjectURL(
+                        ficheiro
+                    );
+                }
+            );
+        }
+    );
+})();
+</script></body>
+</html>

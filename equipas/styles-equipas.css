@@ -1,0 +1,1149 @@
+:root {
+    --brand-color-primary: #3f7a4a;
+    --brand-color-primary-darker-1: #356437;
+    --badge-width: 90px;
+    --badge-height: 90px;
+}
+
+/* ================================
+   BASE
+================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #1f2933;
+    background: #f4f7f5;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ================================
+   HEADER / NAVBAR
+================================ */
+
+#header,
+.header1 {
+    background: #ffffff;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+#header-content {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    align-items: center;
+}
+
+#branding {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+#branding .club-badge img {
+    width: var(--badge-width);
+    height: var(--badge-height);
+    object-fit: contain;
+    display: block;
+}
+
+#header .club-name {
+    color: var(--brand-color-primary);
+    font-weight: 700;
+}
+
+#header .site-slogan {
+    color: #666666;
+    font-size: 0.85rem;
+}
+
+.socialmedia_icons a,
+.template-block.socialmedia_icons .icons a {
+    color: var(--brand-color-primary);
+    transition: color 0.3s ease;
+}
+
+.socialmedia_icons a:hover,
+.template-block.socialmedia_icons .icons a:hover {
+    color: var(--brand-color-primary-darker-1);
+}
+
+.navbar {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.navbar.bg-success {
+    background-color: var(--brand-color-primary) !important;
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand {
+    color: #ffffff !important;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active,
+.navbar .nav-link:focus {
+    color: #e0e0e0 !important;
+}
+
+/* ================================
+   EQUIPAS - HERO
+================================ */
+
+.equipa-hero {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255, 204, 0, 0.20), transparent 28%),
+        linear-gradient(135deg, #198754 0%, #0f5132 100%);
+    color: #ffffff;
+    padding: 82px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.equipa-hero::before {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    top: -110px;
+    right: -90px;
+}
+
+.equipa-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.equipa-kicker {
+    display: inline-block;
+    background: rgba(255, 204, 0, 0.18);
+    color: #ffdf5d;
+    border: 1px solid rgba(255, 204, 0, 0.34);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.78rem;
+    margin-bottom: 18px;
+}
+
+.equipa-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 950;
+    letter-spacing: -1.8px;
+    line-height: 1.02;
+    margin-bottom: 16px;
+}
+
+.equipa-hero p {
+    max-width: 720px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 1.12rem;
+    line-height: 1.7;
+}
+
+/* ================================
+   EQUIPAS - PÁGINA
+================================ */
+
+.teams-app,
+.equipa-page {
+    background: #f4f7f5;
+    padding: 56px 0 82px;
+}
+
+.players-section,
+.staff-section {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.players-section > h2,
+.staff-section > h2 {
+    color: #0f5132;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-weight: 950;
+    letter-spacing: -1.2px;
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+/* Imagem horário */
+#item-image {
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    margin: 0 auto 30px;
+    border-radius: 28px;
+    box-shadow: 0 22px 56px rgba(15, 81, 50, 0.13);
+    border: 1px solid rgba(25, 135, 84, 0.12);
+    background: #ffffff;
+    padding: 10px;
+}
+
+/* Blocos por posição */
+.players-by-position {
+    margin-bottom: 48px;
+}
+
+.player-position {
+    margin-bottom: 20px;
+}
+
+.player-position h3 {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #0f5132;
+    background: #ffffff;
+    border: 1px solid rgba(25, 135, 84, 0.12);
+    border-radius: 999px;
+    padding: 12px 20px;
+    font-size: 1.25rem;
+    font-weight: 950;
+    box-shadow: 0 12px 26px rgba(15, 81, 50, 0.08);
+}
+
+.player-position h3::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: #198754;
+    box-shadow: 0 0 0 5px rgba(25, 135, 84, 0.12);
+}
+
+/* ================================
+   PLANTEL - ESTILO LIMPO SEM CARD PESADO
+================================ */
+
+/* Grelha */
+.players-wrapper,
+.staff-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px;
+    align-items: start;
+}
+
+.players-wrapper article,
+.staff-wrapper article {
+    width: 100%;
+}
+
+/* Cada jogador deixa de parecer "cartão" */
+.thumbnail {
+    position: relative;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+    box-shadow: none;
+    height: auto;
+    transition: transform 0.2s ease;
+}
+
+.thumbnail:hover {
+    transform: translateY(-4px);
+    box-shadow: none;
+}
+
+/* Moldura da foto: limpa, retangular e uniforme */
+.thumbnail img {
+    width: 100% !important;
+    height: 390px !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    display: block;
+    padding: 0 !important;
+    background: #eaf2ed;
+    border-radius: 22px 22px 0 0;
+    border: 1px solid rgba(25, 135, 84, 0.16);
+    border-bottom: 0;
+    box-shadow: 0 12px 26px rgba(15, 81, 50, 0.10);
+}
+
+
+/* Número do jogador */
+.player-nr {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 3;
+
+    min-width: 52px;
+    height: 52px;
+    padding: 0 10px;
+    border-radius: 55px;
+
+    background: #0f5132;
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.15rem;
+    font-weight: 950;
+    line-height: 1;
+
+    border: 3px solid #ffffff;
+    box-shadow: 0 10px 24px rgba(15, 81, 50, 0.28);
+}
+
+.player-nr {
+    min-width: 52px;
+    padding: 0 10px;
+}
+
+/* Nome do jogador */
+.caption {
+    background: linear-gradient(135deg, #198754 0%, #0f5132 100%);
+    padding: 18px 14px 20px;
+    text-align: center;
+    border-top: 4px solid #ffcc00;
+    border-radius: 0 0 22px 22px;
+    box-shadow: 0 12px 26px rgba(15, 81, 50, 0.10);
+    min-height: 98px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.player-info,
+.staff-info {
+    color: #ffffff;
+    font-size: 1.12rem;
+    font-weight: 950;
+    line-height: 1.15;
+    margin: 0;
+    letter-spacing: -0.2px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+}
+
+.player-dob,
+.staff-role {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin: 9px auto 0;
+    color: #0f5132;
+    background: #ffcc00;
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 0.76rem;
+    font-weight: 950;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+/* Staff */
+.staff-section {
+    margin-top: 60px;
+}
+
+.staff-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.staff-wrapper .thumbnail img {
+    height: 390px !important;
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+.main-footer {
+    border-top: 5px solid #198754;
+}
+
+/* ================================
+   RESPONSIVO
+================================ */
+
+@media (max-width: 1100px) {
+    .players-wrapper {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    .players-wrapper {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .staff-wrapper {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .equipa-hero {
+        padding: 58px 18px;
+    }
+
+    .teams-app,
+    .equipa-page {
+        padding: 34px 0 56px;
+    }
+
+    .players-wrapper,
+    .staff-wrapper {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .thumbnail img,
+    .staff-wrapper .thumbnail img {
+        height: 420px !important;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .caption {
+        border-radius: 0 0 20px 20px;
+    }
+
+    .template-block.socialmedia_icons {
+        display: none;
+    }
+
+    #branding .club-badge img {
+        width: 70px;
+        height: 70px;
+    }
+
+    #header .club-name {
+        font-size: 1.15rem;
+    }
+
+    #header .site-slogan {
+        font-size: 0.75rem;
+    }
+
+    #item-image {
+        max-width: 100%;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .thumbnail img,
+    .staff-wrapper .thumbnail img {
+        height: 360px !important;
+    }
+}
+
+/* ================================
+   HORÁRIO POR ESCRITO
+================================ */
+
+.horario-section {
+    max-width: 900px;
+    margin: 0 auto 52px;
+}
+
+.horario-card {
+    background: #ffffff;
+    border-radius: 26px;
+    border: 1px solid rgba(25, 135, 84, 0.14);
+    box-shadow: 0 18px 42px rgba(15, 81, 50, 0.10);
+    overflow: hidden;
+}
+
+.horario-header {
+    background: linear-gradient(135deg, #198754 0%, #0f5132 100%);
+    color: #ffffff;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.horario-header i {
+    width: 54px;
+    height: 54px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.14);
+    display: grid;
+    place-items: center;
+    font-size: 1.4rem;
+}
+
+.horario-header span {
+    display: block;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+}
+
+.horario-header h3 {
+    margin: 0;
+    font-size: 1.7rem;
+    font-weight: 950;
+    letter-spacing: -0.5px;
+}
+
+.horario-list {
+    display: grid;
+}
+
+.horario-item {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 18px;
+    align-items: center;
+    padding: 20px 28px;
+    border-bottom: 1px solid rgba(25, 135, 84, 0.10);
+}
+
+.horario-item:last-child {
+    border-bottom: 0;
+}
+
+.horario-dia {
+    color: #0f5132;
+    font-weight: 950;
+    font-size: 1.02rem;
+}
+
+.horario-info strong {
+    display: block;
+    color: #198754;
+    font-size: 1.15rem;
+    font-weight: 950;
+    margin-bottom: 3px;
+}
+
+.horario-info span {
+    color: #607066;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .horario-card {
+        border-radius: 22px;
+    }
+
+    .horario-header {
+        padding: 22px;
+    }
+
+    .horario-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 18px 22px;
+    }
+
+    .horario-header h3 {
+        font-size: 1.35rem;
+    }
+}
+
+/* =========================================================
+   ACO - MELHORIAS VISUAIS FINAIS
+   Apenas CSS: não altera HTML, JavaScript nem funcionalidades.
+   Pode ficar no fim do ficheiro para sobrepor estilos antigos.
+========================================================= */
+
+:root {
+    --aco-green: #198754;
+    --aco-green-main: #3f7a4a;
+    --aco-green-dark: #0f5132;
+    --aco-green-soft: #eaf5ee;
+    --aco-yellow: #ffcc00;
+    --aco-yellow-soft: rgba(255, 204, 0, 0.16);
+    --aco-bg: #f4f7f5;
+    --aco-card: #ffffff;
+    --aco-text: #1f2933;
+    --aco-muted: #607066;
+    --aco-border: rgba(25, 135, 84, 0.14);
+    --aco-shadow-sm: 0 8px 22px rgba(15, 81, 50, 0.08);
+    --aco-shadow-md: 0 18px 44px rgba(15, 81, 50, 0.12);
+    --aco-shadow-lg: 0 28px 70px rgba(15, 81, 50, 0.16);
+    --aco-radius-sm: 14px;
+    --aco-radius-md: 22px;
+    --aco-radius-lg: 30px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: var(--aco-text);
+    text-rendering: optimizeLegibility;
+}
+
+img {
+    max-width: 100%;
+}
+
+a,
+button,
+.nav-link,
+.dropdown-item,
+.btn,
+.hero-btn,
+.btn-read-more {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Cabeçalho mais limpo */
+#header,
+.header1 {
+    background: #ffffff !important;
+    box-shadow: 0 1px 0 rgba(15, 81, 50, 0.08);
+}
+
+#header-content {
+    max-width: 1180px !important;
+}
+
+#branding .club-badge img,
+.club-badge img {
+    filter: drop-shadow(0 8px 14px rgba(15, 81, 50, 0.10));
+    transition: transform 0.22s ease, filter 0.22s ease;
+}
+
+#branding .club-badge img:hover,
+.club-badge img:hover {
+    transform: translateY(-2px) scale(1.02);
+    filter: drop-shadow(0 12px 20px rgba(15, 81, 50, 0.16));
+}
+
+#header .club-name,
+.club-name {
+    color: var(--aco-green-dark) !important;
+    font-weight: 850 !important;
+    letter-spacing: -0.35px;
+}
+
+#header .site-slogan,
+.club-name .site-slogan {
+    color: var(--aco-muted) !important;
+    font-weight: 650 !important;
+}
+
+/* Redes sociais */
+.socialmedia_icons a,
+.template-block.socialmedia_icons .icons a {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    color: var(--aco-green-dark) !important;
+    background: rgba(25, 135, 84, 0.08);
+    transition: transform 0.22s ease, background 0.22s ease, color 0.22s ease;
+}
+
+.socialmedia_icons a:hover,
+.template-block.socialmedia_icons .icons a:hover {
+    transform: translateY(-2px);
+    color: #ffffff !important;
+    background: var(--aco-green-dark) !important;
+}
+
+/* Navbar principal */
+.navbar {
+    margin: 0 !important;
+    padding-top: 0.55rem !important;
+    padding-bottom: 0.55rem !important;
+    border: 0 !important;
+    box-shadow: 0 12px 28px rgba(15, 81, 50, 0.14) !important;
+}
+
+.navbar.bg-success {
+    background: linear-gradient(135deg, var(--aco-green-main) 0%, #2f7a34 52%, var(--aco-green-dark) 100%) !important;
+}
+
+.navbar .navbar-collapse {
+    gap: 14px;
+}
+
+#menuPrincipal {
+    width: auto !important;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 2px;
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand {
+    color: #ffffff !important;
+    font-weight: 750 !important;
+    border-radius: 999px;
+    padding: 0.55rem 0.82rem !important;
+    transition: background 0.22s ease, color 0.22s ease, transform 0.22s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active,
+.navbar .nav-link:focus {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.navbar .dropdown-menu {
+    border: 0 !important;
+    border-radius: 18px !important;
+    padding: 8px !important;
+    box-shadow: 0 18px 44px rgba(15, 81, 50, 0.22) !important;
+    overflow: hidden;
+}
+
+.navbar .dropdown-item {
+    border-radius: 12px;
+    padding: 10px 13px;
+    font-weight: 750;
+    color: #1f2933;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+    background: var(--aco-green-soft);
+    color: var(--aco-green-dark);
+    transform: translateX(2px);
+}
+
+/* Dropdown da conta criado no main.js */
+#navConta {
+    margin-left: auto !important;
+    align-items: center !important;
+}
+
+.conta-dropdown {
+    position: relative;
+}
+
+.conta-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 13px !important;
+    border-radius: 999px !important;
+    background: rgba(255, 255, 255, 0.13);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    color: #ffffff !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    transition: background 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.conta-toggle:hover,
+.conta-toggle:focus,
+.conta-toggle.show {
+    background: rgba(255, 255, 255, 0.20);
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.10);
+}
+
+.conta-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ffdf5d, var(--aco-yellow));
+    color: var(--aco-green-dark);
+    display: grid;
+    place-items: center;
+    font-size: 0.92rem;
+    box-shadow: 0 6px 14px rgba(255, 204, 0, 0.24);
+}
+
+.conta-texto {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+    text-align: left;
+    max-width: 150px;
+}
+
+.conta-texto small {
+    font-size: 0.68rem;
+    opacity: 0.78;
+    font-weight: 650;
+}
+
+.conta-texto strong {
+    font-size: 0.85rem;
+    font-weight: 950;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.conta-menu {
+    margin-top: 10px !important;
+    min-width: 250px;
+}
+
+.conta-item {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+}
+
+.conta-item i {
+    width: 22px;
+    text-align: center;
+    color: var(--aco-green);
+}
+
+.conta-admin {
+    color: var(--aco-green-dark) !important;
+    font-weight: 900 !important;
+}
+
+.conta-admin i {
+    color: var(--aco-yellow) !important;
+    text-shadow: 0 1px 0 rgba(15, 81, 50, 0.22);
+}
+
+.conta-sair {
+    color: #dc3545 !important;
+}
+
+.conta-sair i {
+    color: #dc3545 !important;
+}
+
+.conta-sair:hover,
+.conta-sair:focus {
+    background: #fff1f2 !important;
+    color: #b02a37 !important;
+}
+
+.btn-login-navbar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: #ffffff;
+    color: var(--aco-green-dark) !important;
+    font-size: 0.88rem;
+    font-weight: 950;
+    text-decoration: none;
+    box-shadow: 0 10px 24px rgba(15, 81, 50, 0.18);
+    transition: transform 0.22s ease, background 0.22s ease, box-shadow 0.22s ease;
+}
+
+.btn-login-navbar:hover {
+    transform: translateY(-2px);
+    background: #f3f8f5;
+    color: var(--aco-green-dark) !important;
+    box-shadow: 0 14px 30px rgba(15, 81, 50, 0.24);
+}
+
+/* Compatibilidade com botão antigo, caso ainda exista */
+#li-auth-container {
+    margin-left: auto !important;
+}
+
+#li-auth-container .btn,
+#btn-admin-nav {
+    border-radius: 999px !important;
+    font-weight: 900 !important;
+    box-shadow: 0 10px 24px rgba(15, 81, 50, 0.16) !important;
+}
+
+/* Heroes das várias páginas */
+.home-hero .swiper-slide,
+.contactos-hero,
+.historia-hero,
+.loja-hero,
+.noticias-hero,
+.noticia-hero,
+.socio-hero,
+.estrutura-hero,
+.presidente-hero,
+.produto-hero,
+.equipa-hero {
+    background:
+        radial-gradient(circle at 16% 18%, rgba(255, 204, 0, 0.24), transparent 28%),
+        radial-gradient(circle at 82% 12%, rgba(255, 255, 255, 0.10), transparent 24%),
+        linear-gradient(135deg, var(--aco-green) 0%, var(--aco-green-dark) 100%) !important;
+}
+
+.contactos-hero,
+.historia-hero,
+.loja-hero,
+.noticias-hero,
+.socio-hero,
+.estrutura-hero,
+.presidente-hero,
+.produto-hero,
+.equipa-hero {
+    isolation: isolate;
+    padding-top: clamp(62px, 8vw, 94px) !important;
+    padding-bottom: clamp(62px, 8vw, 94px) !important;
+}
+
+.contactos-hero h1,
+.historia-hero h1,
+.loja-hero h1,
+.noticias-hero h1,
+.noticia-hero h1,
+.socio-hero h1,
+.estrutura-hero h1,
+.presidente-hero h1,
+.produto-hero h1,
+.equipa-hero h1,
+.hero-content h1 {
+    text-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+}
+
+.contactos-kicker,
+.historia-kicker,
+.loja-kicker,
+.noticias-kicker,
+.noticia-kicker,
+.socio-kicker,
+.estrutura-kicker,
+.presidente-kicker,
+.produto-kicker,
+.equipa-kicker,
+.hero-kicker,
+.section-kicker,
+.form-kicker {
+    border-radius: 999px !important;
+    box-shadow: 0 10px 24px rgba(15, 81, 50, 0.10);
+}
+
+/* Cards e blocos principais */
+.news-card,
+.contact-card,
+.contact-map,
+.historia-banner,
+.historia-intro-card,
+.historia-card,
+.presidente-card,
+.estrutura-intro,
+.dept-card,
+.socio-intro-card,
+.socio-form-card,
+.produto-card,
+.products.products-grid article > a.thumbnail,
+.player-position h3,
+#item-image {
+    border-color: var(--aco-border) !important;
+    box-shadow: var(--aco-shadow-md) !important;
+}
+
+.news-card,
+.contact-card,
+.historia-card,
+.dept-card,
+.products.products-grid article > a.thumbnail {
+    transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.news-card:hover,
+.contact-card:hover,
+.historia-card:hover,
+.dept-card:hover,
+.products.products-grid article > a.thumbnail:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--aco-shadow-lg) !important;
+    border-color: rgba(25, 135, 84, 0.28) !important;
+}
+
+.card-image-wrapper,
+.products.products-grid article > a.thumbnail .item-image,
+.produto-imagem-area,
+.socio-image-wrap {
+    background:
+        radial-gradient(circle at top left, var(--aco-yellow-soft), transparent 34%),
+        linear-gradient(135deg, #f8fbf9 0%, #ffffff 100%) !important;
+}
+
+.card-image-wrapper img,
+.products.products-grid article > a.thumbnail img,
+.produto-img,
+.novo-socio-img,
+#item-image {
+    transition: transform 0.32s ease, filter 0.32s ease;
+}
+
+.news-card:hover .card-image-wrapper img,
+.products.products-grid article > a.thumbnail:hover img {
+    transform: scale(1.045);
+}
+
+/* Botões principais */
+.hero-btn,
+.btn-read-more,
+.socio-submit,
+.produto-comprar,
+.produto-voltar,
+.btn-login-navbar,
+main .btn-primary,
+main .btn-success {
+    border-radius: 999px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.1px;
+}
+
+.hero-btn,
+.socio-submit,
+.produto-comprar,
+main .btn-primary,
+main .btn-success {
+    border: 0 !important;
+    background: linear-gradient(135deg, var(--aco-yellow) 0%, #f0b900 100%) !important;
+    color: var(--aco-green-dark) !important;
+    box-shadow: 0 14px 28px rgba(255, 204, 0, 0.22) !important;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+}
+
+.hero-btn:hover,
+.socio-submit:hover,
+.produto-comprar:hover,
+main .btn-primary:hover,
+main .btn-success:hover {
+    transform: translateY(-3px);
+    color: var(--aco-green-dark) !important;
+    filter: brightness(1.03);
+    box-shadow: 0 18px 36px rgba(255, 204, 0, 0.30) !important;
+}
+
+.btn-read-more {
+    color: var(--aco-green) !important;
+}
+
+.btn-read-more:hover {
+    color: var(--aco-green-dark) !important;
+}
+
+/* Formulários */
+input,
+select,
+textarea,
+.form-control,
+.form-select {
+    border-radius: 14px !important;
+    border-color: rgba(25, 135, 84, 0.18) !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.form-control:focus,
+.form-select:focus {
+    border-color: rgba(25, 135, 84, 0.48) !important;
+    box-shadow: 0 0 0 0.22rem rgba(25, 135, 84, 0.12) !important;
+}
+
+/* Footer */
+.main-footer {
+    border-top: 5px solid var(--aco-green) !important;
+    box-shadow: 0 -12px 28px rgba(15, 81, 50, 0.06);
+}
+
+/* Responsivo */
+@media (max-width: 991.98px) {
+    .navbar .navbar-collapse {
+        padding-top: 12px;
+    }
+
+    #menuPrincipal {
+        width: 100% !important;
+    }
+
+    #navConta {
+        width: 100%;
+        align-items: flex-end !important;
+    }
+
+    .conta-dropdown {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .conta-menu {
+        width: min(100%, 320px);
+        margin-top: 8px !important;
+    }
+
+    .btn-login-navbar {
+        margin-left: auto;
+    }
+
+    .navbar .nav-link {
+        width: 100%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    #header-content {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    #branding {
+        gap: 12px;
+    }
+
+    #branding .club-badge img,
+    .club-badge img {
+        width: 72px !important;
+        height: 72px !important;
+    }
+
+    .contactos-hero,
+    .historia-hero,
+    .loja-hero,
+    .noticias-hero,
+    .socio-hero,
+    .estrutura-hero,
+    .presidente-hero,
+    .produto-hero,
+    .equipa-hero {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    .conta-texto {
+        max-width: 120px;
+    }
+}
+

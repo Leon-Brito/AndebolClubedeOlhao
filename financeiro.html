@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+
+<html lang="pt">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Meus Recibos - ACO</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+<style>
+:root {
+    --aco-green: #198754;
+    --aco-dark: #0f5132;
+    --aco-yellow: #ffcc00;
+    --aco-text: #1f2933;
+    --aco-muted: #66756c;
+}
+
+/* ================================
+   BASE
+================================ */
+
+body {
+    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background:
+        radial-gradient(circle at top left, rgba(25, 135, 84, 0.08), transparent 28%),
+        #f4f7f5;
+    color: var(--aco-text);
+    padding-bottom: 0;
+}
+
+#header,
+.header1 {
+    background: #ffffff;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.navbar {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.navbar.bg-success {
+    background-color: #3f7a4a !important;
+}
+
+#branding .club-badge img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    display: block;
+}
+
+#header .club-name {
+    color: #3f7a4a;
+    font-weight: 700;
+}
+
+#header .site-slogan {
+    color: #666666;
+    font-size: 0.85rem;
+}
+
+/* ================================
+   HERO FINANCEIRO
+================================ */
+
+.financeiro-hero {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255, 204, 0, 0.20), transparent 28%),
+        linear-gradient(135deg, #198754 0%, #0f5132 100%);
+    color: #ffffff;
+    padding: 76px 20px 92px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.financeiro-hero::before {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    top: -110px;
+    right: -90px;
+}
+
+.financeiro-hero::after {
+    content: "";
+    position: absolute;
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+    background: rgba(255, 204, 0, 0.10);
+    bottom: -90px;
+    left: -70px;
+}
+
+.financeiro-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.financeiro-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 204, 0, 0.18);
+    color: #ffdf5d;
+    border: 1px solid rgba(255, 204, 0, 0.34);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.78rem;
+    margin-bottom: 18px;
+}
+
+.financeiro-hero h1 {
+    font-size: clamp(2.4rem, 5vw, 4.8rem);
+    font-weight: 950;
+    letter-spacing: -1.8px;
+    line-height: 1.02;
+    margin-bottom: 16px;
+}
+
+.financeiro-hero p {
+    max-width: 760px;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* ================================
+   PAINEL
+================================ */
+
+.financeiro-page {
+    margin-top: -42px;
+    padding-bottom: 84px;
+    position: relative;
+    z-index: 3;
+}
+
+.financeiro-panel {
+    background: #ffffff;
+    border-radius: 30px;
+    border: 1px solid rgba(25, 135, 84, 0.12);
+    box-shadow: 0 24px 58px rgba(15, 81, 50, 0.13);
+    padding: 32px;
+}
+
+.financeiro-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 28px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(15, 81, 50, 0.10);
+}
+
+.financeiro-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.financeiro-title-icon {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #198754, #0f5132);
+    color: #ffcc00;
+    display: grid;
+    place-items: center;
+    font-size: 1.35rem;
+    box-shadow: 0 12px 26px rgba(25, 135, 84, 0.24);
+}
+
+.financeiro-title span {
+    display: block;
+    color: #198754;
+    font-size: 0.78rem;
+    font-weight: 950;
+    text-transform: uppercase;
+    letter-spacing: 0.55px;
+    margin-bottom: 4px;
+}
+
+.financeiro-title h2 {
+    color: #0f5132;
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    font-weight: 950;
+    letter-spacing: -0.9px;
+    margin: 0;
+}
+
+.financeiro-note {
+    color: #66756c;
+    background: #f4faf6;
+    border: 1px solid #dfeee4;
+    border-radius: 999px;
+    padding: 9px 15px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+/* ================================
+   LOADING / EMPTY
+================================ */
+
+.loading-box,
+.empty-box {
+    background: #f7fbf8;
+    border: 1px solid #dfeee4;
+    border-radius: 24px;
+    padding: 46px 20px;
+    text-align: center;
+    color: #607066;
+}
+
+.loading-box .spinner-border {
+    width: 2.6rem;
+    height: 2.6rem;
+}
+
+#botoesFilhos .btn {
+    border-radius: 999px;
+    font-weight: 900;
+    padding: 12px 18px;
+    box-shadow: 0 10px 22px rgba(25, 135, 84, 0.08);
+}
+
+#listaFaturas h4,
+#listaFaturas h5 {
+    color: #0f5132;
+    font-weight: 900;
+}
+
+.btn-secondary {
+    border-radius: 999px;
+    font-weight: 800;
+}
+
+/* ================================
+   CARDS RECIBOS
+================================ */
+
+.fatura-card {
+    position: relative;
+    height: 100%;
+    cursor: pointer;
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 26px;
+    border: 1px solid rgba(25, 135, 84, 0.13);
+    box-shadow: 0 18px 42px rgba(15, 81, 50, 0.10);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.fatura-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(255, 204, 0, 0.12), transparent 34%);
+    pointer-events: none;
+}
+
+.fatura-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 28px 60px rgba(15, 81, 50, 0.18);
+    border-color: rgba(25, 135, 84, 0.35);
+}
+
+.card-icon {
+    font-size: 4.2rem;
+    color: rgba(25, 135, 84, 0.08);
+    position: absolute;
+    top: 18px;
+    right: 18px;
+}
+
+.fatura-info {
+    position: relative;
+    z-index: 2;
+}
+
+.fatura-info .badge {
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-weight: 950;
+    background: linear-gradient(135deg, #198754, #0f5132) !important;
+}
+
+.fatura-info h4 {
+    margin: 12px 0 8px;
+    color: #0f5132;
+    font-size: 1.18rem;
+    font-weight: 950;
+    line-height: 1.2;
+    letter-spacing: -0.25px;
+}
+
+.fatura-info p {
+    margin: 0;
+    color: #66756c;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 700;
+}
+
+.fatura-info p i {
+    color: #198754;
+}
+
+.fatura-valor {
+    position: relative;
+    z-index: 2;
+    margin-top: 22px;
+    color: #0f5132;
+    font-size: 2rem;
+    font-weight: 950;
+    text-align: right;
+    letter-spacing: -0.8px;
+}
+
+.fatura-valor::before {
+    content: "Total";
+    display: block;
+    color: #198754;
+    font-size: 0.72rem;
+    font-weight: 950;
+    text-transform: uppercase;
+    letter-spacing: 0.55px;
+    margin-bottom: 2px;
+}
+
+/* ================================
+   MODAL RECIBO
+================================ */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(9, 24, 15, 0.68);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 18px;
+    backdrop-filter: blur(7px);
+}
+
+.modal-box {
+    background: #ffffff;
+    width: min(520px, 100%);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 26px 80px rgba(0, 0, 0, 0.38);
+    animation: slideUp 0.22s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(18px) scale(0.98); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.modal-header {
+    background:
+        radial-gradient(circle at top right, rgba(255, 204, 0, 0.16), transparent 35%),
+        linear-gradient(135deg, #198754 0%, #0f5132 100%);
+    color: #ffffff;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#modReciboTitulo {
+    font-weight: 950 !important;
+    letter-spacing: -0.3px;
+}
+
+.btn-fechar {
+    background: rgba(255, 255, 255, 0.16);
+    border: 0;
+    color: #ffffff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.45rem;
+    cursor: pointer;
+    transition: 0.18s ease;
+    line-height: 1;
+}
+
+.btn-fechar:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 28px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.recibo-subtitle {
+    text-align: center;
+    color: #66756c;
+    font-size: 0.9rem;
+    margin-bottom: 22px;
+    font-weight: 700;
+}
+
+.recibo-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid rgba(15, 81, 50, 0.10);
+    padding: 10px 0;
+    color: #1f2933;
+}
+
+.recibo-row span:first-child {
+    color: #66756c;
+    font-weight: 800;
+}
+
+.recibo-row.total {
+    border-top: 2px solid #0f5132;
+    border-bottom: 0;
+    font-weight: 950;
+    font-size: 1.15em;
+    margin-top: 12px;
+    padding-top: 14px;
+}
+
+.pagamento-box {
+    background: #f7fbf8;
+    border: 1px solid #dfeee4;
+    padding: 14px;
+    border-radius: 18px;
+    margin-top: 14px;
+}
+
+.pagamento-title {
+    font-size: 0.75rem;
+    font-weight: 950;
+    color: #198754;
+    text-transform: uppercase;
+    letter-spacing: 0.55px;
+    margin-bottom: 4px;
+}
+
+.modal-footer-custom {
+    padding: 16px 24px 24px;
+    background: #ffffff;
+}
+
+.modal-footer-custom .btn {
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-weight: 950;
+}
+
+/* ================================
+   FOOTER
+================================ */
+
+.main-footer {
+    border-top: 5px solid #198754;
+}
+
+/* ================================
+   RESPONSIVO
+================================ */
+
+@media (max-width: 768px) {
+    .financeiro-hero {
+        padding: 58px 18px 76px;
+    }
+
+    .financeiro-page {
+        margin-top: -30px;
+        padding-bottom: 56px;
+    }
+
+    .financeiro-panel {
+        padding: 22px;
+        border-radius: 24px;
+    }
+
+    .financeiro-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .financeiro-note {
+        white-space: normal;
+        border-radius: 18px;
+    }
+
+    .modal-body {
+        padding: 22px;
+    }
+
+    .template-block.socialmedia_icons {
+        display: none;
+    }
+
+    #branding .club-badge img {
+        width: 70px;
+        height: 70px;
+    }
+
+    #header .club-name {
+        font-size: 1.15rem;
+    }
+
+    #header .site-slogan {
+        font-size: 0.75rem;
+    }
+}
+</style>
+<style>
+/* Exportação de recibos na área pessoal */
+.modal-footer-custom {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.btn-pdf-recibo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 48px;
+    border: 1px solid rgba(220, 53, 69, .18) !important;
+    border-radius: 14px !important;
+    background: #fff1f2 !important;
+    color: #b42332 !important;
+    font-weight: 900 !important;
+    transition: .18s ease;
+}
+
+.btn-pdf-recibo:hover {
+    transform: translateY(-2px);
+    background: #ffe5e8 !important;
+    color: #921b28 !important;
+    box-shadow: 0 12px 28px rgba(180, 35, 50, .14);
+}
+
+@media (max-width: 576px) {
+    .modal-footer-custom {
+        grid-template-columns: 1fr;
+    }
+}
+</style></head>
+<body>
+<header class="header1" id="header">
+<div class="container d-flex justify-content-between align-items-center" id="header-content">
+<div class="d-flex align-items-center" id="branding">
+<div class="club-badge me-3">
+<a href="#"><img alt="logo" height="90" src="../img/logo_9JToiDZ.png" width="90"/></a>
+</div>
+<h2 class="club-name mb-0">
+                    Andebol Clube Olhão
+                    <span class="site-slogan d-block small">#maisqueumclube</span>
+</h2>
+</div>
+<aside class="template-block socialmedia_icons">
+<div class="icons d-flex gap-3 fs-4">
+<a href="https://www.facebook.com/AndebolClubeOlhao/" target="_blank"><i class="fab fa-facebook"></i></a>
+<a href="https://www.instagram.com/andebol_clube_olhao/" target="_blank"><i class="fab fa-instagram"></i></a>
+<a href="https://www.tiktok.com/@andebolclubeolhao" target="_blank"><i class="fab fa-tiktok"></i></a>
+</div>
+</aside>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success mt-0">
+<div class="container">
+<a class="navbar-brand d-lg-none" href="#">Menu</a>
+<button class="navbar-toggler" data-bs-target="#mainNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="mainNav">
+<ul class="navbar-nav" id="menuPrincipal">
+<li class="nav-item"><a class="nav-link" href="../index.html">Início</a></li>
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Clube</a>
+<ul class="dropdown-menu">
+<li><a class="dropdown-item" href="historiaaco.html">História</a></li>
+<li><a class="dropdown-item" href="mensagempr.html">Mensagem do Presidente</a></li>
+<li><a class="dropdown-item" href="Estrutura-desportiva.html">Estrutura desportiva</a></li>
+<li><a class="dropdown-item" href="historia.html">Cidade de Olhão</a></li>
+<li><a class="dropdown-item" href="contactos.html">Contatos</a></li>
+</ul>
+</li>
+<li class="nav-item dropdown">
+<a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="sociosDropdown" role="button">Sócios</a>
+<ul aria-labelledby="sociosDropdown" class="dropdown-menu">
+<li><a class="dropdown-item" href="../novo-socio.html">Novo Sócio</a></li>
+<li><a class="dropdown-item" href="financeiro.html">Financeiro</a></li>
+<li><a class="dropdown-item" href="convocatoria.html">Convocatória</a></li>
+</ul>
+</li>
+<li class="nav-item dropdown">
+<a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="equipasDropdown" role="button">Equipas</a>
+<ul aria-labelledby="equipasDropdown" class="dropdown-menu">
+<li><a class="dropdown-item" href="equipas/sub18.html">Sub-18 Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/sub16.html">Sub-16 Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/sub14.html">Sub-14 Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/sub12.html">Minis Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/minisf.html">Minis Feminino</a></li>
+<li><a class="dropdown-item" href="equipas/bambis.html">Bambis Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/bambis.html">Bambis Feminino</a></li>
+<li><a class="dropdown-item" href="equipas/manitas.html">Manitas Masculino</a></li>
+<li><a class="dropdown-item" href="equipas/manitas.html">Manitas Feminino</a></li>
+<li><a class="dropdown-item" href="equipas/baby.html">Baby</a></li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link" href="noticias.html">Notícias</a></li>
+<li class="nav-item"><a class="nav-link" href="../loja.html">Loja</a></li>
+</ul>
+</div>
+</div>
+</nav>
+</header>
+<div id="nomeUser" style="display: none !important;"></div>
+<section class="financeiro-hero">
+<div class="container">
+<span class="financeiro-kicker">
+<i class="fa-solid fa-file-invoice-dollar"></i>
+            Área Financeira
+        </span>
+<h1>Os Meus Recibos</h1>
+<p>Consulta os recibos, valores e detalhes dos pagamentos associados ao teu perfil no Andebol Clube Olhão.</p>
+</div>
+</section>
+<main class="financeiro-page" id="tabFaturas">
+<div class="container">
+<div class="financeiro-panel">
+<div class="financeiro-heading">
+<div class="financeiro-title">
+<div class="financeiro-title-icon">
+<i class="fa-solid fa-receipt"></i>
+</div>
+<div>
+<span>Histórico financeiro</span>
+<h2>Recibos disponíveis</h2>
+</div>
+</div>
+<div class="financeiro-note">
+<i class="fa-solid fa-circle-info"></i>
+                    Clica num recibo para ver os detalhes
+                </div>
+</div>
+<div class="row g-4" id="listaFaturas">
+<div class="col-12">
+<div class="loading-box">
+<div class="spinner-border text-success" role="status"></div>
+<p class="mt-3 mb-0">A carregar faturas...</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="modal-overlay" id="modalFatura">
+<div class="modal-box">
+<div class="modal-header">
+<span id="modReciboTitulo" style="font-weight:bold;">Recibo #</span>
+<button class="btn-fechar" onclick="fecharModal()">×</button>
+</div>
+<div class="modal-body">
+<p class="recibo-subtitle">Detalhes do Pagamento</p>
+<div id="modConteudo"></div>
+</div>
+<div class="modal-footer-custom"><button class="btn btn-pdf-recibo" onclick="exportarFaturaAtualPDF()" type="button"><i class="fa-solid fa-file-pdf"></i> Exportar PDF</button><button class="btn btn-success" onclick="fecharModal()" type="button">Fechar</button></div>
+</div>
+</div>
+<footer class="main-footer bg-dark text-white py-4 mt-auto">
+<div class="container text-center">
+<div class="mb-3">
+<img alt="AC Olhão" src="../img/logo_9JToiDZ.png" style="height: 50px; opacity: 0.8;"/>
+</div>
+<span>2026 © Andebol Clube Olhão</span>
+<div class="text-center small mt-2">Criado por Leonardo Brito</div>
+</div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="main.js"></script>
+<script>
+const userStr = localStorage.getItem('utilizador');
+
+if (!userStr) {
+    window.location.replace('login.html?destino=financeiro.html');
+    throw new Error('Utilizador não autenticado.');
+}
+
+let utilizador;
+
+try {
+    utilizador = JSON.parse(userStr);
+} catch (erro) {
+    localStorage.removeItem('utilizador');
+    window.location.replace('login.html?destino=financeiro.html');
+    throw erro;
+}
+
+/*
+ * A exportação pertence à área pessoal:
+ * - jogador;
+ * - encarregado de educação;
+ * - treinador.
+ *
+ * O administrador apenas emite faturas no painel admin.
+ */
+const perfisFinanceiros = ['jogador', 'encarregado', 'treinador'];
+
+if (!perfisFinanceiros.includes((utilizador.tipo || '').toLowerCase())) {
+    window.location.replace('/admin');
+    throw new Error('Perfil sem acesso à área financeira pessoal.');
+}
+
+const container = document.getElementById('listaFaturas');
+
+let faturasCache = [];
+let faturaAtual = null;
+let nomeTitularAtual = utilizador.nome || 'Utilizador';
+
+if (utilizador.tipo === 'encarregado') {
+    carregarSeletorFilhosFinancas();
+} else {
+    carregarFaturas(utilizador.id, utilizador.nome || '');
+}
+
+async function lerRespostaJson(resposta) {
+    const tipo = resposta.headers.get('content-type') || '';
+
+    if (!tipo.includes('application/json')) {
+        const texto = await resposta.text();
+        throw new Error(texto || 'Resposta inválida do servidor.');
+    }
+
+    const dados = await resposta.json();
+
+    if (!resposta.ok) {
+        throw new Error(
+            dados.erro ||
+            dados.mensagem ||
+            'Não foi possível concluir o pedido.'
+        );
+    }
+
+    return dados;
+}
+
+async function carregarSeletorFilhosFinancas() {
+    container.innerHTML = `
+        <div class="col-12">
+            <div class="loading-box">
+                <div class="spinner-border text-success"></div>
+                <p class="mt-3 mb-0">A carregar educandos...</p>
+            </div>
+        </div>
+    `;
+
+    try {
+        const resposta = await fetch(
+            `/api/meus-educandos?id=${encodeURIComponent(utilizador.id)}`,
+            {
+                credentials: 'same-origin',
+                headers: { 'Accept': 'application/json' }
+            }
+        );
+
+        const filhos = await lerRespostaJson(resposta);
+
+        container.innerHTML = `
+            <div class="col-12 text-center mb-4">
+                <h5>
+                    <i class="fa-solid fa-users"></i>
+                    Selecione o seu educando para consultar os recibos:
+                </h5>
+
+                <div id="botoesFilhos" class="mt-3"></div>
+            </div>
+        `;
+
+        const botoes = document.getElementById('botoesFilhos');
+
+        if (!filhos.length) {
+            botoes.innerHTML = `
+                <div class="empty-box">
+                    <i class="fa-solid fa-user-slash fa-3x mb-3 text-muted"></i>
+                    <h4>Sem educandos associados</h4>
+                    <p class="mb-0">
+                        Ainda não existem jogadores associados a esta conta.
+                    </p>
+                </div>
+            `;
+            return;
+        }
+
+        filhos.forEach(filho => {
+            const botao = document.createElement('button');
+            botao.type = 'button';
+            botao.className =
+                'btn btn-outline-success btn-lg m-2';
+            botao.innerHTML =
+                `<i class="fa-solid fa-user"></i> ${filho.nome}`;
+
+            botao.addEventListener(
+                'click',
+                () => carregarFaturas(filho.id, filho.nome)
+            );
+
+            botoes.appendChild(botao);
+        });
+
+    } catch (erro) {
+        container.innerHTML = `
+            <div class="col-12">
+                <div class="alert alert-danger">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                    ${erro.message}
+                </div>
+            </div>
+        `;
+    }
+}
+
+async function carregarFaturas(idTitular, nomeTitular = '') {
+    nomeTitularAtual =
+        nomeTitular ||
+        utilizador.nome ||
+        'Utilizador';
+
+    faturaAtual = null;
+
+    container.innerHTML = `
+        <div class="col-12">
+            <div class="loading-box">
+                <div class="spinner-border text-success"></div>
+                <p class="mt-3 mb-0">A carregar faturas...</p>
+            </div>
+        </div>
+    `;
+
+    try {
+        const resposta = await fetch(
+            `/api/minhas-faturas?id=${encodeURIComponent(idTitular)}`,
+            {
+                credentials: 'same-origin',
+                headers: { 'Accept': 'application/json' }
+            }
+        );
+
+        faturasCache = await lerRespostaJson(resposta);
+
+        container.innerHTML =
+            nomeTitular && utilizador.tipo === 'encarregado'
+                ? `
+                    <div class="col-12 mb-4
+                                d-flex justify-content-between
+                                align-items-center flex-wrap gap-3">
+                        <h4 class="mb-0">
+                            Pagamentos de:
+                            <span class="text-success">
+                                ${nomeTitular}
+                            </span>
+                        </h4>
+
+                        <button
+                            class="btn btn-sm btn-secondary"
+                            type="button"
+                            onclick="carregarSeletorFilhosFinancas()"
+                        >
+                            <i class="fa-solid fa-arrow-left"></i>
+                            Voltar
+                        </button>
+                    </div>
+                `
+                : '';
+
+        if (
+            !Array.isArray(faturasCache) ||
+            faturasCache.length === 0
+        ) {
+            container.innerHTML += `
+                <div class="col-12">
+                    <div class="empty-box">
+                        <i class="fa-solid fa-folder-open
+                                  fa-3x mb-3 text-muted"></i>
+
+                        <h4>Sem recibos disponíveis</h4>
+
+                        <p class="mb-0">
+                            Não existem pagamentos registados
+                            para este perfil.
+                        </p>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        faturasCache.forEach((fatura, indice) => {
+            const data = new Date(
+                `${fatura.data_emissao}T00:00:00`
+            );
+
+            const meses = [
+                'JAN', 'FEV', 'MAR', 'ABR',
+                'MAI', 'JUN', 'JUL', 'AGO',
+                'SET', 'OUT', 'NOV', 'DEZ'
+            ];
+
+            const dataTexto = Number.isNaN(data.getTime())
+                ? 'Sem data'
+                : `${data.getDate()} ${meses[data.getMonth()]} - ` +
+                  `${data.getFullYear()}`;
+
+            const coluna = document.createElement('div');
+            coluna.className = 'col-md-6 col-lg-4';
+
+            coluna.innerHTML = `
+                <button
+                    class="fatura-card w-100 text-start border-0"
+                    type="button"
+                    onclick="abrirFatura(${indice})"
+                >
+                    <i class="fa-solid fa-file-invoice card-icon"></i>
+
+                    <div class="fatura-info">
+                        <span class="badge bg-success mb-2">
+                            PAGO
+                        </span>
+
+                        <h4>
+                            ${fatura.descricao || 'Pagamento'}
+                        </h4>
+
+                        <p>
+                            <i class="fa-regular fa-calendar"></i>
+                            ${dataTexto}
+                        </p>
+                    </div>
+
+                    <div class="fatura-valor">
+                        ${formatarDinheiro(fatura.valor_total)}
+                    </div>
+                </button>
+            `;
+
+            container.appendChild(coluna);
+        });
+
+    } catch (erro) {
+        container.innerHTML = `
+            <div class="col-12">
+                <div class="alert alert-danger">
+                    <i class="fa-solid fa-circle-xmark"></i>
+                    ${erro.message}
+                </div>
+            </div>
+        `;
+    }
+}
+
+function formatarDinheiro(valor) {
+    return Number(valor || 0).toLocaleString(
+        'pt-PT',
+        {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }
+    ) + ' €';
+}
+
+function formatarData(data) {
+    if (!data) {
+        return 'Não indicada';
+    }
+
+    const valor = new Date(`${data}T00:00:00`);
+
+    return Number.isNaN(valor.getTime())
+        ? data
+        : valor.toLocaleDateString('pt-PT');
+}
+
+function abrirFatura(indice) {
+    const fatura = faturasCache[indice];
+
+    if (!fatura) {
+        return;
+    }
+
+    faturaAtual = fatura;
+
+    const metodoOriginal =
+        (fatura.metodo_pagamento || '').toString();
+
+    const metodo = metodoOriginal.toLowerCase();
+    let metodoHtml;
+
+    if (metodo.includes('transfer')) {
+        metodoHtml =
+            'Transferência ' +
+            '<i class="fa-solid fa-building-columns ' +
+            'text-primary ms-1"></i>';
+
+    } else if (
+        metodo.includes('dinheiro') ||
+        metodo.includes('numerario')
+    ) {
+        metodoHtml =
+            'Dinheiro ' +
+            '<i class="fa-solid fa-money-bill-wave ' +
+            'text-success ms-1"></i>';
+
+    } else if (
+        metodo.includes('mbway') ||
+        metodo.includes('mb way')
+    ) {
+        metodoHtml =
+            'MB WAY ' +
+            '<i class="fa-solid fa-mobile-screen-button ms-1" ' +
+            'style="color:#e6007e"></i>';
+
+    } else {
+        metodoHtml =
+            metodoOriginal ||
+            '<span class="text-muted">Não especificado</span>';
+    }
+
+    document.getElementById('modReciboTitulo').textContent =
+        `Recibo: ${fatura.numero_recibo || 'S/N'}`;
+
+    document.getElementById('modConteudo').innerHTML = `
+        <div class="recibo-row">
+            <span>Titular:</span>
+            <b>
+                ${fatura.nome_jogador || nomeTitularAtual}
+            </b>
+        </div>
+
+        <div class="recibo-row">
+            <span>Data de emissão:</span>
+            <b>${formatarData(fatura.data_emissao)}</b>
+        </div>
+
+        <div class="recibo-row">
+            <span>Contribuinte:</span>
+            <span>${fatura.nif_jogador || 'N/A'}</span>
+        </div>
+
+        <hr>
+
+        <div class="recibo-row">
+            <span>Descrição:</span>
+            <span>
+                ${fatura.descricao || 'Pagamento'}
+            </span>
+        </div>
+
+        <div class="recibo-row">
+            <span>Desconto:</span>
+            <span>
+                ${formatarDinheiro(fatura.valor_desconto)}
+            </span>
+        </div>
+
+        <div class="recibo-row">
+            <span>Valor base:</span>
+            <span>
+                ${formatarDinheiro(fatura.valor_base)}
+            </span>
+        </div>
+
+        <div class="recibo-row">
+            <span>IVA:</span>
+            <span>
+                ${formatarDinheiro(fatura.valor_iva)}
+            </span>
+        </div>
+
+        <div class="recibo-row total">
+            <span>TOTAL:</span>
+            <span class="text-success">
+                ${formatarDinheiro(fatura.valor_total)}
+            </span>
+        </div>
+
+        <hr>
+
+        <div class="pagamento-box">
+            <div class="pagamento-title">
+                Dados do pagamento
+            </div>
+
+            <div class="recibo-row">
+                <span>Data de pagamento:</span>
+
+                <span>
+                    ${
+                        fatura.data_pagamento
+                            ? formatarData(
+                                fatura.data_pagamento
+                              )
+                            : '<span class="text-warning">' +
+                              'Pendente</span>'
+                    }
+                </span>
+            </div>
+
+            <div class="recibo-row">
+                <span>Método:</span>
+                <span>${metodoHtml}</span>
+            </div>
+
+            ${
+                fatura.nota_pagamento
+                    ? '<div class="mt-2 small text-muted">' +
+                      'Observação: ' +
+                      fatura.nota_pagamento +
+                      '</div>'
+                    : ''
+            }
+        </div>
+    `;
+
+    document.getElementById('modalFatura').style.display =
+        'flex';
+}
+
+function fecharModal() {
+    document.getElementById('modalFatura').style.display =
+        'none';
+}
+
+function exportarFaturaAtualPDF() {
+    if (!faturaAtual) {
+        alert(
+            'Abre primeiro o recibo que pretendes exportar.'
+        );
+        return;
+    }
+
+    if (!window.jspdf?.jsPDF) {
+        alert(
+            'Não foi possível carregar o gerador de PDF.'
+        );
+        return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const documento = new jsPDF({
+        unit: 'mm',
+        format: 'a4'
+    });
+
+    const fatura = faturaAtual;
+
+    const verde = [15, 81, 50];
+    const amarelo = [242, 194, 0];
+    const cinza = [91, 107, 98];
+
+    documento.setFillColor(...verde);
+    documento.rect(0, 0, 210, 45, 'F');
+
+    documento.setTextColor(255, 255, 255);
+    documento.setFont('helvetica', 'bold');
+    documento.setFontSize(20);
+    documento.text(
+        'Andebol Clube Olhão',
+        18,
+        19
+    );
+
+    documento.setFont('helvetica', 'normal');
+    documento.setFontSize(9);
+    documento.text(
+        '#maisqueumclube',
+        18,
+        27
+    );
+
+    documento.setFillColor(...amarelo);
+    documento.roundedRect(
+        150,
+        11,
+        43,
+        21,
+        4,
+        4,
+        'F'
+    );
+
+    documento.setTextColor(...verde);
+    documento.setFont('helvetica', 'bold');
+    documento.setFontSize(10);
+    documento.text(
+        'RECIBO',
+        171.5,
+        19,
+        { align: 'center' }
+    );
+
+    documento.setFontSize(8);
+    documento.text(
+        String(fatura.numero_recibo || 'S/N'),
+        171.5,
+        26,
+        { align: 'center' }
+    );
+
+    let y = 59;
+
+    function tituloSecao(texto) {
+        documento.setTextColor(...verde);
+        documento.setFont('helvetica', 'bold');
+        documento.setFontSize(13);
+        documento.text(texto, 18, y);
+
+        y += 7;
+
+        documento.setDrawColor(220, 235, 227);
+        documento.line(18, y, 192, y);
+
+        y += 9;
+    }
+
+    function linha(label, valor) {
+        documento.setFontSize(9.5);
+        documento.setFont('helvetica', 'bold');
+        documento.setTextColor(...cinza);
+        documento.text(label, 18, y);
+
+        documento.setFont('helvetica', 'normal');
+        documento.setTextColor(31, 41, 51);
+
+        const linhas = documento.splitTextToSize(
+            String(valor || '—'),
+            126
+        );
+
+        documento.text(linhas, 60, y);
+
+        y += Math.max(
+            8,
+            linhas.length * 5
+        );
+    }
+
+    tituloSecao('Dados do recibo');
+
+    linha(
+        'Titular',
+        fatura.nome_jogador || nomeTitularAtual
+    );
+
+    linha(
+        'NIF',
+        fatura.nif_jogador || 'N/A'
+    );
+
+    linha(
+        'Morada',
+        fatura.morada_jogador || 'Não indicada'
+    );
+
+    linha(
+        'Emissão',
+        formatarData(fatura.data_emissao)
+    );
+
+    linha(
+        'Descrição',
+        fatura.descricao || 'Pagamento'
+    );
+
+    y += 3;
+    tituloSecao('Pagamento');
+
+    linha(
+        'Método',
+        fatura.metodo_pagamento || 'Não especificado'
+    );
+
+    linha(
+        'Data',
+        fatura.data_pagamento
+            ? formatarData(fatura.data_pagamento)
+            : 'Pendente'
+    );
+
+    linha(
+        'Observação',
+        fatura.nota_pagamento || 'Sem observações'
+    );
+
+    y += 4;
+
+    documento.setFillColor(246, 250, 248);
+    documento.roundedRect(
+        106,
+        y,
+        86,
+        57,
+        5,
+        5,
+        'F'
+    );
+
+    let valorY = y + 11;
+
+    function linhaValor(label, valor, destaque = false) {
+        documento.setFont(
+            'helvetica',
+            destaque ? 'bold' : 'normal'
+        );
+
+        documento.setFontSize(
+            destaque ? 12 : 9.5
+        );
+
+        documento.setTextColor(
+            ...(destaque ? verde : cinza)
+        );
+
+        documento.text(
+            label,
+            114,
+            valorY
+        );
+
+        documento.text(
+            valor,
+            184,
+            valorY,
+            { align: 'right' }
+        );
+
+        valorY += destaque ? 11 : 8;
+    }
+
+    linhaValor(
+        'Valor base',
+        formatarDinheiro(fatura.valor_base)
+    );
+
+    linhaValor(
+        'IVA',
+        formatarDinheiro(fatura.valor_iva)
+    );
+
+    linhaValor(
+        'Desconto',
+        `- ${formatarDinheiro(
+            fatura.valor_desconto
+        )}`
+    );
+
+    documento.setDrawColor(220, 235, 227);
+    documento.line(
+        114,
+        valorY,
+        184,
+        valorY
+    );
+
+    valorY += 10;
+
+    linhaValor(
+        'TOTAL',
+        formatarDinheiro(fatura.valor_total),
+        true
+    );
+
+    documento.setFont(
+        'helvetica',
+        'normal'
+    );
+
+    documento.setFontSize(8);
+    documento.setTextColor(...cinza);
+
+    documento.text(
+        'Documento exportado pelo titular ou ' +
+        'representante autorizado através da área financeira.',
+        105,
+        282,
+        { align: 'center' }
+    );
+
+    const nomeSeguro = String(
+        fatura.numero_recibo || 'recibo'
+    ).replace(
+        /[^a-zA-Z0-9_-]+/g,
+        '_'
+    );
+
+    documento.save(
+        `recibo_${nomeSeguro}.pdf`
+    );
+}
+</script>
+</body>
+</html>
