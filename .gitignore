@@ -1,0 +1,37 @@
+# Credenciais e configuração privada
+config.php
+.env
+.env.*
+!.env.example
+
+# Logs e ficheiros temporários
+error_log
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Dados e uploads criados no servidor
+img/equipa/uploads/
+
+# Base de dados local / exportações
+db/*.sql
+db/*.sqlite
+db/*.sqlite3
+*.sql
+*.sqlite
+*.sqlite3
+
+# Dependências
+node_modules/
+vendor/
+
+# IDE
+.vscode/
+.idea/
+
+# Backups
+*.bak
+*.backup
+*.old
