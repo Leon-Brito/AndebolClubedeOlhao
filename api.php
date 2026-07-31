@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/mailer.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 $path = trim($_GET['path'] ?? '', '/');
@@ -61,6 +62,626 @@ function password_tem_hash_valido(string $valor): bool {
 
 function criar_hash_password(string $password): string {
     return password_hash($password, PASSWORD_DEFAULT);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| FORMULÁRIOS PÚBLICOS E EMAIL
+|--------------------------------------------------------------------------
+*/
+
+function limpar_texto_formulario(
+    mixed $valor,
+    int $maximo = 500
+): string {
+    $texto = trim((string)$valor);
+    $texto = preg_replace(
+        '/\s+/u',
+        ' ',
+        $texto
+    ) ?? $texto;
+
+    return mb_substr(
+        $texto,
+        0,
+        $maximo
+    );
+}
+
+function escapar_email_html(mixed $valor): string {
+    return htmlspecialchars(
+        (string)$valor,
+        ENT_QUOTES | ENT_SUBSTITUTE,
+        'UTF-8'
+    );
+}
+
+function token_formulario_publico(): string {
+    if (
+        empty($_SESSION['formulario_csrf']) ||
+        !is_string($_SESSION['formulario_csrf'])
+    ) {
+        $_SESSION['formulario_csrf'] =
+            bin2hex(random_bytes(32));
+    }
+
+    return $_SESSION['formulario_csrf'];
+}
+
+function exigir_token_formulario_publico(): void {
+    $recebido = (string)(
+        $_SERVER['HTTP_X_CSRF_TOKEN'] ?? ''
+    );
+
+    $guardado = token_formulario_publico();
+
+    if (
+        $recebido === '' ||
+        !hash_equals($guardado, $recebido)
+    ) {
+        json_response([
+            'erro' =>
+                'A sessão do formulário expirou. Atualiza a página e tenta novamente.'
+        ], 419);
+    }
+
+    /*
+     * Rotação do token depois de cada submissão válida.
+     */
+    $_SESSION['formulario_csrf'] =
+        bin2hex(random_bytes(32));
+}
+
+function bloquear_spam_formulario(
+    string $chave,
+    int $segundos = 45
+): void {
+    $honeypot = trim(
+        (string)($GLOBALS['body']['website'] ?? '')
+    );
+
+    if ($honeypot !== '') {
+        /*
+         * Resposta neutra para não ensinar o bot.
+         */
+        json_response([
+            'mensagem' =>
+                'Pedido recebido.'
+        ]);
+    }
+
+    $agora = time();
+    $ultima = (int)(
+        $_SESSION['form_rate'][$chave] ?? 0
+    );
+
+    if (
+        $ultima > 0 &&
+        ($agora - $ultima) < $segundos
+    ) {
+        json_response([
+            'erro' =>
+                'Aguarda alguns segundos antes de enviar novamente.'
+        ], 429);
+    }
+
+    $_SESSION['form_rate'][$chave] = $agora;
+}
+
+function configuracao_email_publica(): array {
+    return carregar_config_email_aco();
+}
+
+function enviar_email_confirmacao_seguro(
+    string $email,
+    string $nome,
+    string $assunto,
+    string $html
+): bool {
+    try {
+        enviar_email_aco(
+            $email,
+            $nome,
+            $assunto,
+            $html
+        );
+
+        return true;
+
+    } catch (Throwable $e) {
+        error_log(
+            'Falha no email de confirmação: ' .
+            $e->getMessage()
+        );
+
+        return false;
+    }
+}
+
+function enviar_emails_convocatoria_aco(
+    PDO $pdo,
+    int $idConvocatoria,
+    array $idsJogadores,
+    string $adversario,
+    string $data,
+    string $local,
+    string $escalao,
+    int $idCriador
+): array {
+    $enviados = 0;
+    $falhados = 0;
+
+    $dataFormatada = date(
+        'd/m/Y H:i',
+        strtotime($data)
+    );
+
+    $config = configuracao_email_publica();
+    $siteUrl = rtrim(
+        (string)($config['site_url'] ?? ''),
+        '/'
+    );
+
+    $urlConvocatoria =
+        $siteUrl . '/convocatoria.html';
+
+    $placeholders = implode(
+        ',',
+        array_fill(
+            0,
+            count($idsJogadores),
+            '?'
+        )
+    );
+
+    /*
+     * Jogadores convocados.
+     */
+    $stmtJogadores = $pdo->prepare(
+        "SELECT id, nome, email
+         FROM utilizadores
+         WHERE id IN ($placeholders)
+           AND tipo = 'jogador'"
+    );
+
+    $stmtJogadores->execute(
+        $idsJogadores
+    );
+
+    $jogadores = $stmtJogadores->fetchAll();
+    $nomesPorId = [];
+
+    foreach ($jogadores as $jogador) {
+        $idJogador = (int)$jogador['id'];
+        $nomeJogador = (string)$jogador['nome'];
+        $emailJogador = trim(
+            (string)$jogador['email']
+        );
+
+        $nomesPorId[$idJogador] =
+            $nomeJogador;
+
+        if (
+            !filter_var(
+                $emailJogador,
+                FILTER_VALIDATE_EMAIL
+            )
+        ) {
+            continue;
+        }
+
+        $conteudo = '
+            <p>
+                Olá, <strong>' .
+                escapar_email_html($nomeJogador) .
+                '</strong>.
+            </p>
+
+            <p>
+                Foste convocado para o próximo jogo.
+            </p>
+
+            <table role="presentation"
+                   width="100%"
+                   cellspacing="0"
+                   cellpadding="8"
+                   style="
+                       margin:18px 0;
+                       border-collapse:collapse;
+                       background:#f5faf7;
+                       border-radius:12px;
+                   ">
+                <tr>
+                    <td><strong>Escalão</strong></td>
+                    <td>' .
+                        escapar_email_html($escalao) .
+                    '</td>
+                </tr>
+                <tr>
+                    <td><strong>Adversário</strong></td>
+                    <td>' .
+                        escapar_email_html($adversario) .
+                    '</td>
+                </tr>
+                <tr>
+                    <td><strong>Data</strong></td>
+                    <td>' .
+                        escapar_email_html($dataFormatada) .
+                    '</td>
+                </tr>
+                <tr>
+                    <td><strong>Local</strong></td>
+                    <td>' .
+                        escapar_email_html($local) .
+                    '</td>
+                </tr>
+            </table>
+
+            <p>
+                <a href="' .
+                    escapar_email_html($urlConvocatoria) .
+                '"
+                   style="
+                       display:inline-block;
+                       padding:12px 18px;
+                       border-radius:12px;
+                       background:#0f5132;
+                       color:#ffffff;
+                       text-decoration:none;
+                       font-weight:700;
+                   ">
+                    Consultar convocatória
+                </a>
+            </p>
+        ';
+
+        try {
+            enviar_email_aco(
+                $emailJogador,
+                $nomeJogador,
+                'Nova convocatória — ' . $escalao,
+                email_layout_aco(
+                    'Nova convocatória',
+                    $conteudo
+                )
+            );
+
+            $enviados++;
+
+        } catch (Throwable $e) {
+            $falhados++;
+
+            error_log(
+                'Email convocatória jogador ' .
+                $idJogador .
+                ': ' .
+                $e->getMessage()
+            );
+        }
+    }
+
+    /*
+     * Encarregados dos jogadores.
+     */
+    $stmtEncarregados = $pdo->prepare(
+        "SELECT
+            e.id,
+            e.nome,
+            e.email,
+            ej.id_jogador
+         FROM encarregados_jogadores ej
+         INNER JOIN utilizadores e
+             ON e.id = ej.id_encarregado
+         WHERE ej.id_jogador IN ($placeholders)
+           AND e.tipo = 'encarregado'"
+    );
+
+    $stmtEncarregados->execute(
+        $idsJogadores
+    );
+
+    $encarregados = [];
+
+    foreach (
+        $stmtEncarregados->fetchAll()
+        as $linha
+    ) {
+        $idEncarregado = (int)$linha['id'];
+
+        if (!isset($encarregados[$idEncarregado])) {
+            $encarregados[$idEncarregado] = [
+                'nome' => (string)$linha['nome'],
+                'email' => (string)$linha['email'],
+                'educandos' => [],
+            ];
+        }
+
+        $idJogador =
+            (int)$linha['id_jogador'];
+
+        $encarregados[$idEncarregado]['educandos'][] =
+            $nomesPorId[$idJogador] ?? 'Educando';
+    }
+
+    foreach ($encarregados as $id => $encarregado) {
+        $email = trim(
+            (string)$encarregado['email']
+        );
+
+        if (
+            !filter_var(
+                $email,
+                FILTER_VALIDATE_EMAIL
+            )
+        ) {
+            continue;
+        }
+
+        $educandos = array_values(
+            array_unique(
+                $encarregado['educandos']
+            )
+        );
+
+        $conteudo = '
+            <p>
+                Olá, <strong>' .
+                escapar_email_html(
+                    $encarregado['nome']
+                ) .
+                '</strong>.
+            </p>
+
+            <p>
+                Foi criada uma convocatória para:
+                <strong>' .
+                    escapar_email_html(
+                        implode(', ', $educandos)
+                    ) .
+                '</strong>.
+            </p>
+
+            <p>
+                <strong>Jogo:</strong> ' .
+                    escapar_email_html($adversario) .
+                '<br>
+                <strong>Data:</strong> ' .
+                    escapar_email_html($dataFormatada) .
+                '<br>
+                <strong>Local:</strong> ' .
+                    escapar_email_html($local) .
+                '<br>
+                <strong>Escalão:</strong> ' .
+                    escapar_email_html($escalao) .
+                '
+            </p>
+
+            <p>
+                <a href="' .
+                    escapar_email_html($urlConvocatoria) .
+                '"
+                   style="
+                       display:inline-block;
+                       padding:12px 18px;
+                       border-radius:12px;
+                       background:#0f5132;
+                       color:#ffffff;
+                       text-decoration:none;
+                       font-weight:700;
+                   ">
+                    Consultar convocatória
+                </a>
+            </p>
+        ';
+
+        try {
+            enviar_email_aco(
+                $email,
+                (string)$encarregado['nome'],
+                'Convocatória do seu educando — ' .
+                    $escalao,
+                email_layout_aco(
+                    'Nova convocatória',
+                    $conteudo
+                )
+            );
+
+            $enviados++;
+
+        } catch (Throwable $e) {
+            $falhados++;
+
+            error_log(
+                'Email convocatória encarregado ' .
+                $id .
+                ': ' .
+                $e->getMessage()
+            );
+        }
+    }
+
+    /*
+     * Treinadores associados ao escalão.
+     */
+    $stmtTreinadores = $pdo->prepare(
+        'SELECT DISTINCT
+            u.id,
+            u.nome,
+            u.email
+         FROM treinador_escalao te
+         INNER JOIN utilizadores u
+             ON u.id = te.id_treinador
+         WHERE te.escalao = ?
+           AND u.tipo = "treinador"
+           AND u.id <> ?'
+    );
+
+    $stmtTreinadores->execute([
+        $escalao,
+        $idCriador
+    ]);
+
+    foreach (
+        $stmtTreinadores->fetchAll()
+        as $treinador
+    ) {
+        $email = trim(
+            (string)$treinador['email']
+        );
+
+        if (
+            !filter_var(
+                $email,
+                FILTER_VALIDATE_EMAIL
+            )
+        ) {
+            continue;
+        }
+
+        $conteudo = '
+            <p>
+                Olá, <strong>' .
+                escapar_email_html(
+                    $treinador['nome']
+                ) .
+                '</strong>.
+            </p>
+
+            <p>
+                Foi criada uma convocatória para o escalão
+                <strong>' .
+                    escapar_email_html($escalao) .
+                '</strong>.
+            </p>
+
+            <p>
+                <strong>Adversário:</strong> ' .
+                    escapar_email_html($adversario) .
+                '<br>
+                <strong>Data:</strong> ' .
+                    escapar_email_html($dataFormatada) .
+                '<br>
+                <strong>Local:</strong> ' .
+                    escapar_email_html($local) .
+                '
+            </p>
+        ';
+
+        try {
+            enviar_email_aco(
+                $email,
+                (string)$treinador['nome'],
+                'Nova convocatória — ' . $escalao,
+                email_layout_aco(
+                    'Nova convocatória',
+                    $conteudo
+                )
+            );
+
+            $enviados++;
+
+        } catch (Throwable $e) {
+            $falhados++;
+
+            error_log(
+                'Email convocatória treinador ' .
+                $treinador['id'] .
+                ': ' .
+                $e->getMessage()
+            );
+        }
+    }
+
+    return [
+        'enviados' => $enviados,
+        'falhados' => $falhados,
+    ];
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| ÁREA PESSOAL
+|--------------------------------------------------------------------------
+*/
+
+function token_area_pessoal(): string {
+    if (
+        empty($_SESSION['area_pessoal_csrf']) ||
+        !is_string($_SESSION['area_pessoal_csrf'])
+    ) {
+        $_SESSION['area_pessoal_csrf'] =
+            bin2hex(random_bytes(32));
+    }
+
+    return $_SESSION['area_pessoal_csrf'];
+}
+
+function rodar_token_area_pessoal(): string {
+    $_SESSION['area_pessoal_csrf'] =
+        bin2hex(random_bytes(32));
+
+    return $_SESSION['area_pessoal_csrf'];
+}
+
+function exigir_token_area_pessoal(): void {
+    $recebido = (string)(
+        $_SERVER['HTTP_X_CSRF_TOKEN'] ?? ''
+    );
+
+    $guardado = token_area_pessoal();
+
+    if (
+        $recebido === '' ||
+        !hash_equals(
+            $guardado,
+            $recebido
+        )
+    ) {
+        json_response([
+            'erro' =>
+                'A sessão de segurança expirou. Atualiza a página e tenta novamente.'
+        ], 419);
+    }
+}
+
+function perfil_publico_utilizador(array $user): array {
+    return [
+        'id' => (int)$user['id'],
+        'nome' => (string)$user['nome'],
+        'email' => (string)$user['email'],
+        'nif' =>
+            $user['nif'] !== null
+                ? (string)$user['nif']
+                : '',
+        'morada' =>
+            $user['morada'] !== null
+                ? (string)$user['morada']
+                : '',
+        'tipo' => (string)$user['tipo'],
+    ];
+}
+
+function verificar_password_guardada(
+    string $passwordIntroduzida,
+    string $passwordGuardada
+): bool {
+    if (
+        password_tem_hash_valido(
+            $passwordGuardada
+        )
+    ) {
+        return password_verify(
+            $passwordIntroduzida,
+            $passwordGuardada
+        );
+    }
+
+    return hash_equals(
+        $passwordGuardada,
+        $passwordIntroduzida
+    );
 }
 
 function normalizar_ids_jogadores($ids_jogadores): array {
@@ -134,6 +755,597 @@ function jogadores_pertencem_ao_escalao(PDO $pdo, array $idsJogadores, string $e
     return $totalValidos === count($idsJogadores);
 }
 
+
+/*
+|--------------------------------------------------------------------------
+| TOKEN DOS FORMULÁRIOS PÚBLICOS
+|--------------------------------------------------------------------------
+*/
+
+if (
+    $method === 'GET' &&
+    $path === 'formularios/token'
+) {
+    json_response([
+        'token' =>
+            token_formulario_publico()
+    ]);
+}
+
+/*
+|--------------------------------------------------------------------------
+| FORMULÁRIO DA LOJA
+|--------------------------------------------------------------------------
+*/
+
+if (
+    $method === 'POST' &&
+    $path === 'formularios/loja'
+) {
+    exigir_token_formulario_publico();
+    bloquear_spam_formulario('loja', 45);
+
+    $nome = limpar_texto_formulario(
+        $body['nome'] ?? '',
+        120
+    );
+
+    $email = strtolower(
+        limpar_texto_formulario(
+            $body['email'] ?? '',
+            150
+        )
+    );
+
+    $atleta = limpar_texto_formulario(
+        $body['atleta'] ?? '',
+        120
+    );
+
+    $descricao = trim(
+        mb_substr(
+            (string)($body['descricao'] ?? ''),
+            0,
+            3000
+        )
+    );
+
+    $consentimento =
+        (bool)($body['consentimento'] ?? false);
+
+    if (
+        $nome === '' ||
+        $email === '' ||
+        $atleta === '' ||
+        $descricao === ''
+    ) {
+        json_response([
+            'erro' =>
+                'Preenche todos os campos da encomenda.'
+        ], 400);
+    }
+
+    if (
+        !filter_var(
+            $email,
+            FILTER_VALIDATE_EMAIL
+        )
+    ) {
+        json_response([
+            'erro' => 'Indica um endereço de e-mail válido.'
+        ], 400);
+    }
+
+    if (!$consentimento) {
+        json_response([
+            'erro' =>
+                'É necessário aceitar o tratamento de dados.'
+        ], 400);
+    }
+
+    $config = configuracao_email_publica();
+
+    $conteudoClube = '
+        <p>
+            Foi recebido um novo pedido através da loja.
+        </p>
+
+        <table role="presentation"
+               width="100%"
+               cellspacing="0"
+               cellpadding="8"
+               style="
+                   border-collapse:collapse;
+                   background:#f5faf7;
+               ">
+            <tr>
+                <td><strong>Nome</strong></td>
+                <td>' .
+                    escapar_email_html($nome) .
+                '</td>
+            </tr>
+
+            <tr>
+                <td><strong>E-mail</strong></td>
+                <td>' .
+                    escapar_email_html($email) .
+                '</td>
+            </tr>
+
+            <tr>
+                <td><strong>Atleta / pessoa</strong></td>
+                <td>' .
+                    escapar_email_html($atleta) .
+                '</td>
+            </tr>
+        </table>
+
+        <h3 style="color:#0f5132;">
+            Artigos, tamanhos e observações
+        </h3>
+
+        <div style="
+            padding:16px;
+            border-radius:12px;
+            background:#f8fbf9;
+            white-space:pre-wrap;
+        ">' .
+            nl2br(
+                escapar_email_html($descricao)
+            ) .
+        '</div>
+    ';
+
+    try {
+        enviar_email_aco(
+            (string)$config['club_email'],
+            (string)$config['club_name'],
+            'Novo pedido da loja — ' . $nome,
+            email_layout_aco(
+                'Novo pedido da loja',
+                $conteudoClube
+            ),
+            $email,
+            $nome
+        );
+
+    } catch (Throwable $e) {
+        error_log(
+            'Erro no formulário da loja: ' .
+            $e->getMessage()
+        );
+
+        json_response([
+            'erro' =>
+                'O pedido não pôde ser enviado. Tenta novamente mais tarde.'
+        ], 500);
+    }
+
+    $conteudoCliente = '
+        <p>
+            Olá, <strong>' .
+                escapar_email_html($nome) .
+            '</strong>.
+        </p>
+
+        <p>
+            Recebemos o teu pedido para
+            <strong>' .
+                escapar_email_html($atleta) .
+            '</strong>.
+        </p>
+
+        <p>
+            O pedido ainda não representa uma encomenda confirmada.
+            O clube irá responder com informação sobre disponibilidade,
+            preço e prazo de entrega.
+        </p>
+    ';
+
+    $confirmacaoEnviada =
+        enviar_email_confirmacao_seguro(
+            $email,
+            $nome,
+            'Recebemos o seu pedido da loja',
+            email_layout_aco(
+                'Pedido recebido',
+                $conteudoCliente
+            )
+        );
+
+    json_response([
+        'mensagem' =>
+            $confirmacaoEnviada
+                ? 'O pedido foi enviado. Também enviámos uma confirmação para o teu e-mail.'
+                : 'O pedido foi enviado ao clube. A confirmação por e-mail poderá demorar.'
+    ]);
+}
+
+/*
+|--------------------------------------------------------------------------
+| FORMULÁRIO NOVO SÓCIO
+|--------------------------------------------------------------------------
+*/
+
+if (
+    $method === 'POST' &&
+    $path === 'formularios/novo-socio'
+) {
+    exigir_token_formulario_publico();
+    bloquear_spam_formulario(
+        'novo-socio',
+        60
+    );
+
+    $nome = limpar_texto_formulario(
+        $body['nome'] ?? '',
+        120
+    );
+
+    $documento = limpar_texto_formulario(
+        $body['documento'] ?? '',
+        30
+    );
+
+    $nif = preg_replace(
+        '/\D+/',
+        '',
+        (string)($body['nif'] ?? '')
+    ) ?? '';
+
+    $email = strtolower(
+        limpar_texto_formulario(
+            $body['email'] ?? '',
+            150
+        )
+    );
+
+    $telefone = limpar_texto_formulario(
+        $body['telefone'] ?? '',
+        30
+    );
+
+    $morada = trim(
+        mb_substr(
+            (string)($body['morada'] ?? ''),
+            0,
+            500
+        )
+    );
+
+    $codigoPostal = limpar_texto_formulario(
+        $body['codigo_postal'] ?? '',
+        20
+    );
+
+    $cidade = limpar_texto_formulario(
+        $body['cidade'] ?? '',
+        120
+    );
+
+    $concelho = limpar_texto_formulario(
+        $body['concelho'] ?? '',
+        120
+    );
+
+    $distrito = limpar_texto_formulario(
+        $body['distrito'] ?? '',
+        120
+    );
+
+    $pais = limpar_texto_formulario(
+        $body['pais'] ?? '',
+        120
+    );
+
+    $categoria = limpar_texto_formulario(
+        $body['categoria'] ?? '',
+        50
+    );
+
+    $genero = limpar_texto_formulario(
+        $body['genero'] ?? '',
+        10
+    );
+
+    $nascimento = is_array(
+        $body['nascimento'] ?? null
+    )
+        ? $body['nascimento']
+        : [];
+
+    $dia = (int)($nascimento['dia'] ?? 0);
+    $mes = (int)($nascimento['mes'] ?? 0);
+    $ano = (int)($nascimento['ano'] ?? 0);
+
+    $consentimento =
+        (bool)($body['consentimento'] ?? false);
+
+    if (
+        $nome === '' ||
+        $documento === '' ||
+        $nif === '' ||
+        $email === '' ||
+        $telefone === '' ||
+        $morada === '' ||
+        $codigoPostal === '' ||
+        $cidade === '' ||
+        $concelho === '' ||
+        $distrito === '' ||
+        $pais === '' ||
+        $categoria === '' ||
+        $genero === ''
+    ) {
+        json_response([
+            'erro' =>
+                'Preenche todos os campos obrigatórios da inscrição.'
+        ], 400);
+    }
+
+    if (
+        !filter_var(
+            $email,
+            FILTER_VALIDATE_EMAIL
+        )
+    ) {
+        json_response([
+            'erro' => 'Indica um endereço de e-mail válido.'
+        ], 400);
+    }
+
+    if (
+        strlen($nif) !== 9
+    ) {
+        json_response([
+            'erro' =>
+                'O NIF deve conter 9 algarismos.'
+        ], 400);
+    }
+
+    if (
+        !checkdate(
+            $mes,
+            $dia,
+            $ano
+        )
+    ) {
+        json_response([
+            'erro' =>
+                'A data de nascimento não é válida.'
+        ], 400);
+    }
+
+    if (
+        !in_array(
+            $genero,
+            ['m', 'f'],
+            true
+        )
+    ) {
+        json_response([
+            'erro' =>
+                'Seleciona uma opção válida para o género.'
+        ], 400);
+    }
+
+    if (
+        !in_array(
+            $categoria,
+            [
+                'Efetivos',
+                'Mérito',
+                'Honorários',
+                'Atletas'
+            ],
+            true
+        )
+    ) {
+        json_response([
+            'erro' =>
+                'Seleciona uma categoria de sócio válida.'
+        ], 400);
+    }
+
+    if (!$consentimento) {
+        json_response([
+            'erro' =>
+                'É necessário aceitar o tratamento de dados.'
+        ], 400);
+    }
+
+    $dataNascimento = sprintf(
+        '%02d/%02d/%04d',
+        $dia,
+        $mes,
+        $ano
+    );
+
+    $config = configuracao_email_publica();
+
+    $conteudoClube = '
+        <p>
+            Foi recebido um novo pedido de inscrição de sócio.
+        </p>
+
+        <table role="presentation"
+               width="100%"
+               cellspacing="0"
+               cellpadding="8"
+               style="
+                   border-collapse:collapse;
+                   background:#f5faf7;
+               ">
+            <tr>
+                <td><strong>Nome</strong></td>
+                <td>' .
+                    escapar_email_html($nome) .
+                '</td>
+            </tr>
+
+            <tr>
+                <td><strong>Documento</strong></td>
+                <td>' .
+                    escapar_email_html($documento) .
+                '</td>
+            </tr>
+
+            <tr>
+                <td><strong>NIF</strong></td>
+                <td>' .
+                    escapar_email_html($nif) .
+                '</td>
+            </tr>
+
+            <tr>
+                <td><strong>Nascimento</strong></td>
+                <td>' .
+                    escapar_email_html($dataNascimento) .
+                '</td>
+            </tr>
+
+            <tr>
+                <td><strong>Género</strong></td>
+                <td>' .
+                    escapar_email_html(
+                        $genero === 'm'
+                            ? 'Masculino'
+                            : 'Feminino'
+                    ) .
+                '</td>
+            </tr>
+
+            <tr>
+                <td><strong>E-mail</strong></td>
+                <td>' .
+                    escapar_email_html($email) .
+                '</td>
+            </tr>
+
+            <tr>
+                <td><strong>Telemóvel</strong></td>
+                <td>' .
+                    escapar_email_html($telefone) .
+                '</td>
+            </tr>
+
+            <tr>
+                <td><strong>Morada</strong></td>
+                <td>' .
+                    nl2br(
+                        escapar_email_html($morada)
+                    ) .
+                '</td>
+            </tr>
+
+            <tr>
+                <td><strong>Código postal</strong></td>
+                <td>' .
+                    escapar_email_html($codigoPostal) .
+                '</td>
+            </tr>
+
+            <tr>
+                <td><strong>Cidade</strong></td>
+                <td>' .
+                    escapar_email_html($cidade) .
+                '</td>
+            </tr>
+
+            <tr>
+                <td><strong>Concelho</strong></td>
+                <td>' .
+                    escapar_email_html($concelho) .
+                '</td>
+            </tr>
+
+            <tr>
+                <td><strong>Distrito</strong></td>
+                <td>' .
+                    escapar_email_html($distrito) .
+                '</td>
+            </tr>
+
+            <tr>
+                <td><strong>País</strong></td>
+                <td>' .
+                    escapar_email_html($pais) .
+                '</td>
+            </tr>
+
+            <tr>
+                <td><strong>Categoria</strong></td>
+                <td>' .
+                    escapar_email_html($categoria) .
+                '</td>
+            </tr>
+        </table>
+    ';
+
+    try {
+        enviar_email_aco(
+            (string)$config['club_email'],
+            (string)$config['club_name'],
+            'Novo pedido de sócio — ' . $nome,
+            email_layout_aco(
+                'Novo pedido de inscrição',
+                $conteudoClube
+            ),
+            $email,
+            $nome
+        );
+
+    } catch (Throwable $e) {
+        error_log(
+            'Erro no formulário novo sócio: ' .
+            $e->getMessage()
+        );
+
+        json_response([
+            'erro' =>
+                'A inscrição não pôde ser enviada. Tenta novamente mais tarde.'
+        ], 500);
+    }
+
+    $conteudoCliente = '
+        <p>
+            Olá, <strong>' .
+                escapar_email_html($nome) .
+            '</strong>.
+        </p>
+
+        <p>
+            Recebemos o teu pedido para fazer parte do
+            Andebol Clube Olhão como sócio da categoria
+            <strong>' .
+                escapar_email_html($categoria) .
+            '</strong>.
+        </p>
+
+        <p>
+            O clube irá confirmar os dados e entrar em contacto
+            para concluir a inscrição.
+        </p>
+    ';
+
+    $confirmacaoEnviada =
+        enviar_email_confirmacao_seguro(
+            $email,
+            $nome,
+            'Recebemos o seu pedido de inscrição',
+            email_layout_aco(
+                'Pedido de inscrição recebido',
+                $conteudoCliente
+            )
+        );
+
+    json_response([
+        'mensagem' =>
+            $confirmacaoEnviada
+                ? 'A inscrição foi enviada. Também enviámos uma confirmação para o teu e-mail.'
+                : 'A inscrição foi enviada ao clube. A confirmação por e-mail poderá demorar.'
+    ]);
+}
+
 /*
 |--------------------------------------------------------------------------
 | ESCALÕES QUE O UTILIZADOR PODE GERIR
@@ -177,18 +1389,6 @@ if ($method === 'GET' && $path === 'me/escaloes') {
 | CRIAR CONVOCATÓRIA
 |--------------------------------------------------------------------------
 */
-
-if ($method === 'GET' && $path === 'convocatoria') {
-    exigir_admin_ou_treinador();
-
-    $total = (int) $pdo
-        ->query('SELECT COUNT(*) FROM convocatorias')
-        ->fetchColumn();
-
-    json_response([
-        'total_convocatorias' => $total
-    ]);
-}
 
 if ($method === 'POST' && $path === 'convocatoria') {
     $user = exigir_login();
@@ -510,11 +1710,56 @@ if ($method === 'POST' && $path === 'convocatoria') {
 
         $pdo->commit();
 
+        /*
+         * A convocatória já está gravada.
+         * Se algum e-mail falhar, o jogo não é apagado.
+         */
+        try {
+            $resultadoEmails =
+                enviar_emails_convocatoria_aco(
+                    $pdo,
+                    $idConvocatoria,
+                    $idsJogadores,
+                    $adversario,
+                    $data,
+                    $local,
+                    $escalao,
+                    (int)$user['id']
+                );
+
+        } catch (Throwable $emailError) {
+            error_log(
+                'Erro geral nos emails da convocatória: ' .
+                $emailError->getMessage()
+            );
+
+            $resultadoEmails = [
+                'enviados' => 0,
+                'falhados' => 1,
+            ];
+        }
+
+        $mensagem =
+            'Convocatória enviada e notificações criadas!';
+
+        if ($resultadoEmails['enviados'] > 0) {
+            $mensagem .=
+                ' E-mails enviados: ' .
+                $resultadoEmails['enviados'] .
+                '.';
+        }
+
+        if ($resultadoEmails['falhados'] > 0) {
+            $mensagem .=
+                ' Alguns e-mails não puderam ser enviados.';
+        }
+
         json_response([
-            'mensagem' =>
-                'Convocatória enviada e notificações criadas!',
+            'mensagem' => $mensagem,
             'id_convocatoria' =>
-                $idConvocatoria
+                $idConvocatoria,
+            'emails' =>
+                $resultadoEmails
         ]);
 
     } catch (Throwable $e) {
@@ -589,7 +1834,7 @@ if ($method === 'POST' && $path === 'login') {
      * Procuramos primeiro o utilizador.
      * A password nunca é usada diretamente na consulta SQL.
      */
-    if (strpos($login, '@') !== false) {
+    if (str_contains($login, '@')) {
         $stmt = $pdo->prepare(
             'SELECT *
              FROM utilizadores
@@ -711,6 +1956,394 @@ if ($method === 'POST' && $path === 'login') {
                 $user['tipo'] === 'admin' ? 1 : 0,
         ]
     ]);
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| ÁREA PESSOAL DO UTILIZADOR
+|--------------------------------------------------------------------------
+*/
+
+/*
+ * A conta é identificada exclusivamente pela sessão.
+ * O navegador nunca envia o ID da conta a editar.
+ */
+if (
+    $method === 'GET' &&
+    $path === 'me/perfil'
+) {
+    $sessionUser = exigir_login();
+
+    $stmt = $pdo->prepare(
+        'SELECT
+            id,
+            nome,
+            email,
+            nif,
+            morada,
+            tipo
+         FROM utilizadores
+         WHERE id = ?
+         LIMIT 1'
+    );
+
+    $stmt->execute([
+        (int)$sessionUser['id']
+    ]);
+
+    $perfil = $stmt->fetch();
+
+    if (!$perfil) {
+        session_destroy();
+
+        json_response([
+            'erro' =>
+                'A conta associada à sessão já não existe.'
+        ], 401);
+    }
+
+    json_response([
+        'perfil' =>
+            perfil_publico_utilizador($perfil),
+        'csrf' =>
+            token_area_pessoal()
+    ]);
+}
+
+if (
+    $method === 'PUT' &&
+    $path === 'me/perfil'
+) {
+    $sessionUser = exigir_login();
+    exigir_token_area_pessoal();
+
+    $idUtilizador =
+        (int)$sessionUser['id'];
+
+    $nome = limpar_texto_formulario(
+        $body['nome'] ?? '',
+        120
+    );
+
+    $email = strtolower(
+        limpar_texto_formulario(
+            $body['email'] ?? '',
+            150
+        )
+    );
+
+    $nif = preg_replace(
+        '/\D+/',
+        '',
+        (string)($body['nif'] ?? '')
+    ) ?? '';
+
+    $morada = trim(
+        mb_substr(
+            (string)($body['morada'] ?? ''),
+            0,
+            500
+        )
+    );
+
+    $passwordConfirmacao =
+        (string)(
+            $body['password_confirmacao'] ?? ''
+        );
+
+    if (
+        mb_strlen($nome) < 2
+    ) {
+        json_response([
+            'erro' =>
+                'O nome deve ter pelo menos 2 caracteres.'
+        ], 400);
+    }
+
+    if (
+        !filter_var(
+            $email,
+            FILTER_VALIDATE_EMAIL
+        )
+    ) {
+        json_response([
+            'erro' =>
+                'Indica um endereço de e-mail válido.'
+        ], 400);
+    }
+
+    if (
+        $nif !== '' &&
+        strlen($nif) !== 9
+    ) {
+        json_response([
+            'erro' =>
+                'O NIF deve ter exatamente 9 algarismos.'
+        ], 400);
+    }
+
+    $stmtAtual = $pdo->prepare(
+        'SELECT
+            id,
+            nome,
+            email,
+            nif,
+            morada,
+            tipo,
+            senha
+         FROM utilizadores
+         WHERE id = ?
+         LIMIT 1'
+    );
+
+    $stmtAtual->execute([
+        $idUtilizador
+    ]);
+
+    $atual = $stmtAtual->fetch();
+
+    if (!$atual) {
+        session_destroy();
+
+        json_response([
+            'erro' =>
+                'A conta associada à sessão já não existe.'
+        ], 401);
+    }
+
+    $emailMudou =
+        strtolower((string)$atual['email']) !==
+        $email;
+
+    if ($emailMudou) {
+        if ($passwordConfirmacao === '') {
+            json_response([
+                'erro' =>
+                    'Introduz a password atual para alterar o e-mail.'
+            ], 400);
+        }
+
+        if (
+            !verificar_password_guardada(
+                $passwordConfirmacao,
+                (string)$atual['senha']
+            )
+        ) {
+            json_response([
+                'erro' =>
+                    'A password atual está incorreta.'
+            ], 403);
+        }
+    }
+
+    $stmtDuplicado = $pdo->prepare(
+        'SELECT id
+         FROM utilizadores
+         WHERE email = ?
+           AND id <> ?
+         LIMIT 1'
+    );
+
+    $stmtDuplicado->execute([
+        $email,
+        $idUtilizador
+    ]);
+
+    if ($stmtDuplicado->fetch()) {
+        json_response([
+            'erro' =>
+                'Já existe uma conta com esse e-mail.'
+        ], 409);
+    }
+
+    try {
+        $stmtAtualizar = $pdo->prepare(
+            'UPDATE utilizadores
+             SET
+                nome = ?,
+                email = ?,
+                nif = ?,
+                morada = ?
+             WHERE id = ?'
+        );
+
+        $stmtAtualizar->execute([
+            $nome,
+            $email,
+            $nif !== '' ? $nif : null,
+            $morada !== '' ? $morada : null,
+            $idUtilizador
+        ]);
+
+        $_SESSION['user']['nome'] = $nome;
+        $_SESSION['user']['email'] = $email;
+
+        $stmtPerfil = $pdo->prepare(
+            'SELECT
+                id,
+                nome,
+                email,
+                nif,
+                morada,
+                tipo
+             FROM utilizadores
+             WHERE id = ?
+             LIMIT 1'
+        );
+
+        $stmtPerfil->execute([
+            $idUtilizador
+        ]);
+
+        $perfilAtualizado =
+            $stmtPerfil->fetch();
+
+        json_response([
+            'mensagem' =>
+                'As informações pessoais foram atualizadas.',
+            'perfil' =>
+                perfil_publico_utilizador(
+                    $perfilAtualizado
+                ),
+            'csrf' =>
+                rodar_token_area_pessoal()
+        ]);
+
+    } catch (Throwable $e) {
+        error_log(
+            'Erro ao atualizar perfil: ' .
+            $e->getMessage()
+        );
+
+        json_response([
+            'erro' =>
+                'Não foi possível atualizar as informações.'
+        ], 500);
+    }
+}
+
+if (
+    $method === 'PUT' &&
+    $path === 'me/password'
+) {
+    $sessionUser = exigir_login();
+    exigir_token_area_pessoal();
+
+    $idUtilizador =
+        (int)$sessionUser['id'];
+
+    $passwordAtual =
+        (string)($body['password_atual'] ?? '');
+
+    $passwordNova =
+        (string)($body['password_nova'] ?? '');
+
+    if (
+        $passwordAtual === '' ||
+        $passwordNova === ''
+    ) {
+        json_response([
+            'erro' =>
+                'Preenche a password atual e a nova password.'
+        ], 400);
+    }
+
+    if (
+        mb_strlen($passwordNova) < 8
+    ) {
+        json_response([
+            'erro' =>
+                'A nova password deve ter pelo menos 8 caracteres.'
+        ], 400);
+    }
+
+    if (
+        hash_equals(
+            $passwordAtual,
+            $passwordNova
+        )
+    ) {
+        json_response([
+            'erro' =>
+                'A nova password não pode ser igual à password atual.'
+        ], 400);
+    }
+
+    $stmt = $pdo->prepare(
+        'SELECT senha
+         FROM utilizadores
+         WHERE id = ?
+         LIMIT 1'
+    );
+
+    $stmt->execute([
+        $idUtilizador
+    ]);
+
+    $passwordGuardada =
+        $stmt->fetchColumn();
+
+    if ($passwordGuardada === false) {
+        session_destroy();
+
+        json_response([
+            'erro' =>
+                'A conta associada à sessão já não existe.'
+        ], 401);
+    }
+
+    if (
+        !verificar_password_guardada(
+            $passwordAtual,
+            (string)$passwordGuardada
+        )
+    ) {
+        json_response([
+            'erro' =>
+                'A password atual está incorreta.'
+        ], 403);
+    }
+
+    try {
+        $novoHash =
+            criar_hash_password($passwordNova);
+
+        $stmtAtualizar = $pdo->prepare(
+            'UPDATE utilizadores
+             SET senha = ?
+             WHERE id = ?'
+        );
+
+        $stmtAtualizar->execute([
+            $novoHash,
+            $idUtilizador
+        ]);
+
+        /*
+         * Renova o identificador da sessão depois
+         * de uma alteração de credenciais.
+         */
+        session_regenerate_id(true);
+
+        json_response([
+            'mensagem' =>
+                'A password foi alterada com sucesso.',
+            'csrf' =>
+                rodar_token_area_pessoal()
+        ]);
+
+    } catch (Throwable $e) {
+        error_log(
+            'Erro ao alterar password: ' .
+            $e->getMessage()
+        );
+
+        json_response([
+            'erro' =>
+                'Não foi possível alterar a password.'
+        ], 500);
+    }
 }
 
 /*
@@ -864,24 +2497,6 @@ if ($method === 'POST' && $path === 'criar-utilizador') {
 | FATURAS
 |--------------------------------------------------------------------------
 */
-
-if ($method === 'GET' && $path === 'faturas') {
-    $user = exigir_login();
-
-    if (($user['tipo'] ?? '') !== 'admin') {
-        json_response([
-            'erro' => 'Apenas administradores podem consultar este total.'
-        ], 403);
-    }
-
-    $total = (int) $pdo
-        ->query('SELECT COUNT(*) FROM faturas')
-        ->fetchColumn();
-
-    json_response([
-        'total_faturas' => $total
-    ]);
-}
 
 if ($method === 'GET' && $path === 'minhas-faturas') {
     $user = exigir_login();

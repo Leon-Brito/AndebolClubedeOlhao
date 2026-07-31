@@ -164,6 +164,102 @@ function gerirLoginLogout() {
     navConta.appendChild(li);
     collapse.appendChild(navConta);
 }
+/* =========================================================
+   ÁREA PESSOAL — adicionar ao menu do utilizador
+========================================================= */
+
+(function adicionarAreaPessoalAoMenu() {
+    function criarLigacaoAreaPessoal() {
+        let utilizador = null;
+
+        try {
+            utilizador = JSON.parse(
+                localStorage.getItem('utilizador') || 'null'
+            );
+        } catch (erro) {
+            utilizador = null;
+        }
+
+        if (!utilizador) {
+            return;
+        }
+
+        /*
+         * Versão de navbar com menu de conta em dropdown.
+         */
+        const menuConta = document.querySelector(
+            '#navConta .dropdown-menu'
+        );
+
+        if (
+            menuConta &&
+            !document.getElementById(
+                'menu-area-pessoal'
+            )
+        ) {
+            const item = document.createElement('li');
+
+            item.innerHTML = `
+                <a
+                    id="menu-area-pessoal"
+                    class="dropdown-item conta-item"
+                    href="/area-cliente.html"
+                >
+                    <i class="fa-solid fa-user-gear me-2"></i>
+                    Área pessoal
+                </a>
+            `;
+
+            menuConta.prepend(item);
+        }
+
+        /*
+         * Versão antiga de navbar sem dropdown.
+         */
+        const authContainer = document.getElementById(
+            'li-auth-container'
+        );
+
+        if (
+            authContainer &&
+            !document.getElementById(
+                'btn-area-pessoal-nav'
+            )
+        ) {
+            const link = document.createElement('a');
+
+            link.id = 'btn-area-pessoal-nav';
+            link.href = '/area-cliente.html';
+            link.className =
+                'btn btn-light btn-sm rounded-pill px-3 fw-bold shadow-sm';
+
+            link.innerHTML = `
+                <i class="fa-solid fa-user-gear me-1"></i>
+                Minha conta
+            `;
+
+            authContainer.prepend(link);
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener(
+            'DOMContentLoaded',
+            function () {
+                setTimeout(
+                    criarLigacaoAreaPessoal,
+                    150
+                );
+            }
+        );
+    } else {
+        setTimeout(
+            criarLigacaoAreaPessoal,
+            150
+        );
+    }
+})();
+
 // -------------------------------------------------------------------------
 // FUNÇÃO DE SAIR
 // -------------------------------------------------------------------------

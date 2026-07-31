@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Área Pessoal | Andebol Clube Olhão</title>
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="/img/logo_9JToiDZ.png"
+    >
+
+    <style>
+        :root {
+            --aco-green-950: #061c14;
+            --aco-green-900: #08291e;
+            --aco-green-800: #0f5132;
+            --aco-green-700: #157347;
+            --aco-green-100: #eaf6ef;
+            --aco-yellow: #f2c200;
+            --aco-white: #ffffff;
+            --aco-muted: #6f8178;
+            --aco-border: #dce9e1;
+            --aco-danger: #b42332;
+            --aco-shadow: 0 24px 70px rgba(11, 65, 40, .13);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            color: #18392b;
+            background:
+                radial-gradient(
+                    circle at 90% 5%,
+                    rgba(242, 194, 0, .13),
+                    transparent 25%
+                ),
+                linear-gradient(
+                    180deg,
+                    #f5faf7 0,
+                    #eef6f1 48%,
+                    #f8fbf9 100%
+                );
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+        }
+
+        .aco-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            min-height: 74px;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--aco-green-900),
+                    var(--aco-green-700)
+                );
+            box-shadow: 0 12px 35px rgba(6, 28, 20, .20);
+        }
+
+        .aco-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 950;
+        }
+
+        .aco-brand img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .aco-brand small {
+            display: block;
+            margin-top: 1px;
+            color: #f8dc55;
+            font-size: .68rem;
+            font-weight: 850;
+            letter-spacing: .45px;
+        }
+
+        .aco-navbar .nav-link {
+            color: rgba(255, 255, 255, .82);
+            font-size: .88rem;
+            font-weight: 800;
+        }
+
+        .aco-navbar .nav-link:hover,
+        .aco-navbar .nav-link.active {
+            color: #fff;
+        }
+
+        .logout-button {
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .10);
+            color: #fff;
+            font-size: .82rem;
+            font-weight: 850;
+        }
+
+        .logout-button:hover {
+            background: rgba(255, 255, 255, .18);
+            color: #fff;
+        }
+
+        .profile-shell {
+            padding: 42px 0 70px;
+        }
+
+        .profile-hero {
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr) auto;
+            gap: 22px;
+            align-items: center;
+            padding: 28px;
+            border: 1px solid rgba(255, 255, 255, .16);
+            border-radius: 30px;
+            color: #fff;
+            background:
+                radial-gradient(
+                    circle at 91% 16%,
+                    rgba(242, 194, 0, .24),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    var(--aco-green-950),
+                    var(--aco-green-700)
+                );
+            box-shadow: var(--aco-shadow);
+        }
+
+        .profile-hero::after {
+            content: "";
+            position: absolute;
+            right: -55px;
+            bottom: -85px;
+            width: 230px;
+            height: 230px;
+            border: 1px solid rgba(255, 255, 255, .10);
+            border-radius: 50%;
+        }
+
+        .profile-avatar {
+            position: relative;
+            z-index: 1;
+            width: 92px;
+            height: 92px;
+            display: grid;
+            place-items: center;
+            border: 3px solid rgba(242, 194, 0, .72);
+            border-radius: 28px;
+            color: var(--aco-green-950);
+            background: var(--aco-yellow);
+            box-shadow: 0 16px 35px rgba(0, 0, 0, .18);
+            font-size: 1.65rem;
+            font-weight: 950;
+            text-transform: uppercase;
+        }
+
+        .profile-hero-content {
+            position: relative;
+            z-index: 1;
+            min-width: 0;
+        }
+
+        .profile-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-bottom: 7px;
+            color: #ffe36f;
+            font-size: .71rem;
+            font-weight: 950;
+            letter-spacing: .75px;
+            text-transform: uppercase;
+        }
+
+        .profile-hero h1 {
+            margin: 0;
+            font-size: clamp(1.65rem, 4vw, 2.5rem);
+            font-weight: 950;
+            letter-spacing: -.55px;
+        }
+
+        .profile-hero-email {
+            margin: 7px 0 0;
+            color: rgba(255, 255, 255, .72);
+            font-size: .91rem;
+            overflow-wrap: anywhere;
+        }
+
+        .profile-role {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 42px;
+            padding: 0 15px;
+            border: 1px solid rgba(255, 255, 255, .17);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .10);
+            color: #fff;
+            font-size: .79rem;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            min-height: 88px;
+            padding: 17px;
+            border: 1px solid var(--aco-border);
+            border-radius: 22px;
+            color: #193b2c;
+            background: rgba(255, 255, 255, .88);
+            box-shadow: 0 13px 34px rgba(15, 81, 50, .07);
+            text-decoration: none;
+            transition:
+                transform .18s ease,
+                border-color .18s ease,
+                box-shadow .18s ease;
+        }
+
+        .quick-link:hover {
+            transform: translateY(-3px);
+            border-color: rgba(21, 115, 71, .35);
+            color: #0f5132;
+            box-shadow: 0 18px 38px rgba(15, 81, 50, .12);
+        }
+
+        .quick-link-icon {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            color: #0f5132;
+            background: var(--aco-green-100);
+            font-size: 1.04rem;
+        }
+
+        .quick-link strong {
+            display: block;
+            font-size: .9rem;
+            font-weight: 950;
+        }
+
+        .quick-link small {
+            display: block;
+            margin-top: 2px;
+            color: var(--aco-muted);
+            font-size: .72rem;
+            line-height: 1.35;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns:
+                minmax(0, 1.55fr)
+                minmax(320px, .85fr);
+            gap: 20px;
+            align-items: start;
+            margin-top: 22px;
+        }
+
+        .profile-card {
+            overflow: hidden;
+            border: 1px solid var(--aco-border);
+            border-radius: 28px;
+            background: rgba(255, 255, 255, .94);
+            box-shadow: var(--aco-shadow);
+        }
+
+        .profile-card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 23px 24px 18px;
+            border-bottom: 1px solid #e8f0eb;
+        }
+
+        .profile-card-header-icon {
+            width: 46px;
+            height: 46px;
+            min-width: 46px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            color: #0f5132;
+            background: var(--aco-green-100);
+        }
+
+        .profile-card-header h2 {
+            margin: 0;
+            color: #123b29;
+            font-size: 1.08rem;
+            font-weight: 950;
+        }
+
+        .profile-card-header p {
+            margin: 4px 0 0;
+            color: var(--aco-muted);
+            font-size: .78rem;
+            line-height: 1.45;
+        }
+
+        .profile-card-body {
+            padding: 24px;
+        }
+
+        .form-label {
+            margin-bottom: 7px;
+            color: #234536;
+            font-size: .76rem;
+            font-weight: 900;
+        }
+
+        .form-control {
+            min-height: 49px;
+            border: 1px solid #d7e6dd;
+            border-radius: 14px;
+            color: #17382a;
+            background: #fbfdfc;
+            box-shadow: none !important;
+        }
+
+        textarea.form-control {
+            min-height: 112px;
+            resize: vertical;
+        }
+
+        .form-control:focus {
+            border-color: rgba(21, 115, 71, .58);
+            background: #fff;
+        }
+
+        .form-control[readonly] {
+            color: #687a70;
+            background: #eff5f1;
+        }
+
+        .field-help {
+            display: block;
+            margin-top: 6px;
+            color: #829188;
+            font-size: .68rem;
+            line-height: 1.4;
+        }
+
+        .form-divider {
+            height: 1px;
+            margin: 22px 0;
+            background: #e8f0eb;
+        }
+
+        .save-button {
+            min-height: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 0 20px;
+            border: 0;
+            border-radius: 15px;
+            color: #fff;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--aco-green-700),
+                    var(--aco-green-800)
+                );
+            font-size: .83rem;
+            font-weight: 950;
+            box-shadow: 0 13px 28px rgba(15, 81, 50, .20);
+        }
+
+        .save-button:hover {
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        .save-button:disabled {
+            opacity: .68;
+            cursor: wait;
+            transform: none;
+        }
+
+        .password-meter {
+            height: 7px;
+            overflow: hidden;
+            margin-top: 9px;
+            border-radius: 999px;
+            background: #e5eee9;
+        }
+
+        .password-meter-bar {
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: #d34655;
+            transition:
+                width .18s ease,
+                background .18s ease;
+        }
+
+        .account-details {
+            display: grid;
+            gap: 12px;
+        }
+
+        .account-detail {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 13px 14px;
+            border: 1px solid #e3ece7;
+            border-radius: 16px;
+            background: #f9fcfa;
+        }
+
+        .account-detail span {
+            color: #718078;
+            font-size: .73rem;
+            font-weight: 750;
+        }
+
+        .account-detail strong {
+            color: #214335;
+            font-size: .79rem;
+            font-weight: 950;
+            text-align: right;
+            overflow-wrap: anywhere;
+        }
+
+        .security-notice {
+            display: flex;
+            align-items: flex-start;
+            gap: 11px;
+            margin-top: 18px;
+            padding: 14px;
+            border: 1px solid rgba(242, 194, 0, .32);
+            border-radius: 16px;
+            color: #655500;
+            background: rgba(242, 194, 0, .10);
+            font-size: .73rem;
+            line-height: 1.5;
+        }
+
+        .security-notice i {
+            margin-top: 2px;
+            color: #9a7a00;
+        }
+
+        .profile-loading {
+            min-height: 440px;
+            display: grid;
+            place-items: center;
+            color: #5d766a;
+        }
+
+        .profile-loading-content {
+            text-align: center;
+        }
+
+        .toast-container-aco {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            z-index: 2000;
+            width: min(390px, calc(100vw - 28px));
+            display: grid;
+            gap: 10px;
+        }
+
+        .toast-aco {
+            display: grid;
+            grid-template-columns: 43px minmax(0, 1fr) 30px;
+            gap: 11px;
+            align-items: start;
+            padding: 15px;
+            border: 1px solid rgba(164, 214, 184, .24);
+            border-radius: 19px;
+            color: #f4fff8;
+            background:
+                linear-gradient(
+                    145deg,
+                    #103d2e,
+                    #08251c
+                );
+            box-shadow: 0 24px 60px rgba(0, 0, 0, .30);
+            animation: toastIn .22s ease both;
+        }
+
+        .toast-aco.is-error {
+            border-color: rgba(255, 107, 122, .30);
+        }
+
+        .toast-aco-icon {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border-radius: 13px;
+            color: #f2c200;
+            background: rgba(242, 194, 0, .14);
+        }
+
+        .toast-aco.is-error .toast-aco-icon {
+            color: #ff8a96;
+            background: rgba(255, 107, 122, .14);
+        }
+
+        .toast-aco strong {
+            display: block;
+            margin-bottom: 3px;
+            color: #fff;
+            font-size: .88rem;
+            font-weight: 950;
+        }
+
+        .toast-aco p {
+            margin: 0;
+            color: #c8ddd1;
+            font-size: .77rem;
+            line-height: 1.45;
+        }
+
+        .toast-aco-close {
+            width: 29px;
+            height: 29px;
+            border: 0;
+            border-radius: 9px;
+            color: #fff;
+            background: rgba(255, 255, 255, .08);
+        }
+
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateX(22px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 991px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-links {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .profile-shell {
+                padding-top: 22px;
+            }
+
+            .profile-hero {
+                grid-template-columns: auto 1fr;
+                padding: 22px;
+                border-radius: 24px;
+            }
+
+            .profile-role {
+                grid-column: 1 / -1;
+                justify-self: start;
+            }
+
+            .profile-avatar {
+                width: 72px;
+                height: 72px;
+                border-radius: 23px;
+                font-size: 1.3rem;
+            }
+
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-card {
+                border-radius: 23px;
+            }
+
+            .profile-card-header,
+            .profile-card-body {
+                padding-left: 19px;
+                padding-right: 19px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-avatar {
+                width: 66px;
+                height: 66px;
+            }
+
+            .toast-container-aco {
+                top: 10px;
+                right: 12px;
+                left: 12px;
+                width: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark aco-navbar">
+        <div class="container">
+            <a class="aco-brand" href="/">
+                <img
+                    src="/img/logo_9JToiDZ.png"
+                    alt="Andebol Clube Olhão"
+                >
+
+                <span>
+                    Andebol Clube Olhão
+                    <small>#maisqueumclube</small>
+                </span>
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#areaClienteNavbar"
+                aria-controls="areaClienteNavbar"
+                aria-expanded="false"
+                aria-label="Abrir menu"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div
+                class="collapse navbar-collapse"
+                id="areaClienteNavbar"
+            >
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            Início
+                        </a>
+                    </li>
+
+                    <li class="nav-item area-link-convocatorias">
+                        <a
+                            class="nav-link"
+                            href="/convocatoria.html"
+                        >
+                            Convocatórias
+                        </a>
+                    </li>
+
+                    <li class="nav-item area-link-financeiro">
+                        <a
+                            class="nav-link"
+                            href="/financeiro.html"
+                        >
+                            Financeiro
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/area-cliente.html">
+                            Área pessoal
+                        </a>
+                    </li>
+
+                    <li class="nav-item ms-lg-2">
+                        <button
+                            class="btn logout-button px-3"
+                            type="button"
+                            onclick="terminarSessao()"
+                        >
+                            <i class="fa-solid fa-power-off me-1"></i>
+                            Sair
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="profile-shell">
+        <div class="container">
+            <section
+                id="profileLoading"
+                class="profile-loading"
+            >
+                <div class="profile-loading-content">
+                    <div
+                        class="spinner-border text-success"
+                        role="status"
+                    ></div>
+
+                    <p class="mt-3 mb-0">
+                        A carregar a tua área pessoal...
+                    </p>
+                </div>
+            </section>
+
+            <div id="profileContent" hidden>
+                <section class="profile-hero">
+                    <div
+                        class="profile-avatar"
+                        id="profileAvatar"
+                    >
+                        AC
+                    </div>
+
+                    <div class="profile-hero-content">
+                        <span class="profile-kicker">
+                            <i class="fa-solid fa-user-shield"></i>
+                            Área pessoal
+                        </span>
+
+                        <h1 id="profileHeroName">
+                            Utilizador
+                        </h1>
+
+                        <p
+                            class="profile-hero-email"
+                            id="profileHeroEmail"
+                        >
+                            email@exemplo.pt
+                        </p>
+                    </div>
+
+                    <div class="profile-role">
+                        <i class="fa-solid fa-id-badge"></i>
+                        <span id="profileRole">
+                            Utilizador
+                        </span>
+                    </div>
+                </section>
+
+                <section
+                    class="quick-links"
+                    id="quickLinks"
+                    aria-label="Acessos rápidos"
+                ></section>
+
+                <div class="profile-grid">
+                    <section class="profile-card">
+                        <header class="profile-card-header">
+                            <span class="profile-card-header-icon">
+                                <i class="fa-solid fa-address-card"></i>
+                            </span>
+
+                            <div>
+                                <h2>Informações pessoais</h2>
+
+                                <p>
+                                    Atualiza os teus dados de contacto.
+                                    O tipo de conta não pode ser alterado aqui.
+                                </p>
+                            </div>
+                        </header>
+
+                        <div class="profile-card-body">
+                            <form
+                                id="profileForm"
+                                novalidate
+                            >
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label
+                                            class="form-label"
+                                            for="profileName"
+                                        >
+                                            Nome completo
+                                        </label>
+
+                                        <input
+                                            class="form-control"
+                                            id="profileName"
+                                            type="text"
+                                            maxlength="120"
+                                            autocomplete="name"
+                                            required
+                                        >
+                                    </div>
+
+                                    <div class="col-md-7">
+                                        <label
+                                            class="form-label"
+                                            for="profileEmail"
+                                        >
+                                            E-mail
+                                        </label>
+
+                                        <input
+                                            class="form-control"
+                                            id="profileEmail"
+                                            type="email"
+                                            maxlength="150"
+                                            autocomplete="email"
+                                            required
+                                        >
+
+                                        <small class="field-help">
+                                            Para alterar o e-mail,
+                                            confirma a password atual.
+                                        </small>
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <label
+                                            class="form-label"
+                                            for="profileNif"
+                                        >
+                                            NIF
+                                        </label>
+
+                                        <input
+                                            class="form-control"
+                                            id="profileNif"
+                                            type="text"
+                                            maxlength="9"
+                                            inputmode="numeric"
+                                            autocomplete="off"
+                                            placeholder="9 algarismos"
+                                        >
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label
+                                            class="form-label"
+                                            for="profileAddress"
+                                        >
+                                            Morada
+                                        </label>
+
+                                        <textarea
+                                            class="form-control"
+                                            id="profileAddress"
+                                            maxlength="500"
+                                            autocomplete="street-address"
+                                            placeholder="Indica a tua morada"
+                                        ></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-divider"></div>
+
+                                <div class="row g-3 align-items-end">
+                                    <div class="col-md-7">
+                                        <label
+                                            class="form-label"
+                                            for="profileCurrentPassword"
+                                        >
+                                            Password atual
+                                        </label>
+
+                                        <input
+                                            class="form-control"
+                                            id="profileCurrentPassword"
+                                            type="password"
+                                            autocomplete="current-password"
+                                            placeholder="Obrigatória apenas se alterares o e-mail"
+                                        >
+                                    </div>
+
+                                    <div class="col-md-5">
+                                        <button
+                                            class="btn save-button w-100"
+                                            id="profileSaveButton"
+                                            type="submit"
+                                        >
+                                            <i class="fa-solid fa-floppy-disk"></i>
+                                            Guardar alterações
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                    <div class="d-grid gap-4">
+                        <section class="profile-card">
+                            <header class="profile-card-header">
+                                <span class="profile-card-header-icon">
+                                    <i class="fa-solid fa-key"></i>
+                                </span>
+
+                                <div>
+                                    <h2>Alterar password</h2>
+
+                                    <p>
+                                        Utiliza pelo menos oito caracteres.
+                                    </p>
+                                </div>
+                            </header>
+
+                            <div class="profile-card-body">
+                                <form
+                                    id="passwordForm"
+                                    novalidate
+                                >
+                                    <div class="mb-3">
+                                        <label
+                                            class="form-label"
+                                            for="currentPassword"
+                                        >
+                                            Password atual
+                                        </label>
+
+                                        <input
+                                            class="form-control"
+                                            id="currentPassword"
+                                            type="password"
+                                            autocomplete="current-password"
+                                            required
+                                        >
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label
+                                            class="form-label"
+                                            for="newPassword"
+                                        >
+                                            Nova password
+                                        </label>
+
+                                        <input
+                                            class="form-control"
+                                            id="newPassword"
+                                            type="password"
+                                            minlength="8"
+                                            autocomplete="new-password"
+                                            required
+                                        >
+
+                                        <div class="password-meter">
+                                            <div
+                                                class="password-meter-bar"
+                                                id="passwordMeterBar"
+                                            ></div>
+                                        </div>
+
+                                        <small
+                                            class="field-help"
+                                            id="passwordStrengthText"
+                                        >
+                                            Ainda não introduziste uma password.
+                                        </small>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label
+                                            class="form-label"
+                                            for="confirmPassword"
+                                        >
+                                            Confirmar nova password
+                                        </label>
+
+                                        <input
+                                            class="form-control"
+                                            id="confirmPassword"
+                                            type="password"
+                                            minlength="8"
+                                            autocomplete="new-password"
+                                            required
+                                        >
+                                    </div>
+
+                                    <button
+                                        class="btn save-button w-100"
+                                        id="passwordSaveButton"
+                                        type="submit"
+                                    >
+                                        <i class="fa-solid fa-shield-halved"></i>
+                                        Alterar password
+                                    </button>
+                                </form>
+                            </div>
+                        </section>
+
+                        <section class="profile-card">
+                            <header class="profile-card-header">
+                                <span class="profile-card-header-icon">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </span>
+
+                                <div>
+                                    <h2>Dados da conta</h2>
+
+                                    <p>
+                                        Informação de identificação da tua conta.
+                                    </p>
+                                </div>
+                            </header>
+
+                            <div class="profile-card-body">
+                                <div class="account-details">
+                                    <div class="account-detail">
+                                        <span>Número interno</span>
+                                        <strong id="accountId">—</strong>
+                                    </div>
+
+                                    <div class="account-detail">
+                                        <span>Tipo de conta</span>
+                                        <strong id="accountType">—</strong>
+                                    </div>
+
+                                    <div class="account-detail">
+                                        <span>Estado</span>
+                                        <strong>Ativa</strong>
+                                    </div>
+                                </div>
+
+                                <div class="security-notice">
+                                    <i class="fa-solid fa-lock"></i>
+
+                                    <span>
+                                        Os dados são carregados através da tua
+                                        sessão no servidor. Nunca é possível
+                                        editar a conta de outra pessoa indicando
+                                        um ID no endereço.
+                                    </span>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div
+        class="toast-container-aco"
+        id="toastContainer"
+        aria-live="polite"
+        aria-atomic="true"
+    ></div>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    ></script>
+
+    <script>
+        (function () {
+            'use strict';
+
+            const state = {
+                csrf: '',
+                perfil: null,
+                emailOriginal: ''
+            };
+
+            const loading = document.getElementById(
+                'profileLoading'
+            );
+
+            const content = document.getElementById(
+                'profileContent'
+            );
+
+            function escaparHtml(valor) {
+                return String(valor ?? '')
+                    .replaceAll('&', '&amp;')
+                    .replaceAll('<', '&lt;')
+                    .replaceAll('>', '&gt;')
+                    .replaceAll('"', '&quot;')
+                    .replaceAll("'", '&#039;');
+            }
+
+            function tipoContaLegivel(tipo) {
+                const tipos = {
+                    admin: 'Administrador',
+                    treinador: 'Treinador',
+                    jogador: 'Jogador',
+                    encarregado: 'Encarregado de educação'
+                };
+
+                return tipos[
+                    String(tipo || '').toLowerCase()
+                ] || 'Utilizador';
+            }
+
+            function iniciais(nome) {
+                const partes = String(nome || '')
+                    .trim()
+                    .split(/\s+/)
+                    .filter(Boolean);
+
+                if (partes.length === 0) {
+                    return 'AC';
+                }
+
+                if (partes.length === 1) {
+                    return partes[0]
+                        .slice(0, 2)
+                        .toUpperCase();
+                }
+
+                return (
+                    partes[0][0] +
+                    partes[partes.length - 1][0]
+                ).toUpperCase();
+            }
+
+            function mostrarToast(
+                tipo,
+                titulo,
+                mensagem
+            ) {
+                const container = document.getElementById(
+                    'toastContainer'
+                );
+
+                const toast = document.createElement(
+                    'article'
+                );
+
+                toast.className =
+                    'toast-aco' +
+                    (tipo === 'error' ? ' is-error' : '');
+
+                toast.innerHTML = `
+                    <span class="toast-aco-icon">
+                        <i class="fa-solid ${
+                            tipo === 'error'
+                                ? 'fa-circle-xmark'
+                                : 'fa-circle-check'
+                        }"></i>
+                    </span>
+
+                    <div>
+                        <strong>${escaparHtml(titulo)}</strong>
+                        <p>${escaparHtml(mensagem)}</p>
+                    </div>
+
+                    <button
+                        class="toast-aco-close"
+                        type="button"
+                        aria-label="Fechar"
+                    >
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                `;
+
+                const fechar = () => toast.remove();
+
+                toast
+                    .querySelector('.toast-aco-close')
+                    .addEventListener(
+                        'click',
+                        fechar
+                    );
+
+                container.prepend(toast);
+
+                setTimeout(fechar, 6500);
+            }
+
+            async function lerResposta(resposta) {
+                const tipo = resposta.headers.get(
+                    'content-type'
+                ) || '';
+
+                if (!tipo.includes('application/json')) {
+                    throw new Error(
+                        'O servidor devolveu uma resposta inválida.'
+                    );
+                }
+
+                const dados = await resposta.json();
+
+                if (resposta.status === 401) {
+                    localStorage.removeItem('utilizador');
+
+                    window.location.replace(
+                        '/login.html?destino=area-cliente.html'
+                    );
+
+                    throw new Error(
+                        'A tua sessão terminou.'
+                    );
+                }
+
+                if (!resposta.ok) {
+                    throw new Error(
+                        dados.erro ||
+                        dados.mensagem ||
+                        'Não foi possível concluir a operação.'
+                    );
+                }
+
+                return dados;
+            }
+
+            function preencherPerfil(perfil) {
+                state.perfil = perfil;
+                state.emailOriginal = perfil.email || '';
+
+                document.getElementById(
+                    'profileAvatar'
+                ).textContent = iniciais(perfil.nome);
+
+                document.getElementById(
+                    'profileHeroName'
+                ).textContent = perfil.nome || 'Utilizador';
+
+                document.getElementById(
+                    'profileHeroEmail'
+                ).textContent = perfil.email || '';
+
+                document.getElementById(
+                    'profileRole'
+                ).textContent = tipoContaLegivel(
+                    perfil.tipo
+                );
+
+                document.getElementById(
+                    'profileName'
+                ).value = perfil.nome || '';
+
+                document.getElementById(
+                    'profileEmail'
+                ).value = perfil.email || '';
+
+                document.getElementById(
+                    'profileNif'
+                ).value = perfil.nif || '';
+
+                document.getElementById(
+                    'profileAddress'
+                ).value = perfil.morada || '';
+
+                document.getElementById(
+                    'accountId'
+                ).textContent = '#' + perfil.id;
+
+                document.getElementById(
+                    'accountType'
+                ).textContent = tipoContaLegivel(
+                    perfil.tipo
+                );
+
+                configurarAcessosRapidos(perfil.tipo);
+                atualizarLocalStorage(perfil);
+            }
+
+            function atualizarLocalStorage(perfil) {
+                try {
+                    const atual = JSON.parse(
+                        localStorage.getItem(
+                            'utilizador'
+                        ) || '{}'
+                    );
+
+                    localStorage.setItem(
+                        'utilizador',
+                        JSON.stringify({
+                            ...atual,
+                            id: perfil.id,
+                            nome: perfil.nome,
+                            email: perfil.email,
+                            nif: perfil.nif,
+                            tipo: perfil.tipo,
+                            admin:
+                                perfil.tipo === 'admin'
+                                    ? 1
+                                    : 0,
+                            treinador:
+                                perfil.tipo === 'treinador'
+                                    ? 1
+                                    : 0
+                        })
+                    );
+                } catch (erro) {
+                    localStorage.setItem(
+                        'utilizador',
+                        JSON.stringify(perfil)
+                    );
+                }
+            }
+
+            function configurarAcessosRapidos(tipo) {
+                const container = document.getElementById(
+                    'quickLinks'
+                );
+
+                const tipoNormalizado = String(
+                    tipo || ''
+                ).toLowerCase();
+
+                const links = [];
+
+                if (
+                    [
+                        'jogador',
+                        'encarregado',
+                        'treinador'
+                    ].includes(tipoNormalizado)
+                ) {
+                    links.push({
+                        url: '/convocatoria.html',
+                        icone: 'fa-calendar-check',
+                        titulo: 'Convocatórias',
+                        texto: 'Consulta jogos e informações.'
+                    });
+
+                    links.push({
+                        url: '/financeiro.html',
+                        icone: 'fa-file-invoice-dollar',
+                        titulo: 'Financeiro',
+                        texto: 'Consulta e exporta recibos.'
+                    });
+                }
+
+                links.push({
+                    url: '/loja.html',
+                    icone: 'fa-bag-shopping',
+                    titulo: 'Loja do clube',
+                    texto: 'Consulta os artigos disponíveis.'
+                });
+
+                if (
+                    [
+                        'admin',
+                        'treinador'
+                    ].includes(tipoNormalizado)
+                ) {
+                    links.push({
+                        url: '/admin',
+                        icone: 'fa-lock',
+                        titulo: 'Painel de gestão',
+                        texto: 'Acede às funções autorizadas.'
+                    });
+                }
+
+                container.innerHTML = links.map(link => `
+                    <a
+                        class="quick-link"
+                        href="${link.url}"
+                    >
+                        <span class="quick-link-icon">
+                            <i class="fa-solid ${link.icone}"></i>
+                        </span>
+
+                        <span>
+                            <strong>${link.titulo}</strong>
+                            <small>${link.texto}</small>
+                        </span>
+                    </a>
+                `).join('');
+
+                document
+                    .querySelectorAll(
+                        '.area-link-convocatorias, .area-link-financeiro'
+                    )
+                    .forEach(elemento => {
+                        elemento.hidden = ![
+                            'jogador',
+                            'encarregado',
+                            'treinador'
+                        ].includes(tipoNormalizado);
+                    });
+            }
+
+            async function carregarPerfil() {
+                try {
+                    const resposta = await fetch(
+                        '/api/me/perfil',
+                        {
+                            credentials: 'same-origin',
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        }
+                    );
+
+                    const dados = await lerResposta(
+                        resposta
+                    );
+
+                    state.csrf = dados.csrf;
+                    preencherPerfil(dados.perfil);
+
+                    loading.hidden = true;
+                    content.hidden = false;
+
+                } catch (erro) {
+                    loading.innerHTML = `
+                        <div class="profile-loading-content">
+                            <i class="fa-solid fa-circle-xmark fa-2x text-danger"></i>
+                            <p class="mt-3 mb-2">
+                                ${escaparHtml(erro.message)}
+                            </p>
+                            <a
+                                class="btn btn-success"
+                                href="/login.html?destino=area-cliente.html"
+                            >
+                                Iniciar sessão
+                            </a>
+                        </div>
+                    `;
+                }
+            }
+
+            async function guardarPerfil(event) {
+                event.preventDefault();
+
+                const form = event.currentTarget;
+
+                if (!form.checkValidity()) {
+                    form.classList.add('was-validated');
+                    return;
+                }
+
+                const email = document.getElementById(
+                    'profileEmail'
+                ).value.trim();
+
+                const nif = document.getElementById(
+                    'profileNif'
+                ).value.replace(/\D+/g, '');
+
+                if (
+                    nif !== '' &&
+                    nif.length !== 9
+                ) {
+                    mostrarToast(
+                        'error',
+                        'NIF inválido',
+                        'O NIF deve ter exatamente 9 algarismos.'
+                    );
+
+                    return;
+                }
+
+                const emailMudou =
+                    email.toLowerCase() !==
+                    state.emailOriginal.toLowerCase();
+
+                const passwordConfirmacao =
+                    document.getElementById(
+                        'profileCurrentPassword'
+                    ).value;
+
+                if (
+                    emailMudou &&
+                    passwordConfirmacao === ''
+                ) {
+                    mostrarToast(
+                        'error',
+                        'Confirma a tua identidade',
+                        'Introduz a password atual para alterar o e-mail.'
+                    );
+
+                    document.getElementById(
+                        'profileCurrentPassword'
+                    ).focus();
+
+                    return;
+                }
+
+                const botao = document.getElementById(
+                    'profileSaveButton'
+                );
+
+                const htmlOriginal = botao.innerHTML;
+
+                botao.disabled = true;
+                botao.innerHTML = `
+                    <span class="spinner-border spinner-border-sm"></span>
+                    A guardar...
+                `;
+
+                try {
+                    const resposta = await fetch(
+                        '/api/me/perfil',
+                        {
+                            method: 'PUT',
+                            credentials: 'same-origin',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-Token': state.csrf
+                            },
+                            body: JSON.stringify({
+                                nome:
+                                    document.getElementById(
+                                        'profileName'
+                                    ).value.trim(),
+                                email,
+                                nif,
+                                morada:
+                                    document.getElementById(
+                                        'profileAddress'
+                                    ).value.trim(),
+                                password_confirmacao:
+                                    passwordConfirmacao
+                            })
+                        }
+                    );
+
+                    const dados = await lerResposta(
+                        resposta
+                    );
+
+                    state.csrf = dados.csrf;
+                    preencherPerfil(dados.perfil);
+
+                    document.getElementById(
+                        'profileCurrentPassword'
+                    ).value = '';
+
+                    form.classList.remove(
+                        'was-validated'
+                    );
+
+                    mostrarToast(
+                        'success',
+                        'Dados atualizados',
+                        dados.mensagem ||
+                        'As informações foram guardadas com sucesso.'
+                    );
+
+                } catch (erro) {
+                    mostrarToast(
+                        'error',
+                        'Não foi possível guardar',
+                        erro.message
+                    );
+
+                } finally {
+                    botao.disabled = false;
+                    botao.innerHTML = htmlOriginal;
+                }
+            }
+
+            function avaliarPassword(password) {
+                let pontos = 0;
+
+                if (password.length >= 8) pontos++;
+                if (password.length >= 12) pontos++;
+                if (/[a-z]/.test(password)) pontos++;
+                if (/[A-Z]/.test(password)) pontos++;
+                if (/\d/.test(password)) pontos++;
+                if (/[^A-Za-z0-9]/.test(password)) pontos++;
+
+                return Math.min(pontos, 5);
+            }
+
+            function atualizarForcaPassword() {
+                const password = document.getElementById(
+                    'newPassword'
+                ).value;
+
+                const barra = document.getElementById(
+                    'passwordMeterBar'
+                );
+
+                const texto = document.getElementById(
+                    'passwordStrengthText'
+                );
+
+                if (!password) {
+                    barra.style.width = '0';
+                    barra.style.background = '#d34655';
+                    texto.textContent =
+                        'Ainda não introduziste uma password.';
+                    return;
+                }
+
+                const nivel = avaliarPassword(password);
+
+                const configuracoes = [
+                    ['20%', '#d34655', 'Muito fraca'],
+                    ['35%', '#d87630', 'Fraca'],
+                    ['55%', '#c99a00', 'Razoável'],
+                    ['75%', '#5b9b53', 'Boa'],
+                    ['100%', '#157347', 'Forte'],
+                    ['100%', '#0f5132', 'Muito forte']
+                ];
+
+                const [
+                    largura,
+                    cor,
+                    descricao
+                ] = configuracoes[nivel];
+
+                barra.style.width = largura;
+                barra.style.background = cor;
+                texto.textContent =
+                    'Força da password: ' + descricao + '.';
+            }
+
+            async function alterarPassword(event) {
+                event.preventDefault();
+
+                const form = event.currentTarget;
+
+                if (!form.checkValidity()) {
+                    form.classList.add('was-validated');
+                    return;
+                }
+
+                const atual = document.getElementById(
+                    'currentPassword'
+                ).value;
+
+                const nova = document.getElementById(
+                    'newPassword'
+                ).value;
+
+                const confirmar = document.getElementById(
+                    'confirmPassword'
+                ).value;
+
+                if (nova.length < 8) {
+                    mostrarToast(
+                        'error',
+                        'Password demasiado curta',
+                        'A nova password deve ter pelo menos 8 caracteres.'
+                    );
+
+                    return;
+                }
+
+                if (nova !== confirmar) {
+                    mostrarToast(
+                        'error',
+                        'Passwords diferentes',
+                        'A confirmação não corresponde à nova password.'
+                    );
+
+                    return;
+                }
+
+                if (nova === atual) {
+                    mostrarToast(
+                        'error',
+                        'Escolhe outra password',
+                        'A nova password não pode ser igual à password atual.'
+                    );
+
+                    return;
+                }
+
+                const botao = document.getElementById(
+                    'passwordSaveButton'
+                );
+
+                const htmlOriginal = botao.innerHTML;
+
+                botao.disabled = true;
+                botao.innerHTML = `
+                    <span class="spinner-border spinner-border-sm"></span>
+                    A alterar...
+                `;
+
+                try {
+                    const resposta = await fetch(
+                        '/api/me/password',
+                        {
+                            method: 'PUT',
+                            credentials: 'same-origin',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'X-CSRF-Token': state.csrf
+                            },
+                            body: JSON.stringify({
+                                password_atual: atual,
+                                password_nova: nova
+                            })
+                        }
+                    );
+
+                    const dados = await lerResposta(
+                        resposta
+                    );
+
+                    state.csrf = dados.csrf;
+
+                    form.reset();
+                    form.classList.remove(
+                        'was-validated'
+                    );
+
+                    atualizarForcaPassword();
+
+                    mostrarToast(
+                        'success',
+                        'Password alterada',
+                        dados.mensagem ||
+                        'A nova password já está ativa.'
+                    );
+
+                } catch (erro) {
+                    mostrarToast(
+                        'error',
+                        'Não foi possível alterar',
+                        erro.message
+                    );
+
+                } finally {
+                    botao.disabled = false;
+                    botao.innerHTML = htmlOriginal;
+                }
+            }
+
+            window.terminarSessao = function () {
+                localStorage.removeItem('utilizador');
+                window.location.href = '/api/logout';
+            };
+
+            document.getElementById(
+                'profileForm'
+            ).addEventListener(
+                'submit',
+                guardarPerfil
+            );
+
+            document.getElementById(
+                'passwordForm'
+            ).addEventListener(
+                'submit',
+                alterarPassword
+            );
+
+            document.getElementById(
+                'newPassword'
+            ).addEventListener(
+                'input',
+                atualizarForcaPassword
+            );
+
+            document.getElementById(
+                'profileNif'
+            ).addEventListener(
+                'input',
+                function () {
+                    this.value = this.value
+                        .replace(/\D+/g, '')
+                        .slice(0, 9);
+                }
+            );
+
+            carregarPerfil();
+        })();
+    </script>
+</body>
+</html>
